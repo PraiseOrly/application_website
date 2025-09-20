@@ -67,14 +67,14 @@ const certificationsData: Certification[] = [
 		issuer: "IBM",
 		date: "May 2025",
 		status: "completed",
-		url: "/certifications/generative-ai.pdf",
+		url: "/certifications/generative_ai.pdf",
 	},
 	{
 		name: "AI Foundations For Everyone",
 		issuer: "IBM",
 		date: "May 2025",
 		status: "completed",
-		url: "/certifications/AI-foundations.pdf",
+		url: "/certifications/AI_Foundations.pdf",
 	},
 	{
 		name: "IT & Cloud Fundamentals Specialization",
