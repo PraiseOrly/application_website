@@ -116,7 +116,7 @@ export const Skills = () => {
 					viewport={{ once: true }}
 					className="text-center mb-16">
 					<h2 className="text-5xl md:text-6xl font-extrabold text-white mb-4 bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
-						Core Competencies
+						Areas of Focus
 					</h2>
 					<p className="text-teal-300 text-xl max-w-3xl mx-auto">
 						Technical expertise driving innovation
