@@ -36,14 +36,14 @@ const experienceData: ExperienceItem[] = [
 		title: "AI Research Assistant",
 		company: "Cardiac TEK",
 		location: "Tanzania, Remote",
-		duration: "Feb 2024 – March 2025",
+		duration: "Feb 2024 – Present",
 		achievements: [
 			{
 				text: "Built transfer learning-based ML model for ECG analysis (96% accuracy on 10,000+ PhysioNet samples), reducing cardiologist reliance by 70%",
 				icon: <Microscope className="h-5 w-5 text-purple-400" />,
 			},
 			{
-				text: "Developed XGBoost risk stratification model with 98% accuracy for cardiovascular event prediction in underserved populations",
+				text: "Developed XGBoost risk stratification model with 90% accuracy for cardiovascular event prediction in underserved populations",
 				icon: <BrainCircuit className="h-5 w-5 text-indigo-300" />,
 			},
 			{
