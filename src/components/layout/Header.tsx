@@ -23,11 +23,11 @@ export function Header() {
   }, [isOpen]);
 
   const links = [
-    { href: '/', label: 'Home' },
+    { href: '/', label: 'About' },
     // { href: '/analysis', label: 'Analysis' },
     // { href: '/insights', label: 'Data Science' },
 	// {href: '/dataanalytics', label: 'Data Analytics'},
-    { href: '/projects', label: 'Machine Learning & Data Science' },
+    { href: '/projects', label: 'Projects' },
     { href: '/analysis', label: 'Research Interests' },
 	
 
