@@ -186,7 +186,7 @@ const projectsData = [
 		title: "Stroke Prediction Model",
 		domain: "Risk Assessment + Predictive Analytics + Preventive Healthcare",
 		goal: "Building a model to predict stroke risk based on medical and lifestyle data from patients.",
-		image: "/src/assets/images/stroke.jpg",
+		image: 	"/images/Swiss.jpg",
 		concepts: [
 			"Risk factor analysis and feature selection",
 			"Classification modeling for stroke prediction",
