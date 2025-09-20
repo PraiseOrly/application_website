@@ -167,7 +167,7 @@ const projectsData = [
 		title: "ECG Waveform Analysis with Deep Learning",
 		domain: "Computer Vision + Healthtech + Deep Learning",
 		goal: "Detect P, Q, R, S, T, and U waves in ECG images using CNNs and classify cardiac abnormalities.",
-		image: "/src/assets/images/CreatorofCardiactek.jpg",
+		image: "/images/CreatorofCardiactek.jpg",
 		concepts: [
 			"Image preprocessing and augmentation",
 			"CNN architectures (ResNet, EfficientNet)",
@@ -186,7 +186,7 @@ const projectsData = [
 		title: "Stroke Prediction Model",
 		domain: "Risk Assessment + Predictive Analytics + Preventive Healthcare",
 		goal: "Building a model to predict stroke risk based on medical and lifestyle data from patients.",
-		image: 	"/images/Swiss.jpg",
+		image: 	"/images/stroke.jpg",
 		concepts: [
 			"Risk factor analysis and feature selection",
 			"Classification modeling for stroke prediction",
@@ -215,7 +215,7 @@ const projectsData = [
 		domain:
 			"Recommendation Systems + Patient-Centered Care + AI-Driven Medicine",
 		goal: "Creating personalized healthcare recommendations based on individual patient data and medical history.",
-		image: "/src/assets/images/health recommendation.jpg",
+		image: "/images/health recommendation.jpg",
 		concepts: [
 			"Collaborative filtering for treatment recommendations",
 			"Content-based recommendation algorithms",
@@ -243,7 +243,7 @@ const projectsData = [
 		title: "Diabetes Risk Assessment",
 		domain: "Risk Prediction + Preventive Medicine + Population Health",
 		goal: "Creating a predictive model to assess diabetes risk based on personal and health information.",
-		image: "/src/assets/images/diabetes.jpg",
+		image: "/images/diabetes.jpg",
 		concepts: [
 			"Risk factor identification and analysis",
 			"Predictive modeling for diabetes onset",
