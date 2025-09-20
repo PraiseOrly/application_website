@@ -23,7 +23,7 @@ const researchInterests: ResearchInterest[] = [
 		focusAreas: ["Deep Learning", "Signal Processing", "Transfer Learning"],
 		impact:
 			"Enabling early detection of heart conditions outside clinical environments for accessible heart health monitoring.",
-		publications: ["Journal of Medical AI, 2025"],
+		publications: ["Not Published Yet"],
 	},
 	{
 		id: 2,
@@ -34,7 +34,7 @@ const researchInterests: ResearchInterest[] = [
 		focusAreas: ["Reinforcement Learning", "Simulation", "Patient Flow"],
 		impact:
 			"Improving patient experiences and reducing waiting times in clinical settings.",
-		collaborators: ["Healthcare Systems Lab", "City Hospital Network"],
+		// collaborators: ["Healthcare Systems Lab", "City Hospital Network"],
 	},
 	{
 		id: 3,
@@ -45,7 +45,7 @@ const researchInterests: ResearchInterest[] = [
 		focusAreas: ["Predictive Modeling", "EHR Integration", "Explainable AI"],
 		impact:
 			"Enhancing clinician decision-making and reducing hospital readmissions.",
-		publications: ["Health Data Science, 2024"],
+		publications: ["Not Published Yet"],
 	},
 	{
 		id: 4,
@@ -56,18 +56,22 @@ const researchInterests: ResearchInterest[] = [
 		focusAreas: ["Federated Learning", "Differential Privacy", "Ethical AI"],
 		impact:
 			"Protecting patient data while maintaining model accuracy and reliability.",
-		collaborators: ["Privacy Research Group", "HealthTech Security Inc."],
+		// collaborators: ["Privacy Research Group", "HealthTech Security Inc."],
 	},
 	{
 		id: 5,
-		title: "AI-Driven Health Accessibility Tools",
+		title: "Trustworthy AI for Cardiovascular Diagnostics",
 		description:
-			"Designing AI-embedded, low-cost devices like digital ECG monitors and self-service diagnostic kiosks to provide automated health assessments in underserved communities.",
-		domain: "Health Equity",
-		focusAreas: ["Embedded AI", "Health Accessibility", "Low-Cost Devices"],
+			"Developing uncertainty-aware AI models for ECG interpretation that are robust to noisy African data, improve clinician trust, and expand access to scalable heart diagnostics.",
+		domain: "Trustworthy / Explainable AI (XAI)",
+		focusAreas: [
+			"ECG Diagnostics",
+			"Uncertainty-Aware AI",
+			"Clinician Trust"
+		],
 		impact:
 			"Bridging healthcare gaps in rural and underserved areas with scalable solutions.",
-		publications: ["Global Health Technology, 2025"],
+		publications: ["Not Published Yet"],
 	},
 	{
 		id: 6,
@@ -78,7 +82,7 @@ const researchInterests: ResearchInterest[] = [
 		focusAreas: ["Embedded AI", "Health Accessibility", "Low-Cost Devices"],
 		impact:
 			"Bridging healthcare gaps in rural and underserved areas with scalable solutions.",
-		publications: ["Global Health Technology, 2025"],
+		publications: ["Not Published Yet"],
 	},
 ];
 
