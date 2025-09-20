@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card } from './ProjectCard';
 import Popup from './ProjectPopup';
-import { ChevronDown, ChevronUp, Heart, Share2, Eye, Brain, Zap, Code, Globe, Satellite, BarChart3, Lightbulb, Heart as HeartIcon } from 'lucide-react';
+import { ChevronDown, ChevronUp, Heart, Share2, Eye, Brain, Zap, Code, Globe, BarChart3, Lightbulb, Heart as HeartIcon, Microscope, Stethoscope, AlertTriangle, Target, Activity } from 'lucide-react';
 import Button from './Projectbutton';
 import ProjectHero from './ProjectHero';
 
@@ -45,62 +45,110 @@ const insightsData = [
 
 // Project Data
 const projectsData = [
-  {
-    id: 1,
-    title: 'End-to-End Predictive Health AI System',
-    domain: 'Classical Machine Learning + MLOps + Interpretability',
-    goal: 'Predict the risk of heart disease or diabetes using clinical data, explain predictions, and deploy the system.',
-    image: 'https://source.unsplash.com/featured/?health,technology',
-    concepts: [
-      'Data preprocessing and feature engineering',
-      'Supervised learning (logistic regression, random forests, XGBoost)',
-      'Model evaluation: AUC, precision-recall, confusion matrix',
-      'Explainable AI (SHAP, LIME)',
-      'Web app deployment (Streamlit/FastAPI)',
-    ],
-    techStack: ['Python', 'pandas', 'scikit-learn', 'SHAP/LIME', 'Streamlit/FastAPI', 'Docker (optional)'],
-    bonus: 'Uses UCI Heart Disease Dataset. Features user input (age, BP, cholesterol), risk prediction, and explanation charts.',
-    icon: <Brain className="h-8 w-8 text-teal-400" />,
-    analysis: analysisData,
-    insights: insightsData,
-  },
-  {
-    id: 2,
-    title: 'ECG Waveform Analysis with Deep Learning',
-    domain: 'Computer Vision + Healthtech + Deep Learning',
-    goal: 'Detect P, Q, R, S, T, and U waves in ECG images using CNNs and classify cardiac abnormalities.',
-    image: 'https://source.unsplash.com/featured/?ecg,healthcare',
-    concepts: [
-      'Image preprocessing and augmentation',
-      'CNN architectures (ResNet, EfficientNet)',
-      'Multi-label classification',
-      'Grad-CAM for model interpretability',
-    ],
-    techStack: ['PyTorch/TensorFlow', 'OpenCV', 'Matplotlib/Seaborn'],
-    bonus: 'Uses PTB-XL ECG dataset. Includes wave detection overlays and an interactive dashboard for clinicians.',
-    icon: <Zap className="h-8 w-8 text-indigo-400" />,
-    analysis: analysisData,
-    insights: insightsData,
-  },
-  {
-    id: 3,
-    title: 'Transformer-Based Multilingual Chatbot',
-    domain: 'NLP + Transformers + Real-World AI',
-    goal: 'Build a chatbot that answers multilingual questions using fine-tuned transformers (BERT/mBERT).',
-    image: 'https://source.unsplash.com/featured/?chatbot,ai',
-    concepts: [
-      'Tokenization, embeddings, and transformers',
-      'Intent recognition and sequence classification',
-      'Fine-tuning pretrained models (BERT, DistilBERT)',
-      'Chatbot interaction logic',
-    ],
-    techStack: ['HuggingFace Transformers', 'PyTorch', 'spaCy', 'Flask/Gradio'],
-    bonus: 'Trained on FAQ data (e.g., medical, admissions). Features intent classification and context retention.',
-    icon: <Code className="h-8 w-8 text-purple-400" />,
-    analysis: analysisData,
-    insights: insightsData,
-  },
-
+		{
+		id: 1,
+		title: "ECG Waveform Analysis with Deep Learning",
+		domain: "Computer Vision + Healthtech + Deep Learning",
+		goal: "Detect P, Q, R, S, T, and U waves in ECG images using CNNs and classify cardiac abnormalities.",
+		image: "/src/assets/images/CreatorofCardiactek.jpg",
+		concepts: [
+			"Image preprocessing and augmentation",
+			"CNN architectures (ResNet, EfficientNet)",
+			"Multi-label classification",
+			"Grad-CAM for model interpretability",
+		],
+		techStack: ["PyTorch/TensorFlow", "OpenCV", "Matplotlib/Seaborn"],
+		bonus:
+			"Uses PTB-XL ECG dataset. Includes wave detection overlays and an interactive dashboard for clinicians.",
+		icon: <Zap className="h-8 w-8 text-indigo-400" />,
+		analysis: analysisData,
+		insights: insightsData,
+	},
+		{
+		id: 2,
+		title: "Stroke Prediction Model",
+		domain: "Risk Assessment + Predictive Analytics + Preventive Healthcare",
+		goal: "Building a model to predict stroke risk based on medical and lifestyle data from patients.",
+		image: "/src/assets/images/stroke.jpg",
+		concepts: [
+			"Risk factor analysis and feature selection",
+			"Classification modeling for stroke prediction",
+			"Model validation and calibration",
+			"Risk score development",
+			"Early warning system design",
+		],
+		techStack: [
+			"Python",
+			"scikit-learn",
+			"TensorFlow",
+			"pandas",
+			"NumPy",
+			"matplotlib",
+			"Flask",
+		],
+		bonus:
+			"Uses comprehensive patient health datasets. Features real-time risk assessment and early warning notifications.",
+		icon: <AlertTriangle className="h-8 w-8 text-orange-400" />,
+		analysis: analysisData,
+		insights: insightsData,
+	},
+	{
+		id: 3,
+		title: "Healthcare Recommendations",
+		domain:
+			"Recommendation Systems + Patient-Centered Care + AI-Driven Medicine",
+		goal: "Creating personalized healthcare recommendations based on individual patient data and medical history.",
+		image: "/src/assets/images/health recommendation.jpg",
+		concepts: [
+			"Collaborative filtering for treatment recommendations",
+			"Content-based recommendation algorithms",
+			"Patient similarity analysis",
+			"Treatment outcome optimization",
+			"Personalized care pathway design",
+		],
+		techStack: [
+			"Python",
+			"Surprise",
+			"scikit-learn",
+			"pandas",
+			"FastAPI",
+			"PostgreSQL",
+			"Redis",
+		],
+		bonus:
+			"Integrates multiple healthcare datasets. Features real-time personalized treatment recommendations and care pathway optimization.",
+		icon: <Target className="h-8 w-8 text-green-400" />,
+		analysis: analysisData,
+		insights: insightsData,
+	},
+	{
+		id: 4,
+		title: "Diabetes Risk Assessment",
+		domain: "Risk Prediction + Preventive Medicine + Population Health",
+		goal: "Creating a predictive model to assess diabetes risk based on personal and health information.",
+		image: "/src/assets/images/diabetes.jpg",
+		concepts: [
+			"Risk factor identification and analysis",
+			"Predictive modeling for diabetes onset",
+			"Feature engineering for health metrics",
+			"Model interpretability for clinical use",
+			"Population health risk stratification",
+		],
+		techStack: [
+			"Python",
+			"scikit-learn",
+			"XGBoost",
+			"pandas",
+			"matplotlib",
+			"seaborn",
+			"Streamlit",
+		],
+		bonus:
+			"Uses comprehensive health and lifestyle datasets. Includes interactive risk assessment tools and preventive care recommendations.",
+		icon: <Activity className="h-8 w-8 text-pink-400" />,
+		analysis: analysisData,
+		insights: insightsData,
+	},
 ];
 
 // Animation Variants
@@ -222,13 +270,13 @@ const Projects = () => {
           viewport={{ once: true }}
           className="max-w-7xl mx-auto space-y-12"
         >
-          <motion.h2
+          {/* <motion.h2
             variants={cardVariants}
             className="text-4xl md:text-5xl font-extrabold text-center bg-gradient-to-r from-teal-300 to-indigo-300 bg-clip-text text-transparent mb-12"
           >
             Project Showcase
-          </motion.h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          </motion.h2> */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {projectsData.map((project) => (
               <motion.div
                 key={project.id}
@@ -246,7 +294,7 @@ const Projects = () => {
                   <motion.img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-48 object-cover rounded-lg mb-4"
+                    className="w-full h-32 object-cover rounded-lg mb-4"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
@@ -264,12 +312,12 @@ const Projects = () => {
                       onClick={(e) => { e.stopPropagation(); handleLike(project.id); }}
                       className="flex-1 bg-transparent border-teal-400 text-teal-300 hover:bg-teal-400/20 rounded-full text-sm py-2"
                     />
-                    <Button
+                    {/* <Button
                       label={<span className="flex items-center gap-1"><Share2 className="h-4 w-4" /> Share</span>}
                       variant="outline"
                       onClick={(e) => { e.stopPropagation(); handleShare(project.title); }}
                       className="flex-1 bg-transparent border-indigo-400 text-indigo-300 hover:bg-indigo-400/20 rounded-full text-sm py-2"
-                    />
+                    /> */}
                     <Button
                       label={<span className="flex items-center gap-1"><Eye className="h-4 w-4" /> See More</span>}
                       onClick={(e) => { e.stopPropagation(); handleSeeMore(project); }}
