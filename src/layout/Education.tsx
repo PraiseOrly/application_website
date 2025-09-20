@@ -37,8 +37,11 @@ const educationData: EducationData = {
 	duration: "Jan 2022 - June 2025",
 	courses: [
 		"Mathematics for Machine Learning",
-		"Machine Learning Techniques",
+		"Machine Learning Techniques I&II",
+		"Machine Learning Pipelines",
+		"Mission Capstone(Research)",
 		"Ethics in Software Engineering",
+		"Data Structures & Algorithms",
 		"Frontend & Backend Development",
 		"Entrepreneurial Leadership",
 	],
@@ -46,18 +49,32 @@ const educationData: EducationData = {
 
 const certificationsData: Certification[] = [
 	{
-		name: "Data Analytics Certificate",
-		issuer: "ALX",
-		date: "Apr 2025",
+		name: "AI For Good",
+		issuer: "DeepLearning.AI",
+		date: "Sept 2025",
 		status: "completed",
-		url: "/certifications/data-analytics.pdf",
+		url: "/certifications/project-management.pdf",
 	},
 	{
-		name: "Artificial Intelligence Essentials V2",
+		name: "AI For Medicine",
+		issuer: "DeepLearning.AI",
+		date: "Sept 2025",
+		status: "completed",
+		url: "/certifications/project-management.pdf",
+	},
+	{
+		name: "Generative AI for Data Scientists",
 		issuer: "IBM",
-		date: "Mar 2025",
-		status: "in progress",
-		url: "/certifications/ai-essentials.pdf",
+		date: "May 2025",
+		status: "completed",
+		url: "/certifications/generative-ai.pdf",
+	},
+	{
+		name: "AI Foundations For Everyone",
+		issuer: "IBM",
+		date: "May 2025",
+		status: "completed",
+		url: "/certifications/AI-foundations.pdf",
 	},
 	{
 		name: "IT & Cloud Fundamentals Specialization",
@@ -65,13 +82,6 @@ const certificationsData: Certification[] = [
 		date: "Mar 2023",
 		status: "completed",
 		url: "/certifications/cloud-fundamentals.pdf",
-	},
-	{
-		name: "Foundations of Project Management",
-		issuer: "Google",
-		date: "Feb 2023",
-		status: "completed",
-		url: "/certifications/project-management.pdf",
 	},
 ];
 
