@@ -167,7 +167,7 @@ const ProjectHero: React.FC = () => {
 					whileTap={{ scale: 0.95 }}
 					className="mt-10 inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-full font-semibold shadow-lg hover:text-white transition-all duration-300">
 					Explore My Work
-					<ArrowRight className="h-5 w-5" />
+					{/* <ArrowRight className="h-5 w-5" /> */}
 				</motion.a>
 			</motion.div>
 		</section>
