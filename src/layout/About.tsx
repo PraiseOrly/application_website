@@ -30,7 +30,7 @@ const aboutData = {
 			id: "2",
 			title: "Community Impact",
 			description:
-				"Trained 500+ healthcare workers in digital tools across 3 countries",
+				"Mentored peers and emerging professionals, fostering skill development, collaboration, and career growth.",
 			icon: <Award className="h-6 w-6 text-lime-300" />,
 		},
 	],
@@ -114,7 +114,7 @@ export function About() {
 
 						{/* Resume Button */}
 						<motion.a
-							href="https://docs.google.com/document/d/1YHA1ZqJh5g3mZfsCp309UXHfTgp0BdCs/edit?usp=sharing&ouid=101909117862344144947&rtpof=true&sd=true"
+							href="https://docs.google.com/document/d/1hpOO01I7PB5sJytnXY1sThD4xyxU48Co/edit?usp=sharing&ouid=101909117862344144947&rtpof=true&sd=true"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="px-8 py-3 bg-teal-500/90 hover:bg-teal-400 text-slate-950 font-semibold rounded-lg
