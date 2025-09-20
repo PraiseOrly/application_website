@@ -1,0 +1,25 @@
+{
+  "sections": [
+    {
+      "id": 1,
+      "title": "Company Overview",
+      "description": "Our mission, vision and core values",
+      "category": "Introduction",
+      "updated": "2023-11-15"
+    },
+    {
+      "id": 2,
+      "title": "Our Team",
+      "description": "Meet the leadership and key members",
+      "category": "People",
+      "updated": "2023-11-10"
+    },
+    {
+      "id": 3,
+      "title": "History",
+      "description": "Our journey and milestones",
+      "category": "Background",
+      "updated": "2023-11-01"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+    "profile": {
+      "name": "PRAISE ORLY AKU ATADJA",
+      "location": "Sekimondo | Kigali, Rwanda",
+      "contact": {
+        "phone": "+250 790004033",
+        "email": "praiseorly.a@gmail.com",
+        "linkedin": "https://www.linkedin.com/in/praise-atadja/",
+        "github": "https://github.com/praiseorly",
+        "portfolio": "https://praise-portfolio.com"
+      }
+    },
+    "education": [
+      {
+        "institution": "African Leadership University (ALU)",
+        "duration": "Jan 2022 – Present",
+        "degree": "BSc (Hons) Software Engineering (First Class)",
+        "details": [
+          "Relevant Coursework: Mathematics for Machine Learning, Machine Learning Techniques, Ethics in Software Engineering, Full Stack Development, Entrepreneurial Leadership",
+          "Cumulative GPA: 4.56/5.0"
+        ]
+      }
+    ],
+    "certifications": [
+      {
+        "title": "Course Certifications Portfolio",
+        "url": "#"
+      },
+      {
+        "title": "Achievement and Recognition Portfolio",
+        "url": "#"
+      }
+    ],
+    "experience": [
+      {
+        "role": "Team Lead",
+        "organization": "She Innovate Initiative",
+        "location": "Kigali, Rwanda",
+        "duration": "Mar 2024 – Present",
+        "responsibilities": [
+          "Coordinated multi-phase technology projects ensuring timely delivery",
+          "Secured sustainable partnerships and funding through stakeholder research",
+          "Improved project efficiency by 20% through cross-team collaboration"
+        ]
+      },
+      {
+        "role": "Research Assistant",
+        "organization": "Cardiac TEK",
+        "location": "Tanzania (Remote)",
+        "duration": "Feb 2024 – Oct 2024",
+        "responsibilities": [
+          "Developed ML models for healthcare diagnostics using Python",
+          "Conducted EDA and created data visualizations for insights",
+          "Ensured data accuracy for reliable model performance"
+        ]
+      }
+    ],
+    "leadership": [
+      {
+        "role": "Vice President",
+        "organization": "Alliance4AI, ALU",
+        "location": "Kigali, Rwanda",
+        "duration": "Sep 2024 – Present",
+        "responsibilities": [
+          "Led 40+ members in AI initiatives and community engagement",
+          "Organized 4+ workshops on AI education across Africa",
+          "Developed strategic partnership proposals"
+        ]
+      }
+    ],
+    "volunteering": [
+      {
+        "role": "Global Volunteer",
+        "organization": "AIESEC",
+        "location": "Nairobi, Kenya",
+        "duration": "Sep 2024 – Oct 2024",
+        "responsibilities": [
+          "Taught STEM subjects and provided student mentorship",
+          "Organized educational activities and games",
+          "Collaborated with school leadership teams"
+        ]
+      }
+    ],
+    "projects": [
+      "Understanding OCD Trends with Data Analysis",
+      "Personalized Medicine Recommending System",
+      "Heart Disease Prediction Model"
+    ],
+    "research": [
+      "AI-Driven ECG Analysis for Cardiovascular Care in Africa",
+      "Ethical Use of AI in Medical Diagnosis"
+    ],
+    "technicalSkills": {
+      "programming": ["Python", "SQL", "JavaScript (React.js)", "HTML/CSS"],
+      "machineLearning": ["Scikit-learn", "TensorFlow", "Model Evaluation"],
+      "dataAnalysis": ["Power BI", "Tableau", "pandas", "NumPy"],
+      "tools": ["Git", "JIRA", "Postman", "Docker"]
+    },
+    "softSkills": [
+      "Project Management",
+      "Technical Communication",
+      "Agile Development",
+      "Cross-functional Collaboration"
+    ],
+    "interests": [
+      "AI in Healthcare",
+      "Data Science",
+      "Educational Technology",
+      "African Tech Innovation"
+    ],
+    "languages": {
+      "English": "Fluent",
+      "French": "Beginner"
+    }
+  }

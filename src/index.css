@@ -1,0 +1,87 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer components {
+  /* Custom form container */
+  .contact-form {
+    @apply bg-gray-800/90 backdrop-blur-md rounded-3xl shadow-2xl p-10 border border-teal-500/30;
+  }
+
+  /* Form input fields */
+  .form-input {
+    @apply w-full pl-10 p-4 rounded-xl bg-gray-700/50 border border-gray-600 text-white placeholder-gray-400;
+    @apply focus:border-teal-400 focus:ring-2 focus:ring-teal-400/30 outline-none transition-all duration-200;
+  }
+
+  /* Form selector buttons */
+  .form-selector {
+    @apply p-4 rounded-xl border text-sm font-medium flex items-center gap-2;
+    @apply border-gray-700 hover:border-teal-400 text-gray-300 transition-colors;
+  }
+
+  .form-selector.active {
+    @apply border-teal-500 bg-teal-500/10 text-teal-300;
+  }
+
+  /* Success message panel */
+  .success-panel {
+    @apply bg-gray-800/90 backdrop-blur-md rounded-3xl shadow-2xl p-10 text-center border border-teal-500/30;
+  }
+
+  /* Custom button styles */
+  .btn-primary {
+    @apply w-full py-4 bg-teal-600 hover:bg-teal-700 text-white rounded-full font-semibold;
+    @apply disabled:bg-gray-600 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-800/50 border-teal-500/50 text-teal-300 hover:bg-teal-500/10;
+    @apply hover:text-teal-200 transition-all rounded-full py-2 px-6 flex items-center gap-2;
+  }
+}
+
+/* Custom animations */
+@keyframes floating {
+  0%, 100% { transform: translateY(0) scale(0.5); opacity: 0; }
+  50% { transform: translateY(-40px) scale(1); opacity: 1; }
+}
+
+.floating-particle {
+  @apply absolute w-2 h-2 bg-teal-400 rounded-full;
+  animation: floating 3s ease-in-out infinite;
+}
+
+/* Gradient background animation */
+@keyframes gradient-pulse {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.3; }
+}
+
+.gradient-background {
+  @apply absolute inset-0 pointer-events-none w-full h-full blur-3xl;
+  background-image: linear-gradient(to top right, rgba(16, 185, 129, 0.125), rgba(75, 0, 130, 0.125));
+  animation: gradient-pulse 5s ease-in-out infinite;
+  }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  @apply w-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-teal-500/30 rounded-full hover:bg-teal-500/40;
+}
+
+.react-pdf__Page__textContent,
+.react-pdf__Page__annotations {
+  display: none;
+}
+
+.react-pdf__Page__canvas {
+  margin: 0 auto;
+}

@@ -1,0 +1,18 @@
+{
+    "contacts": [
+      {
+        "id": "1",
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "department": "Engineering",
+        "role": "Developer"
+      },
+      {
+        "id": "2",
+        "name": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "department": "Marketing",
+        "role": "Manager"
+      }
+    ]
+  }
