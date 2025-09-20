@@ -6,39 +6,156 @@ import { ChevronDown, ChevronUp, Heart, Share2, Eye, Brain, Zap, Code, Globe, Ba
 import Button from './Projectbutton';
 import ProjectHero from './ProjectHero';
 
-// Analysis and Insights Data
-const analysisData = [
+// Project-specific Analysis and Insights Data
+
+// ECG Waveform Analysis Analysis
+const ecgAnalysisData = [
   {
     title: 'Predictive Accuracy',
-    description: 'Achieved high AUC scores (e.g., 0.85+) in health prediction models, balancing precision and recall.',
+    description: 'CNN models achieved reliable detection of P-QRS-T-U waveforms and classification of cardiac abnormalities with strong performance across multiple classes.',
     icon: <BarChart3 className="h-8 w-8 text-teal-400" />,
   },
   {
     title: 'Model Interpretability',
-    description: 'Implemented SHAP and Grad-CAM to explain complex AI decisions, enhancing trust in healthtech.',
+    description: 'Grad-CAM visualizations highlighted clinically relevant ECG regions, improving transparency for cardiologists.',
     icon: <Brain className="h-8 w-8 text-indigo-400" />,
   },
   {
-    title: 'Deployment Challenges',
-    description: 'Overcame latency and scalability issues in real-time ECG analysis and energy optimization.',
+    title: 'Practical Challenges',
+    description: 'Addressed issues of noisy ECG scans, dataset imbalance, and computational efficiency for potential clinical use.',
     icon: <Zap className="h-8 w-8 text-purple-400" />,
   },
 ];
 
-const insightsData = [
+// ECG Waveform Analysis Insights
+const ecgInsightsData = [
   {
-    title: 'Health Impact',
-    description: 'Predictive models can save lives by identifying risks early, with explainability fostering trust.',
+    title: 'Clinical Impact',
+    description: 'Accurate wave detection and abnormality classification can support early diagnosis and assist overburdened cardiologists.',
     icon: <HeartIcon className="h-8 w-8 text-teal-400" />,
   },
   {
-    title: 'Sustainability',
-    description: 'Energy optimization and land use detection support green initiatives and SDG goals.',
+    title: 'Trust & Usability',
+    description: 'Visual explanations of model predictions build clinician confidence in AI-assisted ECG tools.',
     icon: <Globe className="h-8 w-8 text-green-400" />,
   },
   {
     title: 'Future Potential',
-    description: 'Scalable chatbots and real-time analysis pave the way for broader AI adoption.',
+    description: 'Extensible to mobile and low-resource diagnostic platforms, enabling scalable, accessible cardiac care.',
+    icon: <Lightbulb className="h-8 w-8 text-yellow-400" />,
+  },
+];
+
+// Stroke Prediction Analysis
+const strokeAnalysisData = [
+  {
+    title: 'Predictive Accuracy',
+    description: 'Achieved strong classification performance (AUC > 0.85) in identifying patients at elevated risk of stroke, maintaining a balance between precision and recall.',
+    icon: <BarChart3 className="h-8 w-8 text-teal-400" />,
+  },
+  {
+    title: 'Model Interpretability',
+    description: 'Applied SHAP values to rank medical and lifestyle risk factors, enabling clinicians to understand and validate model outputs.',
+    icon: <Brain className="h-8 w-8 text-indigo-400" />,
+  },
+  {
+    title: 'Practical Challenges',
+    description: 'Managed imbalanced datasets, ensured proper calibration of risk scores, and optimized deployment for real-time use.',
+    icon: <Zap className="h-8 w-8 text-purple-400" />,
+  },
+];
+
+// Stroke Prediction Insights
+const strokeInsightsData = [
+  {
+    title: 'Health Impact',
+    description: 'Early identification of high-risk patients supports timely interventions, reducing the burden of stroke in underserved communities.',
+    icon: <HeartIcon className="h-8 w-8 text-teal-400" />,
+  },
+  {
+    title: 'Trust & Usability',
+    description: 'Transparent feature importance and risk scoring improve clinical adoption of predictive models.',
+    icon: <Globe className="h-8 w-8 text-green-400" />,
+  },
+  {
+    title: 'Future Potential',
+    description: 'Integration into mobile apps and hospital systems can deliver real-time, personalized stroke risk alerts at scale.',
+    icon: <Lightbulb className="h-8 w-8 text-yellow-400" />,
+  },
+];
+
+// Healthcare Recommendations Analysis
+const healthcareRecAnalysisData = [
+  {
+    title: 'Recommendation Accuracy',
+    description: 'Hybrid collaborative and content-based filtering generated personalized treatment suggestions aligned with patient data.',
+    icon: <BarChart3 className="h-8 w-8 text-teal-400" />,
+  },
+  {
+    title: 'Patient Profiling',
+    description: 'Clustering algorithms identified similar patient profiles to optimize care pathways and outcomes.',
+    icon: <Brain className="h-8 w-8 text-indigo-400" />,
+  },
+  {
+    title: 'Real-Time Processing',
+    description: 'Algorithms were optimized to deliver instantaneous recommendations during clinical consultations.',
+    icon: <Zap className="h-8 w-8 text-purple-400" />,
+  },
+];
+
+// Healthcare Recommendations Insights
+const healthcareRecInsightsData = [
+  {
+    title: 'Treatment Optimization',
+    description: 'Data-driven recommendations improve treatment selection and patient outcomes through evidence-based care.',
+    icon: <HeartIcon className="h-8 w-8 text-teal-400" />,
+  },
+  {
+    title: 'Care Personalization',
+    description: 'Individualized care pathways enhance patient engagement and treatment adherence.',
+    icon: <Globe className="h-8 w-8 text-green-400" />,
+  },
+  {
+    title: 'Clinical Decision Support',
+    description: 'AI-powered insights augment clinical expertise for more informed treatment decisions.',
+    icon: <Lightbulb className="h-8 w-8 text-yellow-400" />,
+  },
+];
+
+// Diabetes Risk Assessment Analysis
+const diabetesAnalysisData = [
+  {
+    title: 'Risk Stratification',
+    description: 'Integrated biomarkers, demographics, and lifestyle data to accurately predict diabetes risk.',
+    icon: <BarChart3 className="h-8 w-8 text-teal-400" />,
+  },
+  {
+    title: 'Feature Engineering',
+    description: 'Applied advanced techniques to capture complex interactions among health metrics.',
+    icon: <Brain className="h-8 w-8 text-indigo-400" />,
+  },
+  {
+    title: 'Population Screening',
+    description: 'Designed scalable tools for large-scale population health risk assessment.',
+    icon: <Zap className="h-8 w-8 text-purple-400" />,
+  },
+];
+
+// Diabetes Risk Assessment Insights
+const diabetesInsightsData = [
+  {
+    title: 'Early Intervention',
+    description: 'Enables preventive measures and lifestyle changes before disease onset.',
+    icon: <HeartIcon className="h-8 w-8 text-teal-400" />,
+  },
+  {
+    title: 'Public Health Impact',
+    description: 'Supports targeted prevention programs and optimized resource allocation.',
+    icon: <Globe className="h-8 w-8 text-green-400" />,
+  },
+  {
+    title: 'Healthcare Efficiency',
+    description: 'Risk-based screening enhances preventive care delivery and resource management.',
     icon: <Lightbulb className="h-8 w-8 text-yellow-400" />,
   },
 ];
@@ -61,8 +178,8 @@ const projectsData = [
 		bonus:
 			"Uses PTB-XL ECG dataset. Includes wave detection overlays and an interactive dashboard for clinicians.",
 		icon: <Zap className="h-8 w-8 text-indigo-400" />,
-		analysis: analysisData,
-		insights: insightsData,
+		analysis: ecgAnalysisData,
+		insights: ecgInsightsData,
 	},
 		{
 		id: 2,
@@ -89,8 +206,8 @@ const projectsData = [
 		bonus:
 			"Uses comprehensive patient health datasets. Features real-time risk assessment and early warning notifications.",
 		icon: <AlertTriangle className="h-8 w-8 text-orange-400" />,
-		analysis: analysisData,
-		insights: insightsData,
+		analysis: strokeAnalysisData,
+		insights: strokeInsightsData,
 	},
 	{
 		id: 3,
@@ -118,8 +235,8 @@ const projectsData = [
 		bonus:
 			"Integrates multiple healthcare datasets. Features real-time personalized treatment recommendations and care pathway optimization.",
 		icon: <Target className="h-8 w-8 text-green-400" />,
-		analysis: analysisData,
-		insights: insightsData,
+		analysis: healthcareRecAnalysisData,
+		insights: healthcareRecInsightsData,
 	},
 	{
 		id: 4,
@@ -146,8 +263,8 @@ const projectsData = [
 		bonus:
 			"Uses comprehensive health and lifestyle datasets. Includes interactive risk assessment tools and preventive care recommendations.",
 		icon: <Activity className="h-8 w-8 text-pink-400" />,
-		analysis: analysisData,
-		insights: insightsData,
+		analysis: diabetesAnalysisData,
+		insights: diabetesInsightsData,
 	},
 ];
 
