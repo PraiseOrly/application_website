@@ -7,10 +7,10 @@ import {
 	ArrowRightIcon,
 } from "lucide-react";
 import AcademicExcellenceChampion from "../assets/images/AcademicExcellenceChampion.jpg";
-import CreatorofCardiactek from "../assets/images/CreatorofCardiactek.jpg";
 import PresidentofAlliance4AI from "../assets/images/PresidentofAlliance4AI.jpg";
 import AIinMedicine from "../assets/images/AIinMedicine.jpg";
 import SocialImpactCoderina from "../assets/images/SocialImpactCoderina.jpg";
+import AIInnovation from "../assets/images/AIInnovation.jpg";
 import HomeButtons from "./HomeButtons";
 import { About } from "../layout/About";
 import { Experience } from "../layout/Experience";
@@ -39,11 +39,11 @@ const slideshowData = [
 		subtitle: "AI-Powered Diagnostics",
 		description:
 			"Harnessing machine learning to transform healthcare delivery across Africa with precision and speed.",
-		image: CreatorofCardiactek,
+		image: AIInnovation,
 		bgGradient: "from-gray-200 to-gray-400",
 		buttonText: "Discover More",
 		buttonLink: "#experience",
-		colorIndex: 0,
+		colorIndex: 3,
 		tagline:
 			"Creator of CardiacTek – an AI tool for ECG analysis and cardiac risk prediction.",
 	},
@@ -82,7 +82,7 @@ const slideshowData = [
 		bgGradient: "from-gray-200 to-gray-400",
 		buttonText: "See Innovations",
 		buttonLink: "#experience",
-		colorIndex: 3,
+		colorIndex: 0,
 		tagline:
 			"Building Medical Solutions for better care and access with AI and data science.",
 	},

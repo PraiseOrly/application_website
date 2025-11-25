@@ -43,7 +43,7 @@ export function Header() {
 					{/* Logo */}
 					<Link to="/" className="relative group flex items-center space-x-2">
 						<span className="text-2xl font-extrabold text-teal-400 transition-all duration-300 hover:bg-gradient-to-r hover:from-teal-400 hover:to-indigo-400 hover:bg-clip-text hover:text-transparent">
-							Praise Orly Atadja
+							Praise Orly
 						</span>
 						<span className="absolute -bottom-1 left-0 w-full h-0.5 bg-gradient-to-r from-teal-500 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
 					</Link>
