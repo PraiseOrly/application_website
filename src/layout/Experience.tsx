@@ -1,21 +1,19 @@
-import React from "react";
 import { motion } from "framer-motion";
 import {
+	BookOpen,
+	BrainCircuit,
 	Briefcase,
 	Calendar,
-	MapPin,
-	Users,
-	DollarSign,
-	Trophy,
-	HeartPulse,
-	BrainCircuit,
 	Code2,
-	BookOpen,
+	DollarSign,
+	Globe,
 	HandHeart,
+	MapPin,
 	Microscope,
 	School,
-	Globe,
+	Users
 } from "lucide-react";
+import React from "react";
 
 interface Achievement {
 	text: string;
@@ -199,7 +197,7 @@ const AchievementCard: React.FC<{ achievement: Achievement }> = ({
 	<motion.div
 		variants={animationConfig.item}
 		whileHover={{ x: 5 }}
-		className="flex items-start gap-4 p-4 bg-gray-700 rounded-lg border border-teal-700 hover:border-indigo-500 shadow-sm transition-all">
+		className="flex items-start gap-4">
 		<div className="p-2 bg-gray-800 rounded-full">{achievement.icon}</div>
 		<p className="text-white text-base flex-1">{achievement.text}</p>
 	</motion.div>

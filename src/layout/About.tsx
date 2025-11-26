@@ -68,7 +68,7 @@ export function About() {
 
 			{/* Hero Section */}
 			<section className="relative min-h-screen flex items-center">
-				<div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10 px-8 py-12">
+				<div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10 px-4 py-12">
 					{/* Profile Image Container */}
 					<motion.div
 						className="relative w-96 h-96 rounded-xl border-2 border-teal-400/30 overflow-hidden shadow-2xl backdrop-blur-sm"
