@@ -9,6 +9,8 @@ const profileImages = [
 	"/images/Swiss.jpg",
 	"/images/Moyo.jpg",
 	"/images/Health.jpg",
+	"/images/AI for Good.jpg",
+	"/images/QABF.jpg",
 ];
 
 const aboutData = {

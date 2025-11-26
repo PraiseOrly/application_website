@@ -35,7 +35,7 @@ export function Header() {
   ];
 
   return (
-		<header className="sticky top-0 z-50 bg-gradient-to-r from-white via-white/95 to-white/90 dark:from-slate-900 dark:via-slate-900/95 dark:to-slate-900/90 border-b border-slate-100/50 dark:border-slate-800/50 backdrop-blur-lg shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)]">
+<header className="sticky top-0 z-50 bg-black border-t border-teal-800 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)]">
 			<div
 				className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
 				ref={navRef}>
