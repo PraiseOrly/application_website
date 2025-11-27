@@ -207,8 +207,8 @@ export const Experience = () => {
 	return (
 		<section
 			id="experience"
-			className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-teal-900 to-indigo-900 relative overflow-hidden">
-			<div className="max-w-7xl mx-auto relative z-10">
+			className="py-24 px-6 sm:px-6 lg:px-4 bg-gradient-to-br from-teal-900 to-indigo-900 relative overflow-hidden">
+			<div className="max-w-6xl mx-auto relative z-10">
 				<motion.div
 					variants={animationConfig.section}
 					initial="hidden"
@@ -228,26 +228,26 @@ export const Experience = () => {
 
 				<motion.div
 					variants={animationConfig.section}
-					className="grid gap-8 lg:grid-cols-2">
+					className="grid gap-4 lg:grid-cols-2 justify-items-center">
 					{experienceData.map((exp) => (
 						<motion.div
 							key={`${exp.company}-${exp.title}`}
 							variants={animationConfig.card}
 							whileHover="hover"
-							className="bg-gray-800 rounded-xl shadow-lg p-6 border border-teal-700 relative overflow-hidden">
+							className="bg-gray-800 rounded-xl shadow-lg p-4 border border-teal-700 relative overflow-hidden">
 							<div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-indigo-500 to-teal-500" />
 
-							<div className="flex flex-col gap-4 mb-6">
+							<div className="flex flex-col gap-2 mb-4 p-3">
 								<div className="flex items-center justify-between gap-4">
 									<div className="flex items-center gap-4">
-										<div className="p-3 bg-indigo-900 rounded-lg">
+										<div className="p-2 bg-indigo-900 rounded-lg">
 											<Briefcase className="h-6 w-6 text-indigo-400" />
 										</div>
 										<div>
-											<h3 className="text-2xl font-bold text-teal-300">
+											<h3 className="text-xl font-bold text-teal-300">
 												{exp.title}
 											</h3>
-											<p className="text-white font-medium">{exp.company}</p>
+											<p className="text-white font-medium text-sm">{exp.company}</p>
 										</div>
 									</div>
 									<div className="flex items-center gap-2 text-white">
