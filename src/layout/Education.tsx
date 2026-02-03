@@ -1,16 +1,15 @@
-import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
-	GraduationCap,
-	BookOpen,
+	Briefcase,
 	Calendar,
 	FileBadge,
-	Briefcase,
-	X,
+	GraduationCap,
+	X
 } from "lucide-react";
-import { Document, Page, pdfjs } from "react-pdf";
-import "react-pdf/dist/esm/Page/TextLayer.css";
+import React, { useState } from "react";
+import { pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
+import "react-pdf/dist/esm/Page/TextLayer.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -35,16 +34,7 @@ const educationData: EducationData = {
 	degree: "BSc Software Engineering - First Class Honours",
 	specialization: "Machine Learning, AI for Healthcare",
 	duration: "Jan 2022 - June 2025",
-	courses: [
-		"Mathematics for Machine Learning",
-		"Machine Learning Techniques I&II",
-		"Machine Learning Pipelines",
-		"Mission Capstone(Research)",
-		"Ethics in Software Engineering",
-		"Data Structures & Algorithms",
-		"Frontend & Backend Development",
-		"Entrepreneurial Leadership",
-	],
+	courses: [],
 };
 
 const certificationsData: Certification[] = [
@@ -215,72 +205,58 @@ export const Education = () => {
 
 	return (
 		<section
-			className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-teal-900 to-indigo-900 relative overflow-hidden"
-			id="education">
+			id="education"
+			className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-teal-900 to-indigo-900 relative overflow-hidden">
 			<div className="max-w-7xl mx-auto relative z-10">
 				<motion.div
 					variants={animationConfig.section}
 					initial="hidden"
 					whileInView="visible"
 					viewport={{ once: true }}
-					className="text-center mb-16">
-					<h2 className="text-5xl md:text-6xl font-extrabold text-white mb-4 bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
+					className="text-center mb-6">
+					<h2 className="text-3xl md:text-4xl font-extrabold text-white mb-2 bg-gradient-to-r from-teal-400 to-indigo-400 bg-clip-text text-transparent">
 						Education & Certifications
 					</h2>
 				</motion.div>
 
-				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+				<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 					{/* Education Card */}
 					<motion.div
 						variants={animationConfig.card}
 						initial="hidden"
 						whileInView="visible"
 						whileHover="hover"
-						className="bg-gray-800 rounded-xl shadow-xl p-8 border border-teal-700 relative overflow-hidden">
-						<div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-teal-500 via-indigo-500 to-teal-500" />
+						className="bg-gray-800 rounded-lg shadow-lg p-4 border border-teal-700 relative overflow-hidden">
+						<div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-teal-500 via-indigo-500 to-teal-500" />
 
-						<div className="space-y-6">
+						<div className="space-y-3">
 							<motion.div
 								variants={animationConfig.item}
-								className="flex items-center gap-4">
-								<div className="p-3 bg-teal-700 rounded-full">
-									<GraduationCap className="h-8 w-8 text-teal-400" />
+								className="flex items-center gap-3">
+								<div className="p-2 bg-teal-700 rounded-full">
+									<GraduationCap className="h-5 w-5 text-teal-400" />
 								</div>
 								<div>
-									<h3 className="text-2xl font-bold text-teal-400">
+									<h3 className="text-base font-bold text-teal-400">
 										{educationData.institution}
 									</h3>
-									<p className="text-lg text-white font-medium">
+									<p className="text-white text-sm font-medium">
 										{educationData.degree}
 									</p>
-									<p className="text-white italic">
+									<p className="text-white text-xs italic">
 										{educationData.specialization}
 									</p>
 								</div>
 							</motion.div>
 
-							<motion.div variants={animationConfig.item}>
-								<div className="flex items-center gap-3 mb-4">
-									<BookOpen className="h-6 w-6 text-indigo-400" />
-									<h4 className="text-lg font-semibold text-teal-400">
-										Core Coursework
-									</h4>
-								</div>
-								<ul className="space-y-3">
-									{educationData.courses.map((course, index) => (
-										<CourseItem key={index} course={course} />
-									))}
-								</ul>
-							</motion.div>
-
 							<motion.div
 								variants={animationConfig.item}
-								className="bg-teal-900 rounded-xl p-5">
-								<div className="flex items-center gap-3">
-									<Calendar className="h-6 w-6 text-teal-400" />
+								className="bg-teal-900 rounded-lg p-3">
+								<div className="flex items-center gap-2">
+									<Calendar className="h-4 w-4 text-teal-400" />
 									<div>
-										<p className="text-white font-medium">Program Duration</p>
-										<p className="text-white">{educationData.duration}</p>
+										<p className="text-white text-sm font-medium">Duration</p>
+										<p className="text-white text-xs">{educationData.duration}</p>
 									</div>
 								</div>
 							</motion.div>
@@ -293,28 +269,25 @@ export const Education = () => {
 						initial="hidden"
 						whileInView="visible"
 						whileHover="hover"
-						className="bg-gray-800 rounded-xl shadow-xl p-8 border border-teal-700 relative overflow-hidden">
-						<div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-indigo-500 to-teal-500" />
+						className="bg-gray-800 rounded-lg shadow-lg p-4 border border-teal-700 relative overflow-hidden">
+						<div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-indigo-500 to-teal-500" />
 
-						<div className="space-y-6">
+						<div className="space-y-3">
 							<motion.div
 								variants={animationConfig.item}
-								className="flex items-center gap-4 mb-6">
-								<div className="p-3 text-teal-300 rounded-full">
-									<Briefcase className="h-8 w-8 " />
+								className="flex items-center gap-3 mb-3">
+								<div className="p-2 text-teal-300 rounded-full">
+									<Briefcase className="h-5 w-5" />
 								</div>
 								<div>
-									<h3 className="text-2xl font-bold text-teal-300">
-										Professional Certifications
+									<h3 className="text-base font-bold text-teal-300">
+										Certifications
 									</h3>
-									<p className="text-white">
-										Validated technical expertise and continuous learning
-									</p>
 								</div>
 							</motion.div>
 
-							<div className="space-y-4">
-								{certificationsData.map((certification, index) => (
+							<div className="space-y-2">
+								{certificationsData.slice(0, 3).map((certification, index) => (
 									<CertificationItem
 										key={index}
 										certification={certification}
@@ -330,10 +303,10 @@ export const Education = () => {
 								rel="noopener noreferrer"
 								variants={animationConfig.item}
 								whileHover={{ scale: 1.05 }}
-								className="inline-block w-full px-6 py-3 bg-teal-900 hover:bg-teal-500 text-white font-medium rounded-lg transition-all duration-300 text-center">
+								className="inline-block w-full px-3 py-2 bg-teal-900 hover:bg-teal-500 text-white text-sm font-medium rounded-lg transition-all duration-300 text-center">
 								<div className="flex items-center justify-center gap-2">
-									<FileBadge className="h-5 w-5" />
-									View All Course Certificates
+									<FileBadge className="h-4 w-4" />
+									View All Certificates
 								</div>
 							</motion.a>
 						</div>

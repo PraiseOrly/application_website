@@ -49,7 +49,7 @@ export function About() {
 	}, []);
 
 	return (
-		<div className="w-full sm:px-6 lg:px-8 bg-gradient-to-br from-teal-900 to-indigo-900 relative overflow-hidden text-gray-100">
+		<section id="about" className="w-full sm:px-6 lg:px-8 bg-gradient-to-br from-teal-900 to-indigo-900 relative overflow-hidden text-gray-100">
 			{/* Background Decorative Element */}
 			<div className="absolute inset-0 opacity-10 pointer-events-none">
 				<svg className="w-full h-full" fill="none">
@@ -203,6 +203,6 @@ export function About() {
 					</div>
 				</section>
 			</div>
-		</div>
+		</section>
 	);
 }

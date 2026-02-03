@@ -1,18 +1,19 @@
 import { Heart, Sparkles } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { pdfjs } from "react-pdf";
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Popup from './components/common/Popup';
 import { Footer } from './components/layout/Footer';
 import { Header } from './components/layout/Header';
 import Contact from './components/sections/contacts';
-import Insights from './components/sections/DataScience';
 import Analytics from './components/sections/DataAnalytics';
+import Insights from './components/sections/DataScience';
 import Analysis from './components/sections/Research';
 import Testimonials from './components/Testimonials';
 import { Home } from './pages/Home';
 import Projects from './pages/projects/projects';
+import SinglePagePortfolio from './pages/SinglePagePortfolio';
 import { Skills } from './pages/Skills';
-import { pdfjs } from "react-pdf";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -41,7 +42,8 @@ function Layout() {
 			<Header />
 			<main className="flex-grow">
 				<Routes>
-					<Route path="/" element={<Home />} />
+					<Route path="/" element={<SinglePagePortfolio />} />
+					<Route path="/single-page" element={<SinglePagePortfolio />} />
 					<Route path="/home" element={<Home />} />
 					<Route path="/analysis" element={<Analysis />} />
 					<Route path="/insights" element={<Insights />} />
