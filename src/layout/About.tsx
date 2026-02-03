@@ -26,14 +26,28 @@ const aboutData = {
 			title: "AI Diagnostics",
 			description:
 				"Developed deep learning models for 12-lead ECG interpretation, achieving high accuracy across multiple cardiac conditions.",
-			icon: <Brain className="h-6 w-6 text-teal-400" />,
+			icon: <Brain className="h-5 w-5 text-teal-400" />,
 		},
 		{
 			id: "2",
 			title: "Community Impact",
 			description:
 				"Mentored peers and emerging professionals, fostering skill development, collaboration, and career growth.",
-			icon: <Award className="h-6 w-6 text-lime-300" />,
+			icon: <Award className="h-5 w-5 text-lime-300" />,
+		},
+		{
+			id: "3",
+			title: "Research Leadership",
+			description:
+				"Published research on AI applications in healthcare, presenting at international conferences.",
+			icon: <SparklesIcon className="h-5 w-5 text-purple-400" />,
+		},
+		{
+			id: "4",
+			title: "Tech Innovation",
+			description:
+				"Built scalable AI solutions addressing critical healthcare challenges in underserved regions.",
+			icon: <SparklesIcon className="h-5 w-5 text-orange-400" />,
 		},
 	],
 };
@@ -131,24 +145,24 @@ export function About() {
 			</section>
 
 			{/* Content Sections */}
-			<div className="relative space-y-12 py-2 px-2 lg:px-8 lg:py-2">
+			<div className="relative space-y-8 py-2 px-2 lg:px-8">
 				{/* My Mission Section */}
 				<section className="max-w-4xl mx-auto">
 					<motion.div
-						className="space-y-6 text-center"
+						className="space-y-4 text-center"
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}>
-						<h2 className="text-3xl font-bold text-teal-300 mb-4">
+						<h2 className="text-2xl font-bold text-teal-300">
 							My Mission
 						</h2>
 
-						<div className="space-y-4 text-gray-200 text-lg leading-relaxed">
+						<div className="space-y-3 text-gray-200 text-base leading-relaxed">
 							<p className="max-w-2xl mx-auto">
 								Transforming African healthcare through ethical AI innovation
 								and community empowerment.
 							</p>
 
-							<ul className="grid md:grid-cols-2 gap-4 text-left max-w-4xl mx-auto">
+							<ul className="grid md:grid-cols-2 gap-3 text-left max-w-4xl mx-auto">
 								{[
 									"Democratizing medical AI tools",
 									"Building locally-relevant solutions",
@@ -157,12 +171,12 @@ export function About() {
 								].map((item, index) => (
 									<motion.li
 										key={item}
-										className="flex items-center gap-3 p-4 bg-gray-400/20 rounded-lg backdrop-blur-sm"
+										className="flex items-center gap-2 p-3 bg-gray-400/20 rounded-lg backdrop-blur-sm"
 										initial={{ opacity: 0, x: -20 }}
 										whileInView={{ opacity: 1, x: 0 }}
 										transition={{ delay: index * 0.1 }}>
-										<SparklesIcon className="h-5 w-5 text-teal-400 flex-shrink-0" />
-										<span>{item}</span>
+										<SparklesIcon className="h-4 w-4 text-teal-400 flex-shrink-0" />
+										<span className="text-sm">{item}</span>
 									</motion.li>
 								))}
 							</ul>
@@ -173,29 +187,29 @@ export function About() {
 				{/* Key Achievements */}
 				<section className="max-w-6xl mx-auto">
 					<motion.h2
-						className="text-3xl font-bold text-center mb-6 text-teal-300"
+						className="text-2xl font-bold text-center mb-4 text-teal-300"
 						initial={{ opacity: 0, y: 20 }}
 						whileInView={{ opacity: 1, y: 0 }}>
 						Key Achievements
 					</motion.h2>
 
-					<div className="grid md:grid-cols-2 gap-6 py-8">
+					<div className="grid md:grid-cols-2 gap-4">
 						{aboutData.highlights.map((highlight) => (
 							<motion.div
 								key={highlight.id}
-								className="p-6 bg-gray-400/20 rounded-xl backdrop-blur-sm border border-teal-400/20"
+								className="p-4 bg-gray-400/20 rounded-xl backdrop-blur-sm border border-teal-400/20"
 								initial={{ opacity: 0, y: 20 }}
 								whileInView={{ opacity: 1, y: 0 }}
-								whileHover={{ y: -5 }}>
-								<div className="flex items-center gap-6 mb-4">
-									<div className="p-3 bg-teal-400/10 rounded-lg">
+								whileHover={{ y: -3 }}>
+								<div className="flex items-center gap-4 mb-3">
+									<div className="p-2 bg-teal-400/10 rounded-lg">
 										{highlight.icon}
 									</div>
-									<h3 className="text-xl font-semibold text-teal-200">
+									<h3 className="text-lg font-semibold text-teal-200">
 										{highlight.title}
 									</h3>
 								</div>
-								<p className="text-gray-200 leading-relaxed">
+								<p className="text-gray-200 text-sm leading-relaxed">
 									{highlight.description}
 								</p>
 							</motion.div>

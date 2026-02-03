@@ -228,43 +228,50 @@ export const Experience = () => {
 
 				<motion.div
 					variants={animationConfig.section}
-					className="grid gap-4 lg:grid-cols-2 justify-items-center">
+					className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
 					{experienceData.map((exp) => (
 						<motion.div
 							key={`${exp.company}-${exp.title}`}
 							variants={animationConfig.card}
 							whileHover="hover"
-							className="bg-gray-800 rounded-xl shadow-lg p-4 border border-teal-700 relative overflow-hidden">
-							<div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-indigo-500 to-teal-500" />
+							className="bg-gray-800 rounded-xl shadow-lg p-3 border border-teal-700 relative overflow-hidden">
+							<div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-indigo-500 to-teal-500" />
 
-							<div className="flex flex-col gap-2 mb-4 p-3">
-								<div className="flex items-center justify-between gap-4">
-									<div className="flex items-center gap-4">
-										<div className="p-2 bg-indigo-900 rounded-lg">
-											<Briefcase className="h-6 w-6 text-indigo-400" />
+							<div className="flex flex-col gap-1 mb-3 p-2">
+								<div className="flex items-center justify-between gap-2">
+									<div className="flex items-center gap-2">
+										<div className="p-1.5 bg-indigo-900 rounded-lg">
+											<Briefcase className="h-4 w-4 text-indigo-400" />
 										</div>
 										<div>
-											<h3 className="text-xl font-bold text-teal-300">
+											<h3 className="text-sm font-bold text-teal-300">
 												{exp.title}
 											</h3>
-											<p className="text-white font-medium text-sm">{exp.company}</p>
+											<p className="text-white text-xs font-medium">{exp.company}</p>
 										</div>
 									</div>
-									<div className="flex items-center gap-2 text-white">
-										<Calendar className="h-5 w-5" />
-										<span className="font-medium">{exp.duration}</span>
+									<div className="flex items-center gap-1 text-white">
+										<Calendar className="h-4 w-4" />
+										<span className="text-xs font-medium">{exp.duration}</span>
 									</div>
 								</div>
 
-								<div className="flex items-center gap-2 text-teal-400">
-									<MapPin className="h-5 w-5" />
-									<span>{exp.location}</span>
+								<div className="flex items-center gap-1 text-teal-400">
+									<MapPin className="h-4 w-4" />
+									<span className="text-xs">{exp.location}</span>
 								</div>
 							</div>
 
-							<div className="space-y-4">
+							<div className="space-y-2">
 								{exp.achievements.map((achievement, idx) => (
-									<AchievementCard key={idx} achievement={achievement} />
+									<motion.div
+										key={idx}
+										variants={animationConfig.item}
+										whileHover={{ x: 3 }}
+										className="flex items-start gap-2">
+										<div className="p-1 bg-gray-800 rounded-full shrink-0 mt-0.5">{achievement.icon}</div>
+										<p className="text-white text-xs flex-1 leading-tight">{achievement.text}</p>
+									</motion.div>
 								))}
 							</div>
 						</motion.div>

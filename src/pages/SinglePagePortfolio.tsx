@@ -313,7 +313,7 @@ export function SinglePagePortfolio() {
         <Skills />
         
         {/* Projects Section */}
-        <section id="projects" className="w-full">
+        <section id="projects" className="w-full bg-gray-900">
           <Projects />
         </section>
       </main>
