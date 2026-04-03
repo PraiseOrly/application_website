@@ -25,7 +25,7 @@ const slideshowData = [
     description:
       'Built CardiacTEK — an AI ECG analysis tool achieving 96% diagnostic accuracy across 10,000+ PhysioNet records, reducing cardiologist workload by 70% in resource-constrained settings.',
     image: AIInnovation,
-    accentColor: '#22c55e',
+    accentColor: '#14B8A6',
     buttonText: 'Explore Work',
     buttonLink: '#experience',
     tag: 'CardiacTEK · Deep Learning · ECG Analysis',
@@ -36,7 +36,7 @@ const slideshowData = [
     description:
       "Led 8+ ML workshops with Alliance4AI, with 40% of participants securing AI roles. Directed Rwanda's She Innovate Summer School — training 30 girls in tech with a 40% retention increase.",
     image: PresidentofAlliance4AI,
-    accentColor: '#10b981',
+    accentColor: '#8B5CF6',
     buttonText: 'See Impact',
     buttonLink: '#skills',
     tag: 'Alliance4AI · She Innovate · STEM Education',
@@ -47,7 +47,7 @@ const slideshowData = [
     description:
       'Top-ranked student at African Leadership University with a 4.56 GPA and First Class Honours. Specializing in AI-driven healthcare diagnostics and machine learning systems.',
     image: AcademicExcellenceChampion,
-    accentColor: '#84cc16',
+    accentColor: '#4B5EAA',
     buttonText: 'View Journey',
     buttonLink: '#education',
     tag: 'ALU · First Class Honours · 4.56 GPA',
@@ -108,10 +108,10 @@ export function SinglePagePortfolio() {
   const slide = slideshowData[currentSlide];
 
   return (
-    <div className="w-full min-h-screen overflow-x-hidden text-white" style={{ background: '#030a06' }}>
+    <div className="w-full min-h-screen overflow-x-hidden text-white" style={{ background: '#030712' }}>
 
       {/* ── Hero Section ── */}
-      <section id="home" className="relative h-[96vh] overflow-hidden" style={{ background: '#030a06' }}>
+      <section id="home" className="relative h-[96vh] overflow-hidden" style={{ background: '#030712' }}>
 
         {/* Per-slide ambient glow */}
         <motion.div
@@ -258,9 +258,9 @@ export function SinglePagePortfolio() {
       {/* ── CTA ── */}
       <section
         className="py-20 border-t border-white/5 text-center relative overflow-hidden"
-        style={{ background: '#030a06' }}>
+        style={{ background: '#030712' }}>
         <div className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 55% 50% at 50% 50%, rgba(34,197,94,0.05) 0%, transparent 70%)' }}
+          style={{ background: 'radial-gradient(ellipse 55% 50% at 50% 50%, rgba(20,184,166,0.05) 0%, transparent 70%)' }}
         />
         <motion.h2
           initial={{ opacity: 0, y: 24 }}
@@ -286,7 +286,7 @@ export function SinglePagePortfolio() {
           transition={{ duration: 0.7, delay: 0.24 }}
           whileHover={{ scale: 1.04 }}
           whileTap={{ scale: 0.97 }}
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-green-500/10 border border-green-500/25 text-green-300 text-sm font-semibold hover:bg-green-500/18 hover:border-green-400/40 transition-all duration-300">
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-teal-500/10 border border-teal-500/25 text-teal-300 text-sm font-semibold hover:bg-teal-500/18 hover:border-teal-400/40 transition-all duration-300">
           Contact Me
           <ArrowRightIcon className="h-4 w-4" />
         </motion.a>

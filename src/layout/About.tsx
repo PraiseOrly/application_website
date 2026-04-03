@@ -33,37 +33,33 @@ const achievements = [
     metric: "96%",
     label: "Diagnostic Accuracy",
     description: "ECG model on 10,000+ records; cut cardiologist reliance by 70%.",
-    color: "#22c55e",
-    borderColor: "border-green-500/25",
-    bgColor: "bg-green-500/8",
-    textColor: "text-green-400",
+    borderColor: "border-teal-500/25",
+    bgColor: "bg-teal-500/8",
+    textColor: "text-teal-400",
   },
   {
     metric: "40%",
     label: "Retention Boost",
     description: "She Innovate STEM Summer School participant retention, Rwanda.",
-    color: "#f59e0b",
-    borderColor: "border-amber-500/25",
-    bgColor: "bg-amber-500/8",
-    textColor: "text-amber-400",
+    borderColor: "border-violet-500/25",
+    bgColor: "bg-violet-500/8",
+    textColor: "text-violet-400",
   },
   {
     metric: "100+",
     label: "Students Reached",
     description: "Trained through Alliance4AI workshops; 40% secured AI roles.",
-    color: "#10b981",
-    borderColor: "border-emerald-500/25",
-    bgColor: "bg-emerald-500/8",
-    textColor: "text-emerald-400",
+    borderColor: "border-cyan-500/25",
+    bgColor: "bg-cyan-500/8",
+    textColor: "text-cyan-400",
   },
   {
     metric: "4.56",
     label: "GPA · First Class",
     description: "Top-ranked BSc Software Engineering, ALU, specializing in AI.",
-    color: "#84cc16",
-    borderColor: "border-lime-500/25",
-    bgColor: "bg-lime-500/8",
-    textColor: "text-lime-400",
+    borderColor: "border-indigo-500/25",
+    bgColor: "bg-indigo-500/8",
+    textColor: "text-indigo-400",
   },
 ];
 
@@ -81,17 +77,17 @@ export function About() {
     <section
       id="about"
       className="w-full relative overflow-hidden text-gray-100"
-      style={{ background: 'linear-gradient(to bottom, #030a06, #04110a, #030a06)' }}>
+      style={{ background: 'linear-gradient(to bottom, #030712, #0a1628, #030712)' }}>
 
       {/* Dot grid */}
       <div className="absolute inset-0 opacity-[0.035] pointer-events-none"
         style={{
-          backgroundImage: 'radial-gradient(circle, #22c55e 1px, transparent 1px)',
+          backgroundImage: 'radial-gradient(circle, #14b8a6 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
       />
 
-      {/* ── Hero: Photo + Bio ── */}
+      {/* Hero: Photo + Bio */}
       <div className="relative min-h-screen flex items-center">
         <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center gap-12 px-6 py-20">
 
@@ -139,7 +135,7 @@ export function About() {
                   style={{
                     width: i === currentImageIndex ? 16 : 6,
                     height: 4,
-                    background: i === currentImageIndex ? '#22c55e' : 'rgba(255,255,255,0.18)',
+                    background: i === currentImageIndex ? '#14B8A6' : 'rgba(255,255,255,0.18)',
                   }}
                 />
               ))}
@@ -152,13 +148,13 @@ export function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25 }}>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-green-500/10 border border-green-500/20 text-green-300 mb-4">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-teal-500/10 border border-teal-500/20 text-teal-300 mb-4">
                 <Sparkles className="h-3 w-3" /> About Me
               </span>
               <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
                 Praise Orly Atadja
               </h1>
-              <p className="text-green-300/80 text-base font-medium mt-1.5">
+              <p className="text-teal-300/80 text-base font-medium mt-1.5">
                 AI & Healthcare Engineer · Machine Learning · Project Manager
               </p>
             </motion.div>
@@ -183,7 +179,7 @@ export function About() {
                 href="https://docs.google.com/document/d/1hpOO01I7PB5sJytnXY1sThD4xyxU48Co/edit?usp=sharing&ouid=101909117862344144947&rtpof=true&sd=true"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-2.5 bg-green-500/12 border border-green-500/25 text-green-300 rounded-full text-sm font-medium hover:bg-green-500/22 hover:border-green-400/40 transition-all duration-300">
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-teal-500/12 border border-teal-500/25 text-teal-300 rounded-full text-sm font-medium hover:bg-teal-500/22 hover:border-teal-400/40 transition-all duration-300">
                 View Resume <ArrowUpRight className="h-3.5 w-3.5" />
               </a>
               <a
@@ -196,21 +192,20 @@ export function About() {
         </div>
       </div>
 
-      {/* ── Vision & Key Achievements ── */}
+      {/* Vision & Key Achievements */}
       <div className="max-w-6xl mx-auto px-6 pb-20">
         <div className="grid md:grid-cols-2 gap-8">
 
-          {/* My Mission */}
+          {/* Mission */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-green-500/[0.03] border border-green-500/15 rounded-2xl p-8 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-500/50 to-transparent" />
-            <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full blur-2xl opacity-8 bg-green-500 pointer-events-none" />
-
+            className="bg-teal-500/[0.03] border border-teal-500/15 rounded-2xl p-8 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-500/50 to-transparent" />
+            <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full blur-2xl opacity-8 bg-teal-500 pointer-events-none" />
             <h2 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
               My Vision & Mission
             </h2>
             <div className="space-y-3">
@@ -221,8 +216,8 @@ export function About() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-green-500/20 transition-colors duration-200">
-                  <span className="mt-0.5 text-green-400 shrink-0">{item.icon}</span>
+                  className="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-teal-500/20 transition-colors duration-200">
+                  <span className="mt-0.5 text-teal-400 shrink-0">{item.icon}</span>
                   <p className="text-gray-300 text-sm leading-relaxed">{item.text}</p>
                 </motion.div>
               ))}
@@ -235,11 +230,10 @@ export function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="bg-green-500/[0.03] border border-green-500/15 rounded-2xl p-8 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
-
+            className="bg-teal-500/[0.03] border border-teal-500/15 rounded-2xl p-8 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-violet-500/50 to-transparent" />
             <h2 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
               Key Achievements
             </h2>
             <div className="grid grid-cols-2 gap-3">

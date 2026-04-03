@@ -1,8 +1,8 @@
-import { ArrowRight, Leaf } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { pdfjs } from "react-pdf";
-import { BrowserRouter, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { Footer } from './components/layout/Footer';
 import { Header } from './components/layout/Header';
 import Contact from './components/sections/contacts';
@@ -18,11 +18,8 @@ import { Skills } from './pages/Skills';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 function WelcomePopup({ onClose }: { onClose: () => void }) {
-  const navigate = useNavigate();
-
   const goToProjects = () => {
     onClose();
-    // Scroll to projects section on main page
     const el = document.getElementById('projects');
     if (el) {
       const offset = el.getBoundingClientRect().top + window.scrollY - 80;
@@ -50,12 +47,10 @@ function WelcomePopup({ onClose }: { onClose: () => void }) {
         animate="visible"
         exit="exit"
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-sm bg-[#040f07] border border-green-500/20 rounded-2xl shadow-2xl overflow-hidden">
+        className="relative w-full max-w-sm bg-gray-950 border border-teal-500/20 rounded-2xl shadow-2xl overflow-hidden">
 
-        {/* Accent line */}
-        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-500/60 to-transparent" />
-        {/* Ambient */}
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full blur-3xl bg-green-500/8 pointer-events-none" />
+        <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-500/60 to-transparent" />
+        <div className="absolute -top-16 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full blur-3xl bg-teal-500/8 pointer-events-none" />
 
         <div className="relative z-10 p-6">
           <button
@@ -65,10 +60,10 @@ function WelcomePopup({ onClose }: { onClose: () => void }) {
           </button>
 
           <div className="flex items-center gap-2 mb-4">
-            <div className="p-2 rounded-xl bg-green-500/10 border border-green-500/20">
-              <Leaf className="h-4 w-4 text-green-400" />
+            <div className="p-2 rounded-xl bg-teal-500/10 border border-teal-500/20">
+              <Sparkles className="h-4 w-4 text-teal-400" />
             </div>
-            <span className="text-[11px] font-semibold tracking-widest text-green-400 uppercase">Welcome</span>
+            <span className="text-[11px] font-semibold tracking-widest text-teal-400 uppercase">Welcome</span>
           </div>
 
           <h3 className="text-white font-bold text-lg mb-2 leading-snug pr-6">
@@ -86,7 +81,7 @@ function WelcomePopup({ onClose }: { onClose: () => void }) {
             </button>
             <button
               onClick={goToProjects}
-              className="flex-1 py-2.5 rounded-full text-sm font-semibold bg-green-500/15 border border-green-500/30 text-green-300 hover:bg-green-500/25 transition-all duration-200 flex items-center justify-center gap-1.5">
+              className="flex-1 py-2.5 rounded-full text-sm font-semibold bg-teal-500/15 border border-teal-500/30 text-teal-300 hover:bg-teal-500/25 transition-all duration-200 flex items-center justify-center gap-1.5">
               View Projects
               <ArrowRight className="h-3.5 w-3.5" />
             </button>
@@ -102,13 +97,11 @@ function Layout() {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    // Show popup once per session
     const visited = sessionStorage.getItem('portfolio_visited');
     if (!visited) {
       const timer = setTimeout(() => {
         setShowPopup(true);
         sessionStorage.setItem('portfolio_visited', 'true');
-        // Auto-dismiss after 10 seconds
         setTimeout(() => setShowPopup(false), 10000);
       }, 1800);
       return () => clearTimeout(timer);
@@ -116,7 +109,7 @@ function Layout() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#030a06] flex flex-col relative">
+    <div className="min-h-screen bg-gray-950 flex flex-col relative">
       <Header />
       <main className="flex-grow">
         <Routes>

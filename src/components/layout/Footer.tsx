@@ -26,14 +26,14 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[#030a06] border-t border-white/5">
+    <footer className="bg-gray-950 border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
 
           {/* Brand */}
           <div className="space-y-3">
             <div className="flex items-center gap-2.5">
-              <span className="w-2 h-2 rounded-full bg-green-400 shadow-[0_0_6px_rgba(74,222,128,0.7)]" />
+              <span className="w-2 h-2 rounded-full bg-teal-400 shadow-[0_0_6px_rgba(45,212,191,0.7)]" />
               <span className="text-[15px] font-semibold tracking-wide text-white/90">Praise Orly</span>
             </div>
             <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
@@ -49,7 +49,7 @@ export function Footer() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-sm text-gray-500 hover:text-green-300 transition-colors duration-200 text-left">
+                  className="text-sm text-gray-500 hover:text-teal-300 transition-colors duration-200 text-left">
                   {item.label}
                 </button>
               ))}
@@ -66,7 +66,7 @@ export function Footer() {
                   href={href}
                   target={href.startsWith('http') ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm text-gray-500 hover:text-green-300 transition-colors duration-200">
+                  className="flex items-center gap-3 text-sm text-gray-500 hover:text-teal-300 transition-colors duration-200">
                   <Icon className="h-4 w-4" />
                   {label}
                 </a>

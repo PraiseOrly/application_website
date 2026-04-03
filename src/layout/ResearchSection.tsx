@@ -37,19 +37,19 @@ const researchInterests: ResearchInterest[] = [
     title: "AI-Driven Cardiovascular Diagnostics",
     description: "Developing deep learning models for ECG interpretation and cardiac risk stratification, with a focus on accessibility in resource-limited African healthcare settings.",
     icon: <Heart className="h-5 w-5" />,
-    accentColor: "#22c55e",
-    borderColor: "border-green-500/20",
-    bgColor: "bg-green-500/[0.04]",
-    textColor: "text-green-300",
+    accentColor: "#14B8A6",
+    borderColor: "border-teal-500/20",
+    bgColor: "bg-teal-500/[0.04]",
+    textColor: "text-teal-300",
   },
   {
     title: "Predictive Analytics for Preventive Medicine",
     description: "Applying ML techniques to identify early biomarkers for diabetes, stroke, and chronic conditions before clinical onset — enabling proactive, preventive care delivery.",
     icon: <Brain className="h-5 w-5" />,
-    accentColor: "#10b981",
-    borderColor: "border-emerald-500/20",
-    bgColor: "bg-emerald-500/[0.04]",
-    textColor: "text-emerald-300",
+    accentColor: "#06B6D4",
+    borderColor: "border-cyan-500/20",
+    bgColor: "bg-cyan-500/[0.04]",
+    textColor: "text-cyan-300",
   },
   {
     title: "Health AI for Resource-Limited Settings",
@@ -126,8 +126,8 @@ const publications: Publication[] = [
 ];
 
 const statusConfig: Record<Publication['status'], { label: string; bg: string; text: string; border: string }> = {
-  published: { label: "Published", bg: "bg-green-500/10", text: "text-green-300", border: "border-green-500/20" },
-  preprint: { label: "Preprint", bg: "bg-emerald-500/10", text: "text-emerald-300", border: "border-emerald-500/20" },
+  published: { label: "Published", bg: "bg-teal-500/10", text: "text-teal-300", border: "border-teal-500/20" },
+  preprint: { label: "Preprint", bg: "bg-cyan-500/10", text: "text-cyan-300", border: "border-cyan-500/20" },
   poster: { label: "Research Poster", bg: "bg-amber-500/10", text: "text-amber-300", border: "border-amber-500/20" },
   "in preparation": { label: "In Preparation", bg: "bg-gray-500/10", text: "text-gray-400", border: "border-gray-500/20" },
 };
@@ -142,11 +142,11 @@ export function ResearchSection() {
     <section
       id="research"
       className="py-24 px-6 sm:px-8 relative overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #030a06, #031208, #030a06)' }}>
+      style={{ background: 'linear-gradient(to bottom, #030712, #060c1a, #030712)' }}>
 
       {/* Ambient glows */}
-      <div className="absolute top-0 left-1/3 w-80 h-80 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-green-500" />
-      <div className="absolute bottom-0 right-1/3 w-80 h-80 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-emerald-400" />
+      <div className="absolute top-0 left-1/3 w-80 h-80 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-teal-400" />
+      <div className="absolute bottom-0 right-1/3 w-80 h-80 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-indigo-500" />
       <div className="absolute inset-0 opacity-[0.025] pointer-events-none"
         style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
       />
@@ -160,7 +160,7 @@ export function ResearchSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
           className="text-center mb-16">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-green-500/10 border border-green-500/20 text-green-300 mb-4">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-teal-500/10 border border-teal-500/20 text-teal-300 mb-4">
             <FlaskConical className="h-3 w-3" /> Research
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Research & Publications</h2>
@@ -172,7 +172,7 @@ export function ResearchSection() {
         {/* ── Research Interests ── */}
         <div className="mb-20">
           <div className="flex items-center gap-2 mb-8">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
             <h3 className="text-lg font-bold text-white">Research Interests</h3>
           </div>
 
@@ -225,18 +225,18 @@ export function ResearchSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.08, duration: 0.5 }}
-                  className="group bg-white/[0.02] border border-white/8 hover:border-green-500/20 rounded-2xl p-6 relative overflow-hidden transition-all duration-300">
-                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-500/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  className="group bg-white/[0.02] border border-white/8 hover:border-teal-500/20 rounded-2xl p-6 relative overflow-hidden transition-all duration-300">
+                  <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-500/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
                   <div className="flex items-start justify-between gap-4 mb-3">
                     <div className="flex items-start gap-3">
-                      <div className="p-2 bg-green-500/8 border border-green-500/15 rounded-xl shrink-0 mt-0.5">
-                        <ScrollText className="h-4 w-4 text-green-400" />
+                      <div className="p-2 bg-teal-500/[0.08] border border-teal-500/15 rounded-xl shrink-0 mt-0.5">
+                        <ScrollText className="h-4 w-4 text-teal-400" />
                       </div>
                       <div>
                         <h4 className="text-white text-sm font-bold leading-snug mb-1">{pub.title}</h4>
                         {pub.venue && (
-                          <p className="text-green-400/60 text-xs">{pub.venue}</p>
+                          <p className="text-teal-400/60 text-xs">{pub.venue}</p>
                         )}
                       </div>
                     </div>
@@ -260,7 +260,7 @@ export function ResearchSection() {
                     </div>
                     {pub.url && (
                       <a href={pub.url} target="_blank" rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-xs text-gray-600 hover:text-green-300 transition-colors duration-200">
+                        className="inline-flex items-center gap-1 text-xs text-gray-600 hover:text-teal-300 transition-colors duration-200">
                         <ExternalLink className="h-3.5 w-3.5" /> Read
                       </a>
                     )}
@@ -280,7 +280,7 @@ export function ResearchSection() {
             <p className="text-gray-600 text-sm mb-4">Interested in collaborating on research?</p>
             <a
               href="#contact"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium bg-green-500/10 border border-green-500/20 text-green-300 hover:bg-green-500/18 transition-all duration-300">
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-medium bg-teal-500/10 border border-teal-500/20 text-teal-300 hover:bg-teal-500/18 transition-all duration-300">
               <BookOpen className="h-4 w-4" />
               Discuss Research Collaboration
             </a>

@@ -36,8 +36,8 @@ const formTypeLabels: Record<FormInputs['formType'], string> = {
   teaching: 'Teaching Request',
 };
 
-const inputCls = "w-full p-3.5 rounded-xl bg-white/[0.04] border border-white/8 text-white placeholder-gray-600 focus:border-green-500/40 focus:ring-2 focus:ring-green-500/10 outline-none transition-all duration-200 text-sm";
-const selectCls = "w-full p-3.5 rounded-xl bg-white/[0.04] border border-white/8 text-white focus:border-green-500/40 focus:ring-2 focus:ring-green-500/10 outline-none transition-all duration-200 text-sm";
+const inputCls = "w-full p-3.5 rounded-xl bg-white/[0.04] border border-white/8 text-white placeholder-gray-600 focus:border-teal-500/40 focus:ring-2 focus:ring-teal-500/10 outline-none transition-all duration-200 text-sm";
+const selectCls = "w-full p-3.5 rounded-xl bg-white/[0.04] border border-white/8 text-white focus:border-teal-500/40 focus:ring-2 focus:ring-teal-500/10 outline-none transition-all duration-200 text-sm";
 const labelCls = "block text-xs font-semibold tracking-wide text-gray-500 uppercase mb-1.5";
 
 const ContactForm: React.FC = () => {
@@ -228,13 +228,13 @@ const ContactForm: React.FC = () => {
   return (
     <div
       className="min-h-screen flex items-center justify-center py-20 px-4 relative overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #030a06, #031507, #030a06)' }}>
+      style={{ background: 'linear-gradient(to bottom, #030712, #060c1a, #030712)' }}>
 
       {/* Ambient glows */}
       <div className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse 50% 60% at 50% 50%, rgba(34,197,94,0.06) 0%, transparent 70%)' }} />
-      <div className="absolute top-0 left-0 w-80 h-80 rounded-full blur-3xl opacity-[0.05] pointer-events-none bg-green-500" />
-      <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-emerald-400" />
+        style={{ background: 'radial-gradient(ellipse 50% 60% at 50% 50%, rgba(20,184,166,0.06) 0%, transparent 70%)' }} />
+      <div className="absolute top-0 left-0 w-80 h-80 rounded-full blur-3xl opacity-[0.05] pointer-events-none bg-teal-500" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-indigo-500" />
 
       <div className="max-w-5xl w-full flex flex-col lg:flex-row gap-8 relative z-10">
 
@@ -245,8 +245,8 @@ const ContactForm: React.FC = () => {
           transition={{ duration: 0.7 }}
           className="lg:w-72 shrink-0 space-y-6">
 
-          <div className="bg-green-500/[0.04] border border-green-500/15 rounded-2xl p-6 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-500/45 to-transparent" />
+          <div className="bg-teal-500/[0.04] border border-teal-500/15 rounded-2xl p-6 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-500/45 to-transparent" />
             <h3 className="text-white font-bold text-base mb-1">Let's Collaborate</h3>
             <p className="text-gray-500 text-sm leading-relaxed mb-5">
               Open to AI projects, research partnerships, speaking, and teaching opportunities.
@@ -259,7 +259,7 @@ const ContactForm: React.FC = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ x: 4 }}
-                  className="flex items-center gap-3 text-gray-400 hover:text-green-300 transition-colors duration-200 text-sm">
+                  className="flex items-center gap-3 text-gray-400 hover:text-teal-300 transition-colors duration-200 text-sm">
                   <link.icon className="h-4 w-4 shrink-0" />
                   {link.name}
                 </motion.a>
@@ -279,8 +279,8 @@ const ContactForm: React.FC = () => {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="flex-1 bg-green-500/[0.03] border border-green-500/15 rounded-2xl p-7 relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-500/45 to-transparent" />
+          className="flex-1 bg-teal-500/[0.03] border border-teal-500/15 rounded-2xl p-7 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-500/45 to-transparent" />
 
           <AnimatePresence mode="wait">
             {isSubmitted ? (
@@ -290,8 +290,8 @@ const ContactForm: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0 }}
                 className="flex flex-col items-center justify-center py-16 text-center">
-                <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center mb-5">
-                  <CheckCircle className="h-8 w-8 text-green-400" />
+                <div className="w-16 h-16 rounded-full bg-teal-500/10 border border-teal-500/20 flex items-center justify-center mb-5">
+                  <CheckCircle className="h-8 w-8 text-teal-400" />
                 </div>
                 <h2 className="text-white font-bold text-xl mb-2">Message Sent!</h2>
                 <p className="text-gray-400 text-sm max-w-xs">
@@ -299,7 +299,7 @@ const ContactForm: React.FC = () => {
                 </p>
                 <button
                   onClick={() => setIsSubmitted(false)}
-                  className="mt-6 px-6 py-2.5 rounded-full text-sm font-medium bg-green-500/10 border border-green-500/20 text-green-300 hover:bg-green-500/18 transition-all duration-200">
+                  className="mt-6 px-6 py-2.5 rounded-full text-sm font-medium bg-teal-500/10 border border-teal-500/20 text-teal-300 hover:bg-teal-500/18 transition-all duration-200">
                   Send Another
                 </button>
               </motion.div>
@@ -342,7 +342,7 @@ const ContactForm: React.FC = () => {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   type="submit"
-                  className="w-full py-3.5 rounded-full text-sm font-semibold bg-green-500/15 border border-green-500/30 text-green-200 hover:bg-green-500/25 hover:border-green-400/40 transition-all duration-300 flex items-center justify-center gap-2">
+                  className="w-full py-3.5 rounded-full text-sm font-semibold bg-teal-500/15 border border-teal-500/30 text-teal-200 hover:bg-teal-500/25 hover:border-teal-400/40 transition-all duration-300 flex items-center justify-center gap-2">
                   <Send className="h-4 w-4" />
                   Send Request
                 </motion.button>
