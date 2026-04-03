@@ -1,302 +1,266 @@
-import { motion } from "framer-motion";
-import { Award, Brain, Calendar, FileBadge, GraduationCap, SparklesIcon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowUpRight,
+  Brain,
+  Target,
+  Users,
+  Zap,
+  Sparkles,
+} from "lucide-react";
 import { useEffect, useState } from "react";
+
 const profileImages = [
-	"/images/Praise_Headshot.jpg",
-	"/images/PraiseAlliance.jpg",
-	"/images/Praise_Speech.jpg",
-	"/images/Health2.jpg",
-	"/images/Swiss.jpg",
-	"/images/Moyo.jpg",
-	"/images/Health.jpg",
-	"/images/AI for Good.jpg",
-	"/images/QABF.jpg",
+  { src: "/images/Praise_Headshot.jpg", caption: "Professional Portrait" },
+  { src: "/images/PraiseAlliance.jpg", caption: "Leading Alliance4AI Chapter · Kigali, 2024" },
+  { src: "/images/Praise_Speech.jpg", caption: "Speaking on AI Innovation in Africa" },
+  { src: "/images/Health2.jpg", caption: "Healthcare Technology Research & Development" },
+  { src: "/images/Swiss.jpg", caption: "Swiss Business Case Challenge · Lucerne, 2024" },
+  { src: "/images/Moyo.jpg", caption: "Community Health Initiative · Nairobi, 2024" },
+  { src: "/images/Health.jpg", caption: "Building CardiacTEK — AI for Cardiac Care" },
+  { src: "/images/AI for Good.jpg", caption: "AI for Good Summit, 2024" },
+  { src: "/images/QABF.jpg", caption: "Qutab Ambiance Business Forum" },
 ];
 
-const aboutData = {
-	personal: {
-		name: "Praise Orly Atadja",
-		title: "AI & Healthcare Enthusiast | Machine Learning | Project Manager",
-		intro:
-			"I am a passionate software engineer and researcher dedicated to leveraging AI and machine learning to advance healthcare systems, with a particular focus on Africa. My goal is to develop innovative, accessible, and sustainable healthtech solutions that improve diagnosis, treatment, and health outcomes across diverse communities.",
-	},
-	highlights: [
-		{
-			id: "1",
-			title: "AI Diagnostics",
-			description:
-				"Developed deep learning models for 12-lead ECG interpretation, achieving high accuracy across multiple cardiac conditions.",
-			icon: <Brain className="h-4 w-4 text-teal-400" />,
-		},
-		{
-			id: "2",
-			title: "Community Impact",
-			description:
-				"Mentored peers and emerging professionals, fostering skill development, collaboration, and career growth.",
-			icon: <Award className="h-4 w-4 text-lime-300" />,
-		},
-		{
-			id: "3",
-			title: "Tech Innovation",
-			description:
-				"Built scalable AI solutions addressing critical healthcare challenges in underserved regions.",
-			icon: <SparklesIcon className="h-4 w-4 text-orange-400" />,
-		},
-	],
-	education: {
-		institution: "African Leadership University (ALU)",
-		degree: "BSc Software Engineering - First Class Honours",
-		specialization: "Machine Learning, AI for Healthcare",
-		duration: "Jan 2022 - June 2025",
-	},
-	certifications: [
-		{ name: "AI For Good", issuer: "DeepLearning.AI", date: "Sept 2025" },
-		{ name: "AI For Medicine", issuer: "DeepLearning.AI", date: "Sept 2025" },
-		{ name: "Generative AI for Data Scientists", issuer: "IBM", date: "May 2025" },
-	],
-};
+const missionItems = [
+  { icon: <Brain className="h-4 w-4" />, text: "Democratizing medical AI tools for underserved communities" },
+  { icon: <Target className="h-4 w-4" />, text: "Building locally-relevant, Africa-first healthcare solutions" },
+  { icon: <Users className="h-4 w-4" />, text: "Mentoring the next generation of African tech leaders" },
+  { icon: <Zap className="h-4 w-4" />, text: "Bridging cutting-edge research and real-world clinical impact" },
+];
+
+const achievements = [
+  {
+    metric: "96%",
+    label: "Diagnostic Accuracy",
+    description: "ECG model on 10,000+ records; cut cardiologist reliance by 70%.",
+    color: "#22c55e",
+    borderColor: "border-green-500/25",
+    bgColor: "bg-green-500/8",
+    textColor: "text-green-400",
+  },
+  {
+    metric: "40%",
+    label: "Retention Boost",
+    description: "She Innovate STEM Summer School participant retention, Rwanda.",
+    color: "#f59e0b",
+    borderColor: "border-amber-500/25",
+    bgColor: "bg-amber-500/8",
+    textColor: "text-amber-400",
+  },
+  {
+    metric: "100+",
+    label: "Students Reached",
+    description: "Trained through Alliance4AI workshops; 40% secured AI roles.",
+    color: "#10b981",
+    borderColor: "border-emerald-500/25",
+    bgColor: "bg-emerald-500/8",
+    textColor: "text-emerald-400",
+  },
+  {
+    metric: "4.56",
+    label: "GPA · First Class",
+    description: "Top-ranked BSc Software Engineering, ALU, specializing in AI.",
+    color: "#84cc16",
+    borderColor: "border-lime-500/25",
+    bgColor: "bg-lime-500/8",
+    textColor: "text-lime-400",
+  },
+];
 
 export function About() {
-	const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setCurrentImageIndex((prev) => (prev + 1) % profileImages.length);
-		}, 5000);
-		return () => clearInterval(interval);
-	}, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % profileImages.length);
+    }, 4500);
+    return () => clearInterval(interval);
+  }, []);
 
-	return (
-		<section id="about" className="w-full sm:px-6 lg:px-8 bg-gradient-to-br from-teal-900 to-indigo-900 relative overflow-hidden text-gray-100">
-			{/* Background Decorative Element */}
-			<div className="absolute inset-0 opacity-10 pointer-events-none">
-				<svg className="w-full h-full" fill="none">
-					<pattern
-						id="dots"
-						x="0"
-						y="0"
-						width="40"
-						height="40"
-						patternUnits="userSpaceOnUse">
-						<circle cx="20" cy="20" r="2" fill="#14b8a6" />
-					</pattern>
-					<rect x="0" y="0" width="100%" height="100%" fill="url(#dots)" />
-				</svg>
-			</div>
+  return (
+    <section
+      id="about"
+      className="w-full relative overflow-hidden text-gray-100"
+      style={{ background: 'linear-gradient(to bottom, #030a06, #04110a, #030a06)' }}>
 
-			{/* Hero Section */}
-			<section className="relative min-h-screen flex items-center">
-				<div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-10 px-4 py-12">
-					{/* Profile Image Container */}
-					<motion.div
-						className="relative w-96 h-96 rounded-xl border-2 border-teal-400/30 overflow-hidden shadow-2xl backdrop-blur-sm"
-						initial={{ scale: 0.9, opacity: 0 }}
-						animate={{ scale: 1, opacity: 1 }}
-						transition={{ duration: 0.6 }}>
-						{profileImages.map((img, index) => (
-							<motion.img
-								key={img}
-								src={img}
-								alt="Praise Orly Atadja"
-								className="absolute inset-0 w-full h-full object-cover"
-								initial={{ opacity: 0 }}
-								animate={{
-									opacity: index === currentImageIndex ? 1 : 0,
-									scale: index === currentImageIndex ? 1 : 1.1,
-								}}
-								transition={{ duration: 0.8, ease: "easeInOut" }}
-							/>
-						))}
-					</motion.div>
+      {/* Dot grid */}
+      <div className="absolute inset-0 opacity-[0.035] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(circle, #22c55e 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+        }}
+      />
 
-					{/* Content Section */}
-					<div className="flex-1 space-y-10 relative z-10">
-						<motion.div
-							initial={{ opacity: 0, y: 20 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.3 }}>
-							<SparklesIcon className="h-12 w-12 text-teal-400 mb-4 animate-pulse" />
-							<h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-teal-300 to-indigo-200 bg-clip-text text-transparent">
-								{aboutData.personal.name}
-							</h1>
-							<p className="text-xl md:text-2xl text-teal-100 font-medium mt-2">
-								{aboutData.personal.title}
-							</p>
-						</motion.div>
+      {/* ── Hero: Photo + Bio ── */}
+      <div className="relative min-h-screen flex items-center">
+        <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center gap-12 px-6 py-20">
 
-						<motion.p
-							className="text-lg text-gray-200 leading-relaxed max-w-2xl"
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ delay: 0.6 }}>
-							{aboutData.personal.intro}
-						</motion.p>
+          {/* Photo */}
+          <motion.div
+            className="relative shrink-0"
+            initial={{ opacity: 0, scale: 0.93 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}>
+            <div className="w-80 h-80 md:w-96 md:h-96 rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative">
+              {profileImages.map((img, index) => (
+                <motion.img
+                  key={img.src}
+                  src={img.src}
+                  alt="Praise Orly Atadja"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: index === currentImageIndex ? 1 : 0 }}
+                  transition={{ duration: 0.9, ease: "easeInOut" }}
+                />
+              ))}
+              {/* Caption */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentImageIndex}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.5 }}
+                  className="absolute bottom-0 inset-x-0 px-4 py-3 bg-gradient-to-t from-black/85 via-black/50 to-transparent">
+                  <p className="text-xs text-white/80 font-medium tracking-wide">
+                    {profileImages[currentImageIndex].caption}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
-						{/* Resume Button */}
-						<motion.a
-							href="https://docs.google.com/document/d/1hpOO01I7PB5sJytnXY1sThD4xyxU48Co/edit?usp=sharing&ouid=101909117862344144947&rtpof=true&sd=true"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="px-8 py-3 bg-teal-500/90 hover:bg-teal-400 text-slate-950 font-semibold rounded-lg
-                transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-teal-500/30 inline-block"
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ delay: 0.9 }}>
-							View Resume
-						</motion.a>
-					</div>
-				</div>
-			</section>
+            {/* Dot indicators */}
+            <div className="flex justify-center gap-1.5 mt-4">
+              {profileImages.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentImageIndex(i)}
+                  className="rounded-full transition-all duration-300"
+                  style={{
+                    width: i === currentImageIndex ? 16 : 6,
+                    height: 4,
+                    background: i === currentImageIndex ? '#22c55e' : 'rgba(255,255,255,0.18)',
+                  }}
+                />
+              ))}
+            </div>
+          </motion.div>
 
-			{/* Content Sections */}
-			<div className="relative space-y-8 py-2 px-2 lg:px-8">
-				
-				{/* Row 1: My Mission + Key Achievements */}
-				<div className="grid md:grid-cols-2 gap-8">
-					
-					{/* My Mission - Left Column */}
-					<div>
-						<motion.div
-							className="space-y-4"
-							initial={{ opacity: 0 }}
-							whileInView={{ opacity: 1 }}>
-							<h2 className="text-2xl font-bold text-teal-300 text-center">
-								My Mission
-							</h2>
+          {/* Bio */}
+          <div className="flex-1 space-y-7">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 }}>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-green-500/10 border border-green-500/20 text-green-300 mb-4">
+                <Sparkles className="h-3 w-3" /> About Me
+              </span>
+              <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+                Praise Orly Atadja
+              </h1>
+              <p className="text-green-300/80 text-base font-medium mt-1.5">
+                AI & Healthcare Engineer · Machine Learning · Project Manager
+              </p>
+            </motion.div>
 
-							<div className="space-y-3 text-gray-200 text-base leading-relaxed">
-								<ul className="space-y-3">
-									{[
-										"Democratizing medical AI tools",
-										"Building locally-relevant solutions",
-										"Mentoring tech leaders",
-										"Bridging research & impact",
-									].map((item, index) => (
-										<motion.li
-											key={item}
-											className="flex items-center gap-2 p-3 bg-gray-400/20 rounded-lg backdrop-blur-sm"
-											initial={{ opacity: 0, x: -20 }}
-											whileInView={{ opacity: 1, x: 0 }}
-											transition={{ delay: index * 0.1 }}>
-											<SparklesIcon className="h-4 w-4 text-teal-400 flex-shrink-0" />
-											<span className="text-sm">{item}</span>
-										</motion.li>
-									))}
-								</ul>
-							</div>
-						</motion.div>
-					</div>
+            <motion.p
+              className="text-gray-300 text-[15px] leading-relaxed max-w-2xl"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.45 }}>
+              I am a passionate software engineer and researcher dedicated to leveraging AI and
+              machine learning to advance healthcare systems, with a particular focus on Africa. My
+              goal is to develop innovative, accessible, and sustainable healthtech solutions that
+              improve diagnosis, treatment, and health outcomes across diverse communities.
+            </motion.p>
 
-					{/* Key Achievements - Right Column */}
-					<div>
-						<motion.h2
-							className="text-2xl font-bold mb-4 text-teal-300 text-center"
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}>
-							Key Achievements
-						</motion.h2>
+            <motion.div
+              className="flex flex-wrap gap-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}>
+              <a
+                href="https://docs.google.com/document/d/1hpOO01I7PB5sJytnXY1sThD4xyxU48Co/edit?usp=sharing&ouid=101909117862344144947&rtpof=true&sd=true"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-green-500/12 border border-green-500/25 text-green-300 rounded-full text-sm font-medium hover:bg-green-500/22 hover:border-green-400/40 transition-all duration-300">
+                View Resume <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-6 py-2.5 bg-white/5 border border-white/10 text-gray-300 rounded-full text-sm font-medium hover:bg-white/8 hover:text-white transition-all duration-300">
+                Get in Touch
+              </a>
+            </motion.div>
+          </div>
+        </div>
+      </div>
 
-						<div className="grid gap-2">
-							{aboutData.highlights.map((highlight) => (
-								<motion.div
-									key={highlight.id}
-									className="flex items-center gap-2 p-2 bg-gray-400/20 rounded-lg backdrop-blur-sm border border-teal-400/20"
-									initial={{ opacity: 0, y: 20 }}
-									whileInView={{ opacity: 1, y: 0 }}
-									whileHover={{ x: 3 }}>
-									<div className="p-1 bg-teal-400/10 rounded-lg shrink-0">
-										{highlight.icon}
-									</div>
-									<div className="min-w-0">
-										<h3 className="text-sm font-semibold text-teal-200">
-											{highlight.title}
-										</h3>
-										<p className="text-gray-200 text-xs truncate">
-											{highlight.description}
-										</p>
-									</div>
-								</motion.div>
-							))}
-						</div>
-					</div>
-				</div>
+      {/* ── Vision & Key Achievements ── */}
+      <div className="max-w-6xl mx-auto px-6 pb-20">
+        <div className="grid md:grid-cols-2 gap-8">
 
-				{/* Row 2: Education + Certifications */}
-				<div className="grid md:grid-cols-2 gap-8">
-					
-					{/* Education Card */}
-					<div>
-						<motion.h2
-							className="text-2xl font-bold mb-4 text-teal-300 text-center"
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}>
-							Education
-						</motion.h2>
-						
-						<motion.div
-							className="p-4 bg-gray-400/20 rounded-lg backdrop-blur-sm border border-teal-400/20"
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}
-							whileHover={{ y: -3 }}>
-							<div className="flex items-center gap-3 mb-3">
-								<div className="p-2 bg-teal-700 rounded-full">
-									<GraduationCap className="h-5 w-5 text-teal-400" />
-								</div>
-								<div>
-									<h3 className="text-base font-bold text-teal-400">
-										{aboutData.education.institution}
-									</h3>
-									<p className="text-white text-sm font-medium">
-										{aboutData.education.degree}
-									</p>
-									<p className="text-white text-xs italic">
-										{aboutData.education.specialization}
-									</p>
-								</div>
-							</div>
-							<div className="flex items-center gap-2 text-teal-300 bg-teal-900/50 rounded-lg p-2">
-								<Calendar className="h-4 w-4" />
-								<span className="text-sm">{aboutData.education.duration}</span>
-							</div>
-						</motion.div>
-					</div>
+          {/* My Mission */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-green-500/[0.03] border border-green-500/15 rounded-2xl p-8 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-500/50 to-transparent" />
+            <div className="absolute -bottom-10 -right-10 w-32 h-32 rounded-full blur-2xl opacity-8 bg-green-500 pointer-events-none" />
 
-					{/* Certifications Card */}
-					<div>
-						<motion.h2
-							className="text-2xl font-bold mb-4 text-teal-300 text-center"
-							initial={{ opacity: 0, y: 20 }}
-							whileInView={{ opacity: 1, y: 0 }}>
-							Certifications
-						</motion.h2>
-						
-						<div className="space-y-2">
-							{aboutData.certifications.map((cert, index) => (
-								<motion.div
-									key={index}
-									className="flex items-center gap-3 p-3 bg-gray-400/20 rounded-lg backdrop-blur-sm border border-teal-400/20"
-									initial={{ opacity: 0, x: 20 }}
-									whileInView={{ opacity: 1, x: 0 }}
-									transition={{ delay: index * 0.1 }}
-									whileHover={{ x: 3 }}>
-									<div className="p-1.5 bg-teal-400/10 rounded-lg">
-										<FileBadge className="h-4 w-4 text-teal-400" />
-									</div>
-									<div className="min-w-0 flex-1">
-										<h3 className="text-sm font-semibold text-teal-200 truncate">
-											{cert.name}
-										</h3>
-										<p className="text-gray-400 text-xs">
-											{cert.issuer} • {cert.date}
-										</p>
-									</div>
-								</motion.div>
-							))}
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+            <h2 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+              My Vision & Mission
+            </h2>
+            <div className="space-y-3">
+              {missionItems.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -16 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-green-500/20 transition-colors duration-200">
+                  <span className="mt-0.5 text-green-400 shrink-0">{item.icon}</span>
+                  <p className="text-gray-300 text-sm leading-relaxed">{item.text}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Key Achievements */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="bg-green-500/[0.03] border border-green-500/15 rounded-2xl p-8 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent" />
+
+            <h2 className="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              Key Achievements
+            </h2>
+            <div className="grid grid-cols-2 gap-3">
+              {achievements.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.08 }}
+                  whileHover={{ y: -2 }}
+                  className={`p-4 rounded-xl border ${item.borderColor} ${item.bgColor} group transition-all duration-200`}>
+                  <p className={`text-2xl font-bold ${item.textColor} leading-none mb-1`}>{item.metric}</p>
+                  <p className="text-white text-xs font-semibold mb-1.5">{item.label}</p>
+                  <p className="text-gray-500 text-[11px] leading-snug">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
 }
-

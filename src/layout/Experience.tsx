@@ -1,290 +1,261 @@
 import { motion } from "framer-motion";
 import {
-	BookOpen,
-	BrainCircuit,
-	Briefcase,
-	Calendar,
-	Code2,
-	DollarSign,
-	Globe,
-	HandHeart,
-	MapPin,
-	Microscope,
-	School,
-	Users
+  BookOpen,
+  BrainCircuit,
+  Briefcase,
+  Calendar,
+  Code2,
+  DollarSign,
+  Globe,
+  HandHeart,
+  MapPin,
+  Microscope,
+  School,
+  Users,
 } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 interface Achievement {
-	text: string;
-	icon: React.ReactNode;
+  text: string;
+  icon: React.ReactNode;
 }
 
 interface ExperienceItem {
-	title: string;
-	company: string;
-	location: string;
-	duration: string;
-	achievements: Achievement[];
+  title: string;
+  company: string;
+  location: string;
+  duration: string;
+  type: string;
+  accentColor: string;
+  achievements: Achievement[];
 }
 
 const experienceData: ExperienceItem[] = [
-	// Work Experience
-	{
-		title: "AI Research Assistant",
-		company: "Cardiac TEK",
-		location: "Tanzania, Remote",
-		duration: "Feb 2024 – Present",
-		achievements: [
-			{
-				text: "Built transfer learning-based ML model for ECG analysis (96% accuracy on 10,000+ PhysioNet samples), reducing cardiologist reliance by 70%",
-				icon: <Microscope className="h-5 w-5 text-purple-400" />,
-			},
-			{
-				text: "Developed XGBoost risk stratification model with 90% accuracy for cardiovascular event prediction in underserved populations",
-				icon: <BrainCircuit className="h-5 w-5 text-indigo-300" />,
-			},
-			{
-				text: "Improved diagnostic tool UI for low-resource settings, boosting data accuracy by 30%",
-				icon: <Code2 className="h-5 w-5 text-teal-300" />,
-			},
-		],
-	},
-	{
-		title: "Team Lead",
-		company: "She Innovate Initiative",
-		location: "Kigali, Rwanda",
-		duration: "March 2024 – Present",
-		achievements: [
-			{
-				text: "Led 2-week Summer School training 30 Rwandan girls in tech & design, increasing retention by 40%",
-				icon: <School className="h-5 w-5 text-pink-400" />,
-			},
-			{
-				text: "Managed $2K budget and secured 3 corporate partnerships for hackathon with 6 teams from 4 schools",
-				icon: <DollarSign className="h-5 w-5 text-green-400" />,
-			},
-			{
-				text: "Created inclusive learning materials boosting engagement by 40%",
-				icon: <BookOpen className="h-5 w-5 text-blue-300" />,
-			},
-		],
-	},
-	{
-		title: "Hub Ambassador",
-		company: "African Leadership University",
-		location: "Lagos, Nigeria",
-		duration: "May 2023 – Sept 2023",
-		achievements: [
-			{
-				text: "Organized educational trips and 5+ tech events, increasing student participation by 15%",
-				icon: <Globe className="h-5 w-5 text-orange-300" />,
-			},
-			{
-				text: "Reduced event costs by 30% through vendor negotiations",
-				icon: <DollarSign className="h-5 w-5 text-green-400" />,
-			},
-			{
-				text: "Facilitated ALU student engagement with Nigeria's tech ecosystem",
-				icon: <Users className="h-5 w-5 text-cyan-400" />,
-			},
-		],
-	},
-
-	// Leadership Experience
-	{
-		title: "Vice President",
-		company: "Alliance4AI, ALU Chapter",
-		location: "Kigali, Rwanda",
-		duration: "Sept 2024 – Present",
-		achievements: [
-			{
-				text: "Oversaw 8+ ML workshops using TensorFlow/Scikit-learn, leading to 40% participants securing AI roles",
-				icon: <BrainCircuit className="h-5 w-5 text-indigo-300" />,
-			},
-			{
-				text: "Managed team of 10, increasing student engagement by 25%",
-				icon: <Users className="h-5 w-5 text-cyan-400" />,
-			},
-			{
-				text: "Mentored 15+ students in project-based AI initiatives",
-				icon: <School className="h-5 w-5 text-pink-400" />,
-			},
-		],
-	},
-	{
-		title: "Participant",
-		company: "Swiss Business Case Challenge",
-		location: "Lucerne, Switzerland",
-		duration: "June 2024",
-		achievements: [
-			{
-				text: "Researched green hydrogen's potential to meet 25% of Africa's energy needs",
-				icon: <Globe className="h-5 w-5 text-orange-300" />,
-			},
-			{
-				text: "Led negotiations securing 40% stakeholder support for SDG-aligned energy project",
-				icon: <HandHeart className="h-5 w-5 text-red-300" />,
-			},
-		],
-	},
-
-	// Volunteering Experience
-	{
-		title: "Global Volunteer",
-		company: "AIESEC",
-		location: "Nairobi, Kenya",
-		duration: "Sept 2024 – Oct 2024",
-		achievements: [
-			{
-				text: "Improved literacy/numeracy skills for 70% of 30 students in Nairobi slums",
-				icon: <BookOpen className="h-5 w-5 text-blue-300" />,
-			},
-			{
-				text: "Increased classroom participation by 30% through engaging activities",
-				icon: <Users className="h-5 w-5 text-cyan-400" />,
-			},
-		],
-	},
-
+  {
+    title: "AI Research Assistant",
+    company: "Cardiac TEK",
+    location: "Tanzania, Remote",
+    duration: "Feb 2024 – Present",
+    type: "Research",
+    accentColor: "#22c55e",
+    achievements: [
+      { text: "Built transfer learning ECG model (96% accuracy, 10,000+ PhysioNet samples); cut cardiologist reliance by 70%", icon: <Microscope className="h-4 w-4 text-green-400" /> },
+      { text: "Developed XGBoost risk stratification model with 90% accuracy for cardiovascular events in underserved populations", icon: <BrainCircuit className="h-4 w-4 text-emerald-300" /> },
+      { text: "Improved diagnostic tool UI for low-resource settings, boosting data accuracy by 30%", icon: <Code2 className="h-4 w-4 text-lime-300" /> },
+    ],
+  },
+  {
+    title: "Team Lead",
+    company: "She Innovate Initiative",
+    location: "Kigali, Rwanda",
+    duration: "March 2024 – Present",
+    type: "Leadership",
+    accentColor: "#f59e0b",
+    achievements: [
+      { text: "Led 2-week Summer School training 30 Rwandan girls in tech & design, increasing retention by 40%", icon: <School className="h-4 w-4 text-amber-300" /> },
+      { text: "Managed $2K budget and secured 3 corporate partnerships for hackathon with 6 teams from 4 schools", icon: <DollarSign className="h-4 w-4 text-yellow-400" /> },
+      { text: "Created inclusive learning materials boosting participant engagement by 40%", icon: <BookOpen className="h-4 w-4 text-amber-200" /> },
+    ],
+  },
+  {
+    title: "Hub Ambassador",
+    company: "African Leadership University",
+    location: "Lagos, Nigeria",
+    duration: "May 2023 – Sept 2023",
+    type: "Engagement",
+    accentColor: "#10b981",
+    achievements: [
+      { text: "Organized educational trips and 5+ tech events, increasing student participation by 15%", icon: <Globe className="h-4 w-4 text-emerald-300" /> },
+      { text: "Reduced event costs by 30% through strategic vendor negotiations", icon: <DollarSign className="h-4 w-4 text-green-400" /> },
+      { text: "Facilitated ALU student engagement with Nigeria's emerging tech ecosystem", icon: <Users className="h-4 w-4 text-teal-300" /> },
+    ],
+  },
+  {
+    title: "Vice President",
+    company: "Alliance4AI, ALU Chapter",
+    location: "Kigali, Rwanda",
+    duration: "Sept 2024 – Present",
+    type: "Leadership",
+    accentColor: "#84cc16",
+    achievements: [
+      { text: "Oversaw 8+ ML workshops using TensorFlow/Scikit-learn; 40% of participants secured AI roles", icon: <BrainCircuit className="h-4 w-4 text-lime-300" /> },
+      { text: "Managed a team of 10, increasing student engagement by 25%", icon: <Users className="h-4 w-4 text-green-300" /> },
+      { text: "Mentored 15+ students in project-based AI initiatives with measurable outcomes", icon: <School className="h-4 w-4 text-lime-400" /> },
+    ],
+  },
+  {
+    title: "Participant",
+    company: "Swiss Business Case Challenge",
+    location: "Lucerne, Switzerland",
+    duration: "June 2024",
+    type: "Competition",
+    accentColor: "#06b6d4",
+    achievements: [
+      { text: "Researched green hydrogen's potential to meet 25% of Africa's energy needs sustainably", icon: <Globe className="h-4 w-4 text-cyan-300" /> },
+      { text: "Led negotiations securing 40% stakeholder support for an SDG-aligned energy project", icon: <HandHeart className="h-4 w-4 text-sky-300" /> },
+    ],
+  },
+  {
+    title: "Global Volunteer",
+    company: "AIESEC",
+    location: "Nairobi, Kenya",
+    duration: "Sept 2024 – Oct 2024",
+    type: "Volunteer",
+    accentColor: "#4ade80",
+    achievements: [
+      { text: "Improved literacy and numeracy for 70% of 30 students in underserved Nairobi communities", icon: <BookOpen className="h-4 w-4 text-green-300" /> },
+      { text: "Increased classroom participation by 30% through engaging, student-centred activities", icon: <Users className="h-4 w-4 text-emerald-300" /> },
+    ],
+  },
 ];
 
-const animationConfig = {
-	section: {
-		hidden: { opacity: 0, y: 50 },
-		visible: {
-			opacity: 1,
-			y: 0,
-			transition: {
-				duration: 0.8,
-				staggerChildren: 0.2,
-				when: "beforeChildren",
-			},
-		},
-	},
-	card: {
-		hidden: { opacity: 0, scale: 0.95 },
-		visible: {
-			opacity: 1,
-			scale: 1,
-			transition: {
-				type: "spring",
-				stiffness: 120,
-				damping: 15,
-			},
-		},
-		hover: {
-			scale: 1.03,
-			boxShadow: "0 15px 40px rgba(0, 0, 0, 0.3)",
-		},
-	},
-	item: {
-		hidden: { opacity: 0, x: -20 },
-		visible: {
-			opacity: 1,
-			x: 0,
-			transition: {
-				duration: 0.5,
-				ease: "backOut",
-			},
-		},
-	},
+const typeColors: Record<string, string> = {
+  Research:    "bg-green-500/10 text-green-300 border-green-500/25",
+  Leadership:  "bg-amber-500/10 text-amber-300 border-amber-500/25",
+  Engagement:  "bg-emerald-500/10 text-emerald-300 border-emerald-500/25",
+  Competition: "bg-cyan-500/10 text-cyan-300 border-cyan-500/25",
+  Volunteer:   "bg-lime-500/10 text-lime-300 border-lime-500/25",
 };
 
-const AchievementCard: React.FC<{ achievement: Achievement }> = ({
-	achievement,
-}) => (
-	<motion.div
-		variants={animationConfig.item}
-		whileHover={{ x: 5 }}
-		className="flex items-start gap-4">
-		<div className="p-2 bg-gray-800 rounded-full">{achievement.icon}</div>
-		<p className="text-white text-base flex-1">{achievement.text}</p>
-	</motion.div>
-);
+function FlipCard({ exp }: { exp: ExperienceItem }) {
+  const [flipped, setFlipped] = useState(false);
+  const typeCls = typeColors[exp.type] || "bg-gray-500/10 text-gray-300 border-gray-500/25";
+
+  return (
+    <div
+      style={{ perspective: "1200px", height: "280px" }}
+      onMouseEnter={() => setFlipped(true)}
+      onMouseLeave={() => setFlipped(false)}
+      className="cursor-pointer">
+      <div
+        style={{
+          transformStyle: "preserve-3d",
+          transition: "transform 0.55s cubic-bezier(0.4, 0, 0.2, 1)",
+          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+          position: "relative",
+          width: "100%",
+          height: "100%",
+        }}>
+
+        {/* FRONT */}
+        <div
+          style={{ backfaceVisibility: "hidden", position: "absolute", inset: 0 }}
+          className="rounded-2xl border border-white/8 bg-green-500/[0.03] overflow-hidden flex flex-col justify-between p-6">
+          <div
+            className="absolute top-0 left-0 w-full h-[2px]"
+            style={{ background: `linear-gradient(to right, ${exp.accentColor}80, transparent)` }}
+          />
+          <div
+            className="absolute -top-8 -left-8 w-28 h-28 rounded-full blur-2xl opacity-15 pointer-events-none"
+            style={{ background: exp.accentColor }}
+          />
+          <div>
+            <span className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-widest uppercase border ${typeCls} mb-4`}>
+              {exp.type}
+            </span>
+            <h3 className="text-white text-lg font-bold leading-tight mb-1">{exp.title}</h3>
+            <p className="font-medium text-sm" style={{ color: exp.accentColor }}>{exp.company}</p>
+          </div>
+          <div className="space-y-2">
+            <div className="flex items-center gap-1.5 text-gray-500 text-xs">
+              <MapPin className="h-3.5 w-3.5" />{exp.location}
+            </div>
+            <div className="flex items-center gap-1.5 text-gray-500 text-xs">
+              <Calendar className="h-3.5 w-3.5" />{exp.duration}
+            </div>
+          </div>
+          <p className="text-[10px] text-gray-700 mt-2 tracking-wide">Hover to view details →</p>
+        </div>
+
+        {/* BACK */}
+        <div
+          style={{
+            backfaceVisibility: "hidden",
+            position: "absolute",
+            inset: 0,
+            transform: "rotateY(180deg)",
+            border: `1px solid ${exp.accentColor}20`,
+            background: `linear-gradient(140deg, ${exp.accentColor}08, #040f07 60%)`,
+          }}
+          className="rounded-2xl overflow-hidden flex flex-col p-5">
+          <div className="relative z-10 flex flex-col h-full">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="p-1.5 rounded-lg" style={{ background: `${exp.accentColor}15` }}>
+                <Briefcase className="h-3.5 w-3.5" style={{ color: exp.accentColor }} />
+              </div>
+              <div>
+                <p className="text-white text-sm font-semibold">{exp.title}</p>
+                <p className="text-gray-500 text-[11px]">{exp.company}</p>
+              </div>
+            </div>
+            <div className="flex-1 space-y-2.5 overflow-hidden">
+              {exp.achievements.map((a, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={flipped ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: i * 0.08 + 0.1 }}
+                  className="flex items-start gap-2.5">
+                  <span className="shrink-0 mt-0.5">{a.icon}</span>
+                  <p className="text-gray-300 text-[11px] leading-snug">{a.text}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const sectionVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, staggerChildren: 0.1 } },
+};
 
 export const Experience = () => {
-	return (
-		<section
-			id="experience"
-			className="py-24 px-6 sm:px-6 lg:px-4 bg-gradient-to-br from-teal-900 to-indigo-900 relative overflow-hidden">
-			<div className="max-w-6xl mx-auto relative z-10">
-				<motion.div
-					variants={animationConfig.section}
-					initial="hidden"
-					whileInView="visible"
-					viewport={{ once: true, margin: "-100px" }}
-					className="text-center mb-16">
-					<h2 className="text-5xl font-bold text-white mb-4 bg-gradient-to-r from-indigo-400 to-teal-400 bg-clip-text text-transparent">
-						Professional Experience
-					</h2>
-					<motion.p
-						variants={animationConfig.item}
-						className="text-teal-300 text-xl max-w-3xl mx-auto">
-						Demonstrating technical leadership and social impact through diverse
-						roles
-					</motion.p>
-				</motion.div>
+  return (
+    <section
+      id="experience"
+      className="py-24 px-6 sm:px-8 relative overflow-hidden"
+      style={{ background: 'linear-gradient(to bottom, #030a06, #04110a, #030a06)' }}>
 
-				<motion.div
-					variants={animationConfig.section}
-					className="grid gap-3 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
-					{experienceData.map((exp) => (
-						<motion.div
-							key={`${exp.company}-${exp.title}`}
-							variants={animationConfig.card}
-							whileHover="hover"
-							className="bg-gray-800 rounded-xl shadow-lg p-3 border border-teal-700 relative overflow-hidden">
-							<div className="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-indigo-500 to-teal-500" />
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-green-400" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-emerald-400" />
 
-							<div className="flex flex-col gap-1 mb-3 p-2">
-								<div className="flex items-center justify-between gap-2">
-									<div className="flex items-center gap-2">
-										<div className="p-1.5 bg-indigo-900 rounded-lg">
-											<Briefcase className="h-4 w-4 text-indigo-400" />
-										</div>
-										<div>
-											<h3 className="text-sm font-bold text-teal-300">
-												{exp.title}
-											</h3>
-											<p className="text-white text-xs font-medium">{exp.company}</p>
-										</div>
-									</div>
-									<div className="flex items-center gap-1 text-white">
-										<Calendar className="h-4 w-4" />
-										<span className="text-xs font-medium">{exp.duration}</span>
-									</div>
-								</div>
+      <div className="max-w-6xl mx-auto relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16">
+          <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-green-500/10 border border-green-500/20 text-green-300 mb-4">
+            Career
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">
+            Professional Experience
+          </h2>
+          <p className="text-gray-400 text-base max-w-2xl mx-auto">
+            Demonstrating technical leadership and social impact through diverse roles — hover any card to reveal details.
+          </p>
+        </motion.div>
 
-								<div className="flex items-center gap-1 text-teal-400">
-									<MapPin className="h-4 w-4" />
-									<span className="text-xs">{exp.location}</span>
-								</div>
-							</div>
-
-							<div className="space-y-2">
-								{exp.achievements.map((achievement, idx) => (
-									<motion.div
-										key={idx}
-										variants={animationConfig.item}
-										whileHover={{ x: 3 }}
-										className="flex items-start gap-2">
-										<div className="p-1 bg-gray-800 rounded-full shrink-0 mt-0.5">{achievement.icon}</div>
-										<p className="text-white text-xs flex-1 leading-tight">{achievement.text}</p>
-									</motion.div>
-								))}
-							</div>
-						</motion.div>
-					))}
-				</motion.div>
-
-				<motion.div
-					initial={{ opacity: 0, scale: 0.5 }}
-					animate={{ opacity: 0.1, scale: 1 }}
-					transition={{ duration: 2, repeat: Infinity, repeatType: "mirror" }}
-					className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-r from-teal-700 to-indigo-700 rounded-full blur-3xl pointer-events-none"
-				/>
-			</div>
-		</section>
-	);
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-80px" }}
+          className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {experienceData.map((exp) => (
+            <motion.div
+              key={`${exp.company}-${exp.title}`}
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+              <FlipCard exp={exp} />
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
 };

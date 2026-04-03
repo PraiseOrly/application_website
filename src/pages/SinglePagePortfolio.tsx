@@ -1,9 +1,8 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowRightIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
-  SparklesIcon,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import AcademicExcellenceChampion from '../assets/images/AcademicExcellenceChampion.jpg';
@@ -15,364 +14,285 @@ import ContactForm from '../components/sections/contacts';
 import { About } from '../layout/About';
 import { Education } from '../layout/Education';
 import { Experience } from '../layout/Experience';
+import { ResearchSection } from '../layout/ResearchSection';
 import { Skills } from '../layout/Skills';
 import Projects from '../pages/projects/projects';
-
-// New complementary color palette
-const sliderColors = [
-  { name: 'Vibrant Teal', hex: '#14B8A6' },
-  { name: 'Bright Coral', hex: '#FF6B6B' },
-  { name: 'Deep Indigo', hex: '#4B5EAA' },
-  { name: 'Lime Glow', hex: '#A3E635' },
-  { name: 'Vivid Violet', hex: '#8B5CF6' },
-];
-
-const particleVariants = {
-  animate: {
-    y: [0, -30, 0],
-    opacity: [0, 1, 0],
-    scale: [0.5, 1.2, 0.5],
-    transition: { duration: 2.5, repeat: Infinity, ease: 'easeInOut' },
-  },
-};
 
 const slideshowData = [
   {
     title: 'Revolutionizing Healthcare',
     subtitle: 'AI-Powered Diagnostics',
     description:
-      'Harnessing machine learning to transform healthcare delivery across Africa with precision and speed.',
+      'Built CardiacTEK — an AI ECG analysis tool achieving 96% diagnostic accuracy across 10,000+ PhysioNet records, reducing cardiologist workload by 70% in resource-constrained settings.',
     image: AIInnovation,
-    bgGradient: 'from-gray-200 to-gray-400',
-    buttonText: 'Discover More',
+    accentColor: '#22c55e',
+    buttonText: 'Explore Work',
     buttonLink: '#experience',
-    colorIndex: 3,
-    tagline:
-      'Creator of CardiacTek – an AI tool for ECG analysis and cardiac risk prediction.',
+    tag: 'CardiacTEK · Deep Learning · ECG Analysis',
   },
   {
     title: 'Empowering Communities',
     subtitle: 'Tech Leadership',
     description:
-      'Leading initiatives that inspire and educate the next generation of African innovators.',
+      "Led 8+ ML workshops with Alliance4AI, with 40% of participants securing AI roles. Directed Rwanda's She Innovate Summer School — training 30 girls in tech with a 40% retention increase.",
     image: PresidentofAlliance4AI,
-    bgGradient: 'from-gray-200 to-gray-400',
-    buttonText: 'Explore Impact',
+    accentColor: '#10b981',
+    buttonText: 'See Impact',
     buttonLink: '#skills',
-    colorIndex: 1,
-    tagline:
-      "President of Alliance4AI ALU & Rwanda Team Lead at Shenovate's STEM initiative.",
+    tag: 'Alliance4AI · She Innovate · STEM Education',
   },
   {
     title: 'Academic Excellence',
-    subtitle: 'Software & AI',
+    subtitle: 'Software Engineering · AI',
     description:
-      'Mastering cutting-edge tech at ALU to solve real-world challenges.',
+      'Top-ranked student at African Leadership University with a 4.56 GPA and First Class Honours. Specializing in AI-driven healthcare diagnostics and machine learning systems.',
     image: AcademicExcellenceChampion,
-    bgGradient: 'from-gray-200 to-gray-400',
-    buttonText: 'Learn Journey',
+    accentColor: '#84cc16',
+    buttonText: 'View Journey',
     buttonLink: '#education',
-    colorIndex: 2,
-    tagline:
-      'Excelling in Software Engineering at ALU with a 4.56 GPA, specializing in AI and data-driven solutions.',
+    tag: 'ALU · First Class Honours · 4.56 GPA',
   },
   {
     title: 'Future of Medicine',
-    subtitle: 'Innovative Solutions',
+    subtitle: 'Innovative AI Solutions',
     description:
-      'Pioneering AI tools for early detection and equitable healthcare access.',
+      'Pioneering predictive models for stroke (AUC >0.85), diabetes risk stratification, and 12-lead ECG classification — democratizing diagnostic precision for underserved communities across Africa.',
     image: AIinMedicine,
-    bgGradient: 'from-gray-200 to-gray-400',
-    buttonText: 'See Innovations',
-    buttonLink: '#experience',
-    colorIndex: 0,
-    tagline:
-      'Building Medical Solutions for better care and access with AI and data science.',
+    accentColor: '#f59e0b',
+    buttonText: 'See Projects',
+    buttonLink: '#projects',
+    tag: 'Predictive Modeling · Health AI · Impact at Scale',
   },
   {
     title: 'Tech for Good',
     subtitle: 'Social Impact',
     description:
-      'Building bridges between technology and humanity for a better tomorrow.',
+      "Improved literacy and numeracy outcomes for 70% of 30 students in Nairobi's underserved communities. Building inclusive, tech-powered health platforms that reach thousands across Africa.",
     image: SocialImpactCoderina,
-    bgGradient: 'from-gray-200 to-gray-400',
+    accentColor: '#06b6d4',
     buttonText: 'Get Involved',
     buttonLink: '#contact',
-    colorIndex: 4,
-    tagline:
-      'Driving inclusive education and health access across Africa through tech-powered platforms.',
+    tag: 'AIESEC · Nairobi · Inclusive Education',
   },
 ];
 
-// Animation Variants
 const slideVariants = {
-  hidden: { opacity: 0, x: 150 },
-  visible: { opacity: 1, x: 0, transition: { duration: 1, ease: 'easeOut' } },
-  exit: { opacity: 0, x: -150, transition: { duration: 1, ease: 'easeIn' } },
+  enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 80 : -80 }),
+  center: { opacity: 1, x: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+  exit: (dir: number) => ({ opacity: 0, x: dir > 0 ? -80 : 80, transition: { duration: 0.5, ease: 'easeIn' } }),
 };
 
 const textVariants = {
-  hidden: { opacity: 0, y: 30, rotate: -5 },
+  hidden: { opacity: 0, y: 20 },
   visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    rotate: 0,
-    transition: {
-      duration: 0.8,
-      delay: i * 0.2,
-      type: 'spring',
-      stiffness: 80,
-    },
+    opacity: 1, y: 0,
+    transition: { duration: 0.55, delay: i * 0.14, ease: 'easeOut' },
   }),
 };
 
 export function SinglePagePortfolio() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1);
 
-  // Auto-slide every 4 seconds
   useEffect(() => {
     const interval = setInterval(() => {
+      setDirection(1);
       setCurrentSlide((prev) => (prev + 1) % slideshowData.length);
-    }, 4000);
+    }, 5500);
     return () => clearInterval(interval);
   }, []);
 
-  const handleNext = () =>
-    setCurrentSlide((prev) => (prev + 1) % slideshowData.length);
-  const handlePrev = () =>
-    setCurrentSlide(
-      (prev) => (prev - 1 + slideshowData.length) % slideshowData.length
-    );
+  const handleNext = () => { setDirection(1); setCurrentSlide((prev) => (prev + 1) % slideshowData.length); };
+  const handlePrev = () => { setDirection(-1); setCurrentSlide((prev) => (prev - 1 + slideshowData.length) % slideshowData.length); };
+
+  const slide = slideshowData[currentSlide];
 
   return (
-    <div className="w-full min-h-screen bg-gray-900 overflow-x-hidden text-white">
-      {/* Home/Hero Section */}
-      <section id="home" className="relative h-[95vh] overflow-hidden">
-        {slideshowData.map((slide, index) => (
+    <div className="w-full min-h-screen overflow-x-hidden text-white" style={{ background: '#030a06' }}>
+
+      {/* ── Hero Section ── */}
+      <section id="home" className="relative h-[96vh] overflow-hidden" style={{ background: '#030a06' }}>
+
+        {/* Per-slide ambient glow */}
+        <motion.div
+          key={currentSlide + '-glow'}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2 }}
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: `radial-gradient(ellipse 65% 55% at 72% 50%, ${slide.accentColor}14 0%, transparent 70%)` }}
+        />
+
+        {/* Subtle grid texture */}
+        <div className="absolute inset-0 opacity-[0.025] pointer-events-none"
+          style={{
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+          }}
+        />
+
+        <AnimatePresence custom={direction} mode="wait">
           <motion.div
-            key={index}
-            initial="hidden"
-            animate={index === currentSlide ? 'visible' : 'hidden'}
-            exit="exit"
+            key={currentSlide}
+            custom={direction}
             variants={slideVariants}
-            className={`absolute inset-0 bg-gradient-to-br ${slide.bgGradient}`}
-            style={{
-              background: `linear-gradient(135deg, ${
-                sliderColors[slide.colorIndex].hex
-              }AA 0%, ${
-                slide.bgGradient.includes('teal') ? '#2A5A6A' : '#3B4B7A'
-              } 100%)`,
-            }}>
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex flex-col md:flex-row items-center justify-between gap-10">
-              {/* Text Content */}
-              <div className="text-center md:text-left text-white md:w-1/2 py-10">
-                <motion.h2
-                  custom={0}
-                  initial="hidden"
-                  animate="visible"
-                  variants={textVariants}
-                  className="text-2xl md:text-3xl font-semibold text-white mb-4 tracking-wide">
-                  {slide.subtitle}
-                </motion.h2>
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className="absolute inset-0 flex items-center">
+            <div className="max-w-7xl mx-auto w-full px-6 sm:px-8 lg:px-12 flex flex-col md:flex-row items-center gap-12">
+
+              {/* Text */}
+              <div className="md:w-1/2 space-y-6 text-center md:text-left">
+                <motion.div custom={0} variants={textVariants} initial="hidden" animate="visible">
+                  <span
+                    className="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase border mb-4"
+                    style={{ color: slide.accentColor, borderColor: `${slide.accentColor}35`, background: `${slide.accentColor}10` }}>
+                    {slide.subtitle}
+                  </span>
+                </motion.div>
+
                 <motion.h1
-                  custom={1}
-                  initial="hidden"
-                  animate="visible"
-                  variants={textVariants}
-                  className="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 leading-tight bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  custom={1} variants={textVariants} initial="hidden" animate="visible"
+                  className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight text-white">
                   {slide.title}
-                  <motion.span
-                    animate={{ rotate: [0, 10, -10, 0] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    className="inline-block ml-3">
-                    <SparklesIcon
-                      className="h-8 w-8"
-                      style={{ color: sliderColors[slide.colorIndex].hex }}
-                    />
-                  </motion.span>
                 </motion.h1>
+
                 <motion.p
-                  custom={2}
-                  initial="hidden"
-                  animate="visible"
-                  variants={textVariants}
-                  className="text-lg md:text-xl lg:text-2xl mb-8 font-light max-w-lg mx-auto md:mx-0 leading-relaxed text-gray-200">
+                  custom={2} variants={textVariants} initial="hidden" animate="visible"
+                  className="text-[15px] md:text-base text-gray-300 leading-relaxed max-w-xl mx-auto md:mx-0">
                   {slide.description}
                 </motion.p>
-                <motion.a
-                  href={slide.buttonLink}
-                  custom={3}
-                  initial="hidden"
-                  animate="visible"
-                  variants={textVariants}
-                  whileHover={{
-                    scale: 1.1,
-                    boxShadow: '0 12px 40px rgba(255, 255, 255, 0.4)',
-                    backgroundImage: `linear-gradient(to right, ${
-                      sliderColors[slide.colorIndex].hex
-                    }, #4B5EAA)`,
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-3 px-8 py-4 text-white rounded-full font-semibold shadow-md transition-all"
-                  style={{
-                    backgroundColor: sliderColors[slide.colorIndex].hex,
-                  }}>
-                  {slide.buttonText}
-                  <ArrowRightIcon className="h-5 w-5" />
-                </motion.a>
+
+                <motion.div
+                  custom={3} variants={textVariants} initial="hidden" animate="visible"
+                  className="flex flex-col sm:flex-row items-center md:items-start gap-4">
+                  <motion.a
+                    href={slide.buttonLink}
+                    whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
+                    className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-semibold text-white shadow-lg transition-all"
+                    style={{ background: `linear-gradient(135deg, ${slide.accentColor}cc, ${slide.accentColor}88)` }}>
+                    {slide.buttonText}
+                    <ArrowRightIcon className="h-4 w-4" />
+                  </motion.a>
+                  <span className="text-xs text-gray-600 font-medium tracking-wide">{slide.tag}</span>
+                </motion.div>
               </div>
 
               {/* Image */}
               <motion.div
-                initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                transition={{ delay: 0.6, type: 'spring', stiffness: 120 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
                 className="md:w-1/2 relative">
+                <div
+                  className="absolute inset-0 rounded-2xl blur-2xl opacity-20 -z-10 scale-105"
+                  style={{ background: `linear-gradient(135deg, ${slide.accentColor}, transparent)` }}
+                />
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  className="w-full h-72 md:h-[450px] object-cover rounded-2xl shadow-2xl border"
-                  style={{ borderColor: sliderColors[slide.colorIndex].hex }}
+                  className="w-full h-72 md:h-[460px] object-cover rounded-2xl shadow-2xl"
+                  style={{ border: `1px solid ${slide.accentColor}25` }}
                 />
-                <motion.div
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ repeat: Infinity, duration: 3 }}
-                  className="absolute -top-4 -right-4 w-16 h-16 rounded-full blur-xl"
-                  style={{
-                    backgroundColor:
-                      sliderColors[slide.colorIndex].hex + '30',
-                  }}
-                />
+                <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-full backdrop-blur-md bg-black/50 border border-white/10 text-xs font-medium text-white/70">
+                  Praise Orly Atadja
+                </div>
               </motion.div>
             </div>
           </motion.div>
-        ))}
+        </AnimatePresence>
 
-        {/* Navigation Arrows */}
+        {/* Arrows */}
         <button
           onClick={handlePrev}
-          style={{
-            backgroundColor:
-              sliderColors[slideshowData[currentSlide].colorIndex].hex + 'CC',
-          }}
-          className="absolute left-6 top-1/2 transform -translate-y-1/2 p-4 rounded-full hover:opacity-90 backdrop-blur-sm transition-all"
-          aria-label="Previous Slide">
-          <ChevronLeftIcon
-            style={{
-              color: sliderColors[slideshowData[currentSlide].colorIndex].hex,
-            }}
-            className="h-7 w-7"
-          />
+          className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 transition-all duration-200 backdrop-blur-sm"
+          aria-label="Previous">
+          <ChevronLeftIcon className="h-5 w-5" />
         </button>
         <button
           onClick={handleNext}
-          style={{
-            backgroundColor:
-              sliderColors[slideshowData[currentSlide].colorIndex].hex + 'CC',
-          }}
-          className="absolute right-6 top-1/2 transform -translate-y-1/2 p-4 rounded-full hover:opacity-90 backdrop-blur-sm transition-all"
-          aria-label="Next Slide">
-          <ChevronRightIcon
-            style={{
-              color: sliderColors[slideshowData[currentSlide].colorIndex].hex,
-            }}
-            className="h-7 w-7"
-          />
+          className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 transition-all duration-200 backdrop-blur-sm"
+          aria-label="Next">
+          <ChevronRightIcon className="h-5 w-5" />
         </button>
 
-        {/* Dots Navigation */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3">
-          {slideshowData.map((slide, index) => {
-            const baseColor = sliderColors[index].hex;
-            const activeBgColor = baseColor;
-            const inactiveBgColor = baseColor + '80';
-            return (
-              <motion.div
-                key={index}
-                animate={{
-                  scale: index === currentSlide ? 1.3 : 1,
-                  opacity: index === currentSlide ? 1 : 0.5,
-                  backgroundColor:
-                    index === currentSlide ? activeBgColor : inactiveBgColor,
-                }}
-                transition={{ duration: 0.3 }}
-                className="w-4 h-4 rounded-full cursor-pointer"
-                onClick={() => setCurrentSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            );
-          })}
+        {/* Slide dots */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+          {slideshowData.map((s, i) => (
+            <button
+              key={i}
+              onClick={() => { setDirection(i > currentSlide ? 1 : -1); setCurrentSlide(i); }}
+              className="rounded-full transition-all duration-300"
+              style={{
+                height: 4,
+                width: i === currentSlide ? 28 : 8,
+                background: i === currentSlide ? s.accentColor : 'rgba(255,255,255,0.15)',
+              }}
+              aria-label={`Slide ${i + 1}`}
+            />
+          ))}
         </div>
       </section>
 
-      {/* Main Content Sections */}
+      {/* ── Main Sections ── */}
       <main className="relative z-10">
         <About />
         <Experience />
         <Education />
         <Skills />
-        
-        {/* Projects Section */}
-        <section id="projects" className="w-full bg-gray-900">
+
+        <section id="projects" className="w-full">
           <Projects />
         </section>
+
+        {/* Research Section */}
+        <ResearchSection />
       </main>
 
-      {/* Contact Section */}
+      {/* ── Contact ── */}
       <section id="contact" className="w-full">
         <ContactForm />
       </section>
 
-      {/* Call to Action Section */}
-      <section className="py-6 bg-gradient-to-br from-teal-900 to-indigo-900 text-center relative overflow-hidden">
+      {/* ── CTA ── */}
+      <section
+        className="py-20 border-t border-white/5 text-center relative overflow-hidden"
+        style={{ background: '#030a06' }}>
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 55% 50% at 50% 50%, rgba(34,197,94,0.05) 0%, transparent 70%)' }}
+        />
         <motion.h2
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1 }}
-          className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-white to-coral-500 bg-clip-text text-transparent mb-6 p-8">
-          Let's Build the Future
+          transition={{ duration: 0.7 }}
+          className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+          Let's Build Something Impactful
         </motion.h2>
-
         <motion.p
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="text-xl mb-8 max-w-2xl mx-auto font-light text-gray-200">
-          I'm always open to new projects and collaborations. Reach out and
-          let's build something impactful together.
+          transition={{ duration: 0.7, delay: 0.12 }}
+          className="text-gray-500 text-sm max-w-lg mx-auto mb-8 leading-relaxed">
+          Open to collaborations, research partnerships, and conversations around AI and healthcare innovation across Africa.
         </motion.p>
-
         <motion.a
           href="#contact"
-          whileHover={{
-            scale: 1.1,
-            boxShadow: '0 15px 50px rgba(255, 255, 255, 0.4)',
-          }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-flex items-center gap-3 px-10 py-4 bg-teal-700 text-white rounded-full font-semibold shadow-lg hover:bg-coral-500 transition-all">
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.24 }}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.97 }}
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-green-500/10 border border-green-500/25 text-green-300 text-sm font-semibold hover:bg-green-500/18 hover:border-green-400/40 transition-all duration-300">
           Contact Me
-          <ArrowRightIcon className="h-6 w-6" />
+          <ArrowRightIcon className="h-4 w-4" />
         </motion.a>
-
-        {/* Animated background particles */}
-        {Array.from({ length: 10 }).map((_, i) => (
-          <motion.div
-            key={i}
-            variants={particleVariants}
-            animate="animate"
-            className="absolute w-2 h-2 bg-violet-500 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
       </section>
     </div>
   );
 }
 
 export default SinglePagePortfolio;
-

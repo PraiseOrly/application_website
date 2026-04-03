@@ -1,622 +1,369 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Card } from './ProjectCard';
-import Popup from './ProjectPopup';
-import { ChevronDown, ChevronUp, Heart, Share2, Eye, Brain, Zap, Code, Globe, BarChart3, Lightbulb, Heart as HeartIcon, Microscope, Stethoscope, AlertTriangle, Target, Activity } from 'lucide-react';
-import Button from './Projectbutton';
-import ProjectHero from './ProjectHero';
+import {
+  BarChart3, Brain, Database, FlaskConical, Cpu, X, ExternalLink,
+  ChevronRight, Activity, Heart, Stethoscope, Globe, AlertTriangle,
+  Microscope, Pill, Virus, Search, TrendingUp, Dna, Zap,
+} from 'lucide-react';
 
-// Project-specific Analysis and Insights Data
+interface Project {
+  title: string;
+  description: string;
+  techStack: string[];
+  status: 'Completed' | 'In Progress';
+  icon: React.ReactNode;
+  githubUrl?: string;
+}
 
-// ECG Waveform Analysis Analysis
-const ecgAnalysisData = [
+interface Category {
+  id: string;
+  label: string;
+  tagline: string;
+  accentColor: string;
+  borderColor: string;
+  bgColor: string;
+  textColor: string;
+  tagBg: string;
+  tagText: string;
+  tagBorder: string;
+  headerIcon: React.ReactNode;
+  projects: Project[];
+}
+
+const categories: Category[] = [
   {
-    title: 'Predictive Accuracy',
-    description: 'CNN models achieved reliable detection of P-QRS-T-U waveforms and classification of cardiac abnormalities with strong performance across multiple classes.',
-    icon: <BarChart3 className="h-8 w-8 text-teal-400" />,
+    id: 'data-science',
+    label: 'Data Science',
+    tagline: 'Exploratory analysis & statistical insights from complex healthcare datasets.',
+    accentColor: '#22c55e',
+    borderColor: 'border-green-500/20',
+    bgColor: 'bg-green-500/[0.04]',
+    textColor: 'text-green-300',
+    tagBg: 'bg-green-500/10',
+    tagText: 'text-green-200',
+    tagBorder: 'border-green-500/15',
+    headerIcon: <Database className="h-5 w-5" />,
+    projects: [
+      {
+        title: 'Drugs, Side Effects & Medical Conditions Analysis',
+        description: 'Comprehensive analysis of drug interactions, side effects, and associated medical conditions using large-scale pharmaceutical datasets to uncover critical health patterns and risk correlations.',
+        techStack: ['Python', 'Pandas', 'Matplotlib', 'Seaborn', 'NLP', 'Statistical Analysis'],
+        status: 'Completed',
+        icon: <Pill className="h-5 w-5 text-green-400" />,
+      },
+      {
+        title: 'COVID-19 Clinical Trials Analysis',
+        description: 'In-depth exploration of global COVID-19 clinical trial data — identifying treatment trends, trial success rates, phase distributions, and geographic research concentration.',
+        techStack: ['Python', 'Pandas', 'Plotly', 'Seaborn', 'Statistical Analysis'],
+        status: 'Completed',
+        icon: <Virus className="h-5 w-5 text-green-400" />,
+      },
+    ],
   },
   {
-    title: 'Model Interpretability',
-    description: 'Grad-CAM visualizations highlighted clinically relevant ECG regions, improving transparency for cardiologists.',
-    icon: <Brain className="h-8 w-8 text-indigo-400" />,
+    id: 'data-analysis',
+    label: 'Data Analysis',
+    tagline: 'Deep-dive risk factor studies using real-world clinical and population datasets.',
+    accentColor: '#10b981',
+    borderColor: 'border-emerald-500/20',
+    bgColor: 'bg-emerald-500/[0.04]',
+    textColor: 'text-emerald-300',
+    tagBg: 'bg-emerald-500/10',
+    tagText: 'text-emerald-200',
+    tagBorder: 'border-emerald-500/15',
+    headerIcon: <BarChart3 className="h-5 w-5" />,
+    projects: [
+      {
+        title: 'Heart Disease Risk Factor Exploration',
+        description: 'Systematic analysis of cardiovascular risk factors — including age, cholesterol, blood pressure, and lifestyle variables — to identify early warning patterns and key predictors of heart disease.',
+        techStack: ['Python', 'Pandas', 'Seaborn', 'Scikit-learn', 'Matplotlib', 'EDA'],
+        status: 'Completed',
+        icon: <Heart className="h-5 w-5 text-emerald-400" />,
+      },
+      {
+        title: 'Cancer Risk Factor Analysis',
+        description: 'Exploratory study of demographic, genetic, and environmental risk factors across multiple cancer types, providing data-driven insights to support early detection and prevention strategies.',
+        techStack: ['Python', 'Pandas', 'Matplotlib', 'NumPy', 'Statistical Tests'],
+        status: 'Completed',
+        icon: <Dna className="h-5 w-5 text-emerald-400" />,
+      },
+    ],
   },
   {
-    title: 'Practical Challenges',
-    description: 'Addressed issues of noisy ECG scans, dataset imbalance, and computational efficiency for potential clinical use.',
-    icon: <Zap className="h-8 w-8 text-purple-400" />,
+    id: 'machine-learning',
+    label: 'Machine Learning',
+    tagline: 'Predictive and recommender models trained on clinical data for preventive care.',
+    accentColor: '#f59e0b',
+    borderColor: 'border-amber-500/20',
+    bgColor: 'bg-amber-500/[0.04]',
+    textColor: 'text-amber-300',
+    tagBg: 'bg-amber-500/10',
+    tagText: 'text-amber-200',
+    tagBorder: 'border-amber-500/15',
+    headerIcon: <Brain className="h-5 w-5" />,
+    projects: [
+      {
+        title: 'Heart Disease Prediction',
+        description: 'Supervised ML model using clinical biomarkers and patient features to predict heart disease likelihood with high sensitivity, designed for early clinical screening and decision support.',
+        techStack: ['Python', 'Scikit-learn', 'XGBoost', 'Pandas', 'Feature Engineering'],
+        status: 'Completed',
+        icon: <Activity className="h-5 w-5 text-amber-400" />,
+      },
+      {
+        title: 'Stroke Risk Prediction',
+        description: 'Classification model predicting stroke risk from patient health and lifestyle data, achieving AUC >0.85 with SHAP-based interpretability for transparent clinical use.',
+        techStack: ['Python', 'Scikit-learn', 'SHAP', 'Flask', 'Pandas', 'XGBoost'],
+        status: 'Completed',
+        icon: <AlertTriangle className="h-5 w-5 text-amber-400" />,
+      },
+      {
+        title: 'Personalized Medicine Recommender System',
+        description: 'Hybrid collaborative and content-based filtering system generating personalized treatment recommendations aligned with individual patient profiles and medical histories.',
+        techStack: ['Python', 'Scikit-learn', 'Surprise', 'FastAPI', 'PostgreSQL', 'Redis'],
+        status: 'Completed',
+        icon: <Stethoscope className="h-5 w-5 text-amber-400" />,
+      },
+      {
+        title: 'Heart Disease Prediction with Recommendation Model',
+        description: 'End-to-end pipeline combining heart disease risk prediction with a follow-up recommendation engine for personalized preventive care plans and lifestyle guidance.',
+        techStack: ['Python', 'XGBoost', 'Scikit-learn', 'Streamlit', 'Pandas'],
+        status: 'Completed',
+        icon: <TrendingUp className="h-5 w-5 text-amber-400" />,
+      },
+    ],
+  },
+  {
+    id: 'artificial-intelligence',
+    label: 'Artificial Intelligence',
+    tagline: 'Deep learning and AI systems for advanced diagnostics and epidemiological intelligence.',
+    accentColor: '#06b6d4',
+    borderColor: 'border-cyan-500/20',
+    bgColor: 'bg-cyan-500/[0.04]',
+    textColor: 'text-cyan-300',
+    tagBg: 'bg-cyan-500/10',
+    tagText: 'text-cyan-200',
+    tagBorder: 'border-cyan-500/15',
+    headerIcon: <Cpu className="h-5 w-5" />,
+    projects: [
+      {
+        title: 'ECG Arrhythmia Detection',
+        description: 'CNN-based deep learning model for detecting cardiac arrhythmias in 12-lead ECG recordings, achieving 96% accuracy on the PTB-XL dataset with Grad-CAM visualizations for clinical interpretability.',
+        techStack: ['PyTorch', 'TensorFlow', 'OpenCV', 'Grad-CAM', 'Matplotlib', 'Scikit-learn'],
+        status: 'Completed',
+        icon: <Zap className="h-5 w-5 text-cyan-400" />,
+      },
+      {
+        title: 'Disease Outbreak Prediction',
+        description: 'Time-series and epidemiological model leveraging historical outbreak data, environmental signals, and demographic indicators to predict and map potential disease surges across regions.',
+        techStack: ['Python', 'Prophet', 'Scikit-learn', 'GeoPandas', 'Plotly', 'FastAPI'],
+        status: 'In Progress',
+        icon: <Globe className="h-5 w-5 text-cyan-400" />,
+      },
+    ],
   },
 ];
 
-// ECG Waveform Analysis Insights
-const ecgInsightsData = [
-  {
-    title: 'Clinical Impact',
-    description: 'Accurate wave detection and abnormality classification can support early diagnosis and assist overburdened cardiologists.',
-    icon: <HeartIcon className="h-8 w-8 text-teal-400" />,
-  },
-  {
-    title: 'Trust & Usability',
-    description: 'Visual explanations of model predictions build clinician confidence in AI-assisted ECG tools.',
-    icon: <Globe className="h-8 w-8 text-green-400" />,
-  },
-  {
-    title: 'Future Potential',
-    description: 'Extensible to mobile and low-resource diagnostic platforms, enabling scalable, accessible cardiac care.',
-    icon: <Lightbulb className="h-8 w-8 text-yellow-400" />,
-  },
-];
-
-// Stroke Prediction Analysis
-const strokeAnalysisData = [
-  {
-    title: 'Predictive Accuracy',
-    description: 'Achieved strong classification performance (AUC > 0.85) in identifying patients at elevated risk of stroke, maintaining a balance between precision and recall.',
-    icon: <BarChart3 className="h-8 w-8 text-teal-400" />,
-  },
-  {
-    title: 'Model Interpretability',
-    description: 'Applied SHAP values to rank medical and lifestyle risk factors, enabling clinicians to understand and validate model outputs.',
-    icon: <Brain className="h-8 w-8 text-indigo-400" />,
-  },
-  {
-    title: 'Practical Challenges',
-    description: 'Managed imbalanced datasets, ensured proper calibration of risk scores, and optimized deployment for real-time use.',
-    icon: <Zap className="h-8 w-8 text-purple-400" />,
-  },
-];
-
-// Stroke Prediction Insights
-const strokeInsightsData = [
-  {
-    title: 'Health Impact',
-    description: 'Early identification of high-risk patients supports timely interventions, reducing the burden of stroke in underserved communities.',
-    icon: <HeartIcon className="h-8 w-8 text-teal-400" />,
-  },
-  {
-    title: 'Trust & Usability',
-    description: 'Transparent feature importance and risk scoring improve clinical adoption of predictive models.',
-    icon: <Globe className="h-8 w-8 text-green-400" />,
-  },
-  {
-    title: 'Future Potential',
-    description: 'Integration into mobile apps and hospital systems can deliver real-time, personalized stroke risk alerts at scale.',
-    icon: <Lightbulb className="h-8 w-8 text-yellow-400" />,
-  },
-];
-
-// Healthcare Recommendations Analysis
-const healthcareRecAnalysisData = [
-  {
-    title: 'Recommendation Accuracy',
-    description: 'Hybrid collaborative and content-based filtering generated personalized treatment suggestions aligned with patient data.',
-    icon: <BarChart3 className="h-8 w-8 text-teal-400" />,
-  },
-  {
-    title: 'Patient Profiling',
-    description: 'Clustering algorithms identified similar patient profiles to optimize care pathways and outcomes.',
-    icon: <Brain className="h-8 w-8 text-indigo-400" />,
-  },
-  {
-    title: 'Real-Time Processing',
-    description: 'Algorithms were optimized to deliver instantaneous recommendations during clinical consultations.',
-    icon: <Zap className="h-8 w-8 text-purple-400" />,
-  },
-];
-
-// Healthcare Recommendations Insights
-const healthcareRecInsightsData = [
-  {
-    title: 'Treatment Optimization',
-    description: 'Data-driven recommendations improve treatment selection and patient outcomes through evidence-based care.',
-    icon: <HeartIcon className="h-8 w-8 text-teal-400" />,
-  },
-  {
-    title: 'Care Personalization',
-    description: 'Individualized care pathways enhance patient engagement and treatment adherence.',
-    icon: <Globe className="h-8 w-8 text-green-400" />,
-  },
-  {
-    title: 'Clinical Decision Support',
-    description: 'AI-powered insights augment clinical expertise for more informed treatment decisions.',
-    icon: <Lightbulb className="h-8 w-8 text-yellow-400" />,
-  },
-];
-
-// Diabetes Risk Assessment Analysis
-const diabetesAnalysisData = [
-  {
-    title: 'Risk Stratification',
-    description: 'Integrated biomarkers, demographics, and lifestyle data to accurately predict diabetes risk.',
-    icon: <BarChart3 className="h-8 w-8 text-teal-400" />,
-  },
-  {
-    title: 'Feature Engineering',
-    description: 'Applied advanced techniques to capture complex interactions among health metrics.',
-    icon: <Brain className="h-8 w-8 text-indigo-400" />,
-  },
-  {
-    title: 'Population Screening',
-    description: 'Designed scalable tools for large-scale population health risk assessment.',
-    icon: <Zap className="h-8 w-8 text-purple-400" />,
-  },
-];
-
-// Diabetes Risk Assessment Insights
-const diabetesInsightsData = [
-  {
-    title: 'Early Intervention',
-    description: 'Enables preventive measures and lifestyle changes before disease onset.',
-    icon: <HeartIcon className="h-8 w-8 text-teal-400" />,
-  },
-  {
-    title: 'Public Health Impact',
-    description: 'Supports targeted prevention programs and optimized resource allocation.',
-    icon: <Globe className="h-8 w-8 text-green-400" />,
-  },
-  {
-    title: 'Healthcare Efficiency',
-    description: 'Risk-based screening enhances preventive care delivery and resource management.',
-    icon: <Lightbulb className="h-8 w-8 text-yellow-400" />,
-  },
-];
-
-// Project Data
-const projectsData = [
-		{
-		id: 1,
-		title: "ECG Waveform Analysis with Deep Learning",
-		domain: "Computer Vision + Healthtech + Deep Learning",
-		goal: "Detect P, Q, R, S, T, and U waves in ECG images using CNNs and classify cardiac abnormalities.",
-		image: "/images/CreatorofCardiactek.jpg",
-		concepts: [
-			"Image preprocessing and augmentation",
-			"CNN architectures (ResNet, EfficientNet)",
-			"Multi-label classification",
-			"Grad-CAM for model interpretability",
-		],
-		techStack: ["PyTorch/TensorFlow", "OpenCV", "Matplotlib/Seaborn"],
-		bonus:
-			"Uses PTB-XL ECG dataset. Includes wave detection overlays and an interactive dashboard for clinicians.",
-		icon: <Zap className="h-8 w-8 text-indigo-400" />,
-		analysis: ecgAnalysisData,
-		insights: ecgInsightsData,
-	},
-		{
-		id: 2,
-		title: "Stroke Prediction Model",
-		domain: "Risk Assessment + Predictive Analytics + Preventive Healthcare",
-		goal: "Building a model to predict stroke risk based on medical and lifestyle data from patients.",
-		image: 	"/images/stroke.jpg",
-		concepts: [
-			"Risk factor analysis and feature selection",
-			"Classification modeling for stroke prediction",
-			"Model validation and calibration",
-			"Risk score development",
-			"Early warning system design",
-		],
-		techStack: [
-			"Python",
-			"scikit-learn",
-			"TensorFlow",
-			"pandas",
-			"NumPy",
-			"matplotlib",
-			"Flask",
-		],
-		bonus:
-			"Uses comprehensive patient health datasets. Features real-time risk assessment and early warning notifications.",
-		icon: <AlertTriangle className="h-8 w-8 text-orange-400" />,
-		analysis: strokeAnalysisData,
-		insights: strokeInsightsData,
-	},
-	{
-		id: 3,
-		title: "Healthcare Recommendations",
-		domain:
-			"Recommendation Systems + Patient-Centered Care + AI-Driven Medicine",
-		goal: "Creating personalized healthcare recommendations based on individual patient data and medical history.",
-		image: "/images/health recommendation.jpg",
-		concepts: [
-			"Collaborative filtering for treatment recommendations",
-			"Content-based recommendation algorithms",
-			"Patient similarity analysis",
-			"Treatment outcome optimization",
-			"Personalized care pathway design",
-		],
-		techStack: [
-			"Python",
-			"Surprise",
-			"scikit-learn",
-			"pandas",
-			"FastAPI",
-			"PostgreSQL",
-			"Redis",
-		],
-		bonus:
-			"Integrates multiple healthcare datasets. Features real-time personalized treatment recommendations and care pathway optimization.",
-		icon: <Target className="h-8 w-8 text-green-400" />,
-		analysis: healthcareRecAnalysisData,
-		insights: healthcareRecInsightsData,
-	},
-	{
-		id: 4,
-		title: "Diabetes Risk Assessment",
-		domain: "Risk Prediction + Preventive Medicine + Population Health",
-		goal: "Creating a predictive model to assess diabetes risk based on personal and health information.",
-		image: "/images/diabetes.jpg",
-		concepts: [
-			"Risk factor identification and analysis",
-			"Predictive modeling for diabetes onset",
-			"Feature engineering for health metrics",
-			"Model interpretability for clinical use",
-			"Population health risk stratification",
-		],
-		techStack: [
-			"Python",
-			"scikit-learn",
-			"XGBoost",
-			"pandas",
-			"matplotlib",
-			"seaborn",
-			"Streamlit",
-		],
-		bonus:
-			"Uses comprehensive health and lifestyle datasets. Includes interactive risk assessment tools and preventive care recommendations.",
-		icon: <Activity className="h-8 w-8 text-pink-400" />,
-		analysis: diabetesAnalysisData,
-		insights: diabetesInsightsData,
-	},
-];
-
-// Animation Variants
 const cardVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.95 },
-  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, type: 'spring', stiffness: 100 } },
-  hover: { scale: 1.03, boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)', transition: { duration: 0.3 } },
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut', staggerChildren: 0.2 } },
-};
+const ProjectDetailModal: React.FC<{ project: Project | null; category: Category | null; onClose: () => void }> = ({ project, category, onClose }) => {
+  if (!project || !category) return null;
+  return (
+    <motion.div
+      initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4"
+      onClick={onClose}>
+      <motion.div
+        initial={{ scale: 0.93, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.96, opacity: 0 }}
+        transition={{ type: 'spring', stiffness: 210, damping: 24 }}
+        className="bg-[#040f07] border rounded-2xl p-7 max-w-2xl w-full relative shadow-2xl"
+        style={{ borderColor: `${category.accentColor}20` }}
+        onClick={(e) => e.stopPropagation()}>
+        <div className="absolute top-0 left-0 w-full h-px rounded-t-2xl"
+          style={{ background: `linear-gradient(to right, transparent, ${category.accentColor}60, transparent)` }} />
+        <button onClick={onClose} className="absolute top-4 right-4 p-1.5 rounded-lg text-gray-600 hover:text-white hover:bg-white/8 transition-all duration-200">
+          <X className="h-5 w-5" />
+        </button>
 
-const slideshowVariants = {
-  enter: { opacity: 0, x: 100 },
-  center: { opacity: 1, x: 0 },
-  exit: { opacity: 0, x: -100 },
+        <div className="flex items-start gap-4 mb-5">
+          <div className="p-2.5 rounded-xl shrink-0" style={{ background: `${category.accentColor}15`, border: `1px solid ${category.accentColor}25` }}>
+            {project.icon}
+          </div>
+          <div>
+            <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold border tracking-widest uppercase mb-2 ${category.tagBg} ${category.tagText} ${category.tagBorder}`}>
+              {category.label}
+            </span>
+            <h3 className="text-white font-bold text-xl leading-snug">{project.title}</h3>
+          </div>
+        </div>
+
+        <p className="text-gray-300 text-sm leading-relaxed mb-6">{project.description}</p>
+
+        <div>
+          <p className="text-xs font-semibold tracking-widest text-gray-600 uppercase mb-3">Tech Stack</p>
+          <div className="flex flex-wrap gap-2">
+            {project.techStack.map((tech) => (
+              <span key={tech} className={`px-3 py-1 rounded-full text-xs font-medium border ${category.tagBg} ${category.tagText} ${category.tagBorder}`}>
+                {tech}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-5 pt-5 border-t border-white/5 flex items-center justify-between">
+          <span className={`text-xs font-medium px-2.5 py-1 rounded-full border ${
+            project.status === 'Completed'
+              ? 'bg-green-500/10 text-green-300 border-green-500/20'
+              : 'bg-amber-500/10 text-amber-300 border-amber-500/20'
+          }`}>
+            {project.status}
+          </span>
+          {project.githubUrl && (
+            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors duration-200">
+              <ExternalLink className="h-3.5 w-3.5" /> View on GitHub
+            </a>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
 };
 
 const Projects = () => {
-  const [expandedProject, setExpandedProject] = useState<number | null>(null);
-  const [selectedProject, setSelectedProject] = useState<typeof projectsData[0] | null>(null);
-  const [likes, setLikes] = useState<{ [key: number]: number }>({});
-  const [isSlideshowActive, setIsSlideshowActive] = useState(false);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const inactivityTimer = useRef<NodeJS.Timeout | null>(null);
-  const slideshowTimer = useRef<NodeJS.Timeout | null>(null);
-  const slideshowRef = useRef<HTMLDivElement>(null);
-
-  // Handle inactivity timer reset
-  const resetInactivityTimer = () => {
-    if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
-    inactivityTimer.current = setTimeout(() => {
-      setIsSlideshowActive(true);
-      startSlideshow();
-    }, 5 * 60 * 1000); // 5 minutes
-  };
-
-  // Start slideshow with 5-second intervals
-  const startSlideshow = () => {
-    if (slideshowTimer.current) clearInterval(slideshowTimer.current);
-    setCurrentSlide(0); // Start from first slide
-    slideshowTimer.current = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % projectsData.length);
-    }, 5000); // Change slide every 5 seconds
-  };
-
-  // Close slideshow and reset inactivity timer
-  const closeSlideshow = () => {
-    setIsSlideshowActive(false);
-    if (slideshowTimer.current) clearInterval(slideshowTimer.current);
-    resetInactivityTimer(); // Reset the 5-minute inactivity timer
-  };
-
-  // Handle click outside slideshow
-  const handleClickOutside = (event: MouseEvent) => {
-    if (slideshowRef.current && !slideshowRef.current.contains(event.target as Node)) {
-      closeSlideshow();
-    }
-  };
-
-  // Set up inactivity detection and outside click handler
-  useEffect(() => {
-    const events = ['mousemove', 'keydown', 'scroll', 'click'];
-    events.forEach(event => window.addEventListener(event, resetInactivityTimer));
-    
-    resetInactivityTimer(); // Start the timer initially
-
-    if (isSlideshowActive) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      events.forEach(event => window.removeEventListener(event, resetInactivityTimer));
-      document.removeEventListener('mousedown', handleClickOutside);
-      if (inactivityTimer.current) clearTimeout(inactivityTimer.current);
-      if (slideshowTimer.current) clearInterval(slideshowTimer.current);
-    };
-  }, [isSlideshowActive]);
-
-  const toggleExpand = (id: number) => {
-    setExpandedProject(expandedProject === id ? null : id);
-  };
-
-  const handleLike = (id: number) => {
-    setLikes((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
-  };
-
-  const handleShare = (title: string) => {
-    const url = window.location.href;
-    navigator.clipboard.writeText(`${title}: ${url}`).then(() => alert('Project link copied to clipboard!'));
-  };
-
-  const handleSeeMore = (project: typeof projectsData[0]) => {
-    setSelectedProject(project);
-  };
-
-  const closePopup = () => {
-    setSelectedProject(null);
-  };
+  const [selectedProject, setSelectedProject] = useState<{ project: Project; category: Category } | null>(null);
 
   return (
-    <div className="w-full min-h-screen bg-gray-900 text-white relative">
-      {/* Hero Section */}
-      <ProjectHero />
+    <div className="w-full text-white" style={{ background: 'linear-gradient(to bottom, #030a06, #040e08, #030a06)' }}>
 
-      {/* Main Projects Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-teal-900 to-indigo-900 relative overflow-hidden">
-        <motion.div
-          animate={{ opacity: [0.1, 0.3, 0.1] }}
-          transition={{ duration: 5, repeat: Infinity }}
-          className="absolute inset-0 bg-gradient-to-tr from-teal-500/20 to-indigo-500/20 blur-3xl pointer-events-none"
-        />
-        <motion.div
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="max-w-7xl mx-auto space-y-12"
-        >
-          {/* <motion.h2
-            variants={cardVariants}
-            className="text-4xl md:text-5xl font-extrabold text-center bg-gradient-to-r from-teal-300 to-indigo-300 bg-clip-text text-transparent mb-12"
-          >
-            Project Showcase
-          </motion.h2> */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {projectsData.map((project) => (
-              <motion.div
-                key={project.id}
-                variants={cardVariants}
-                initial="hidden"
-                whileInView="visible"
-                whileHover="hover"
-                viewport={{ once: true }}
-                className="relative"
-              >
-                <Card
-                  className="bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-teal-500/30 p-6 h-full flex flex-col justify-between cursor-pointer transition-all duration-300"
-                  onClick={() => toggleExpand(project.id)}
-                >
-                  <motion.img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-32 object-cover rounded-lg mb-4"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  <div className="flex items-center gap-4 mb-4">
-                    {project.icon}
-                    <h3 className="text-xl font-semibold text-white">{project.title}</h3>
-                  </div>
-                  <p className="text-sm text-teal-300 mb-2">{project.domain}</p>
-                  <p className="text-gray-300 leading-relaxed">{project.goal}</p>
-                  <div className="mt-4 flex justify-between items-center gap-2">
-                    <Button
-                      label={<span className="flex items-center gap-1"><Heart className="h-4 w-4" /> {likes[project.id] || 0}</span>}
-                      variant="outline"
-                      onClick={(e) => { e.stopPropagation(); handleLike(project.id); }}
-                      className="flex-1 bg-transparent border-teal-400 text-teal-300 hover:bg-teal-400/20 rounded-full text-sm py-2"
-                    />
-                    {/* <Button
-                      label={<span className="flex items-center gap-1"><Share2 className="h-4 w-4" /> Share</span>}
-                      variant="outline"
-                      onClick={(e) => { e.stopPropagation(); handleShare(project.title); }}
-                      className="flex-1 bg-transparent border-indigo-400 text-indigo-300 hover:bg-indigo-400/20 rounded-full text-sm py-2"
-                    /> */}
-                    <Button
-                      label={<span className="flex items-center gap-1"><Eye className="h-4 w-4" /> See More</span>}
-                      onClick={(e) => { e.stopPropagation(); handleSeeMore(project); }}
-                      className="flex-1 bg-teal-500 text-white hover:bg-teal-600 rounded-full text-sm py-2"
-                    />
-                  </div>
-                  <AnimatePresence>
-                    {expandedProject === project.id && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="mt-4"
-                      >
-                        <h4 className="text-sm font-semibold text-indigo-300">Tech Stack:</h4>
-                        <div className="flex flex-wrap gap-2 mt-2">
-                          {project.techStack.map((tech, idx) => (
-                            <span key={idx} className="px-2 py-1 bg-teal-500/20 text-teal-300 rounded-full text-xs">
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  <motion.div
-                    className="mt-4 flex justify-center"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {expandedProject === project.id ? (
-                      <ChevronUp className="h-6 w-6 text-teal-400" />
-                    ) : (
-                      <ChevronDown className="h-6 w-6 text-teal-400" />
-                    )}
-                  </motion.div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+      {/* ── Header ── */}
+      <div className="relative pt-20 pb-12 text-center overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none"
+          style={{ background: 'radial-gradient(ellipse 55% 40% at 50% 0%, rgba(34,197,94,0.08) 0%, transparent 70%)' }} />
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="relative z-10">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-green-500/10 border border-green-500/20 text-green-300 mb-5">
+            <FlaskConical className="h-3 w-3" /> Portfolio
+          </span>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">Project Showcase</h1>
+          <p className="text-gray-400 text-base max-w-2xl mx-auto leading-relaxed">
+            AI-powered solutions in{' '}
+            <span className="text-green-300 font-medium">Data Science</span>,{' '}
+            <span className="text-emerald-300 font-medium">Machine Learning</span>, and{' '}
+            <span className="text-cyan-300 font-medium">Artificial Intelligence</span>{' '}
+            — built to transform healthcare across Africa.
+          </p>
         </motion.div>
-        <AnimatePresence>
-          {selectedProject && (
-            <Popup
-              isOpen={!!selectedProject}
-              onClose={closePopup}
-              title={
-                <div className="flex items-center gap-4">
-                  {selectedProject.icon}
-                  <span className="text-2xl font-bold text-white">{selectedProject.title}</span>
-                </div>
-              }
-              message={selectedProject.goal}
-              variant="info"
-              className="w-full max-w-2xl"
-            >
-              <motion.img
-                src={selectedProject.image}
-                alt={selectedProject.title}
-                className="w-full h-64 object-cover rounded-lg mb-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              />
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-lg font-semibold text-teal-300">Domain:</h4>
-                  <p className="text-gray-300">{selectedProject.domain}</p>
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-teal-300">Concepts Covered:</h4>
-                  <ul className="list-disc pl-5 text-gray-300">
-                    {selectedProject.concepts.map((concept, idx) => (
-                      <li key={idx}>{concept}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-teal-300">Tech Stack:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.techStack.map((tech, idx) => (
-                      <span key={idx} className="px-3 py-1 bg-teal-500/20 text-teal-300 rounded-full text-sm">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-teal-300">Bonus:</h4>
-                  <p className="text-gray-300">{selectedProject.bonus}</p>
-                </div>
-                {/* Render Analysis */}
-                <div>
-                  <h4 className="text-lg font-semibold text-teal-300 mt-6">Project Analysis:</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-                    {selectedProject.analysis.map((item, idx) => (
-                      <Card key={idx} className="bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-teal-500/30 p-6 flex flex-col items-center text-center">
-                        <div className="mb-4">{item.icon}</div>
-                        <h5 className="text-xl font-semibold text-white mb-2">{item.title}</h5>
-                        <p className="text-gray-300">{item.description}</p>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-                {/* Render Insights */}
-                <div>
-                  <h4 className="text-lg font-semibold text-teal-300 mt-6">Project Insights:</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
-                    {selectedProject.insights.map((item, idx) => (
-                      <Card key={idx} className="bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-xl border border-teal-500/30 p-6 flex flex-col items-center text-center">
-                        <div className="mb-4">{item.icon}</div>
-                        <h5 className="text-xl font-semibold text-white mb-2">{item.title}</h5>
-                        <p className="text-gray-300">{item.description}</p>
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </Popup>
-          )}
-        </AnimatePresence>
-      </section>
+      </div>
 
-      {/* Slideshow Overlay */}
-      <AnimatePresence>
-        {isSlideshowActive && (
+      {/* ── Categories ── */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 space-y-16">
+        {categories.map((cat, catIdx) => (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-          >
-            <motion.div
-              key={currentSlide}
-              variants={slideshowVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.5 }}
-              className="max-w-4xl w-full"
-              ref={slideshowRef}
-            >
-              <Card className="bg-gray-800/95 rounded-2xl shadow-2xl border border-teal-500/40 p-6">
-                <motion.img
-                  src={projectsData[currentSlide].image}
-                  alt={projectsData[currentSlide].title}
-                  className="w-full h-64 object-cover rounded-lg mb-6"
-                  initial={{ scale: 0.95 }}
-                  animate={{ scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                />
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    {projectsData[currentSlide].icon}
-                    <h3 className="text-2xl font-bold text-white">
-                      {projectsData[currentSlide].title}
-                    </h3>
+            key={cat.id}
+            initial={{ opacity: 0, y: 32 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.6, delay: catIdx * 0.05 }}>
+
+            {/* Category Header */}
+            <div className="flex items-center gap-4 mb-8">
+              <div className="p-2.5 rounded-xl border" style={{ background: `${cat.accentColor}12`, borderColor: `${cat.accentColor}25`, color: cat.accentColor }}>
+                {cat.headerIcon}
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-3">
+                  <h2 className={`text-xl font-bold ${cat.textColor}`}>{cat.label}</h2>
+                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${cat.tagBg} ${cat.tagText} ${cat.tagBorder}`}>
+                    {cat.projects.length} project{cat.projects.length > 1 ? 's' : ''}
+                  </span>
+                </div>
+                <p className="text-gray-500 text-sm mt-0.5">{cat.tagline}</p>
+              </div>
+              <div className="hidden sm:block h-px flex-1 max-w-[120px]" style={{ background: `linear-gradient(to right, ${cat.accentColor}30, transparent)` }} />
+            </div>
+
+            {/* Project cards */}
+            <div className={`grid gap-5 ${cat.projects.length === 2 ? 'md:grid-cols-2' : cat.projects.length === 3 ? 'md:grid-cols-2 lg:grid-cols-3' : 'md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4'}`}>
+              {cat.projects.map((project, projIdx) => (
+                <motion.div
+                  key={project.title}
+                  variants={cardVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  transition={{ delay: projIdx * 0.07 }}
+                  whileHover={{ y: -4 }}
+                  onClick={() => setSelectedProject({ project, category: cat })}
+                  className={`group cursor-pointer rounded-2xl border ${cat.borderColor} ${cat.bgColor} p-6 relative overflow-hidden transition-all duration-300`}
+                  style={{ borderColor: undefined }}>
+
+                  <div className={`absolute top-0 left-0 w-full h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+                    style={{ background: `linear-gradient(to right, transparent, ${cat.accentColor}60, transparent)` }} />
+                  <div className="absolute -bottom-8 -right-8 w-24 h-24 rounded-full blur-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: cat.accentColor }} />
+
+                  {/* Icon + Status */}
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="p-2 rounded-xl" style={{ background: `${cat.accentColor}12`, border: `1px solid ${cat.accentColor}20` }}>
+                      {project.icon}
+                    </div>
+                    <span className={`text-[10px] font-semibold px-2.5 py-1 rounded-full border ${
+                      project.status === 'Completed'
+                        ? 'bg-green-500/10 text-green-300 border-green-500/20'
+                        : 'bg-amber-500/10 text-amber-300 border-amber-500/20'
+                    }`}>
+                      {project.status}
+                    </span>
                   </div>
-                  <p className="text-teal-300 text-sm">{projectsData[currentSlide].domain}</p>
-                  <p className="text-gray-300">{projectsData[currentSlide].goal}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {projectsData[currentSlide].techStack.map((tech, idx) => (
-                      <span key={idx} className="px-3 py-1 bg-teal-500/20 text-teal-300 rounded-full text-sm">
+
+                  {/* Title */}
+                  <h3 className="text-white text-sm font-bold leading-snug mb-2 group-hover:text-white/90 transition-colors">
+                    {project.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-gray-500 text-xs leading-relaxed mb-4 line-clamp-3">
+                    {project.description}
+                  </p>
+
+                  {/* Tech tags (first 3) */}
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {project.techStack.slice(0, 3).map((tech) => (
+                      <span key={tech} className={`px-2 py-0.5 rounded-full text-[10px] font-medium border ${cat.tagBg} ${cat.tagText} ${cat.tagBorder}`}>
                         {tech}
                       </span>
                     ))}
+                    {project.techStack.length > 3 && (
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-medium text-gray-600 border border-white/5">
+                        +{project.techStack.length - 3}
+                      </span>
+                    )}
                   </div>
-                </div>
-                <div className="mt-6 flex justify-between items-center">
-                  <span className="text-gray-400 text-sm">
-                    Slide {currentSlide + 1} of {projectsData.length}
-                  </span>
-                  <Button
-                    label="Close Slideshow"
-                    onClick={closeSlideshow}
-                    className="bg-teal-500 text-white hover:bg-teal-600 rounded-full px-4 py-2"
-                  />
-                </div>
-              </Card>
-            </motion.div>
+
+                  {/* View details */}
+                  <div className={`flex items-center gap-1 text-xs font-medium ${cat.textColor} opacity-0 group-hover:opacity-100 transition-all duration-200`}>
+                    View details <ChevronRight className="h-3.5 w-3.5" />
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
+        ))}
+      </div>
+
+      {/* Project detail modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <ProjectDetailModal
+            project={selectedProject.project}
+            category={selectedProject.category}
+            onClose={() => setSelectedProject(null)}
+          />
         )}
       </AnimatePresence>
     </div>
