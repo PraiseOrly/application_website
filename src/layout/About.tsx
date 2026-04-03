@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Award, Brain, SparklesIcon } from "lucide-react";
+import { Award, Brain, Calendar, FileBadge, GraduationCap, SparklesIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 const profileImages = [
 	"/images/Praise_Headshot.jpg",
@@ -26,29 +26,33 @@ const aboutData = {
 			title: "AI Diagnostics",
 			description:
 				"Developed deep learning models for 12-lead ECG interpretation, achieving high accuracy across multiple cardiac conditions.",
-			icon: <Brain className="h-5 w-5 text-teal-400" />,
+			icon: <Brain className="h-4 w-4 text-teal-400" />,
 		},
 		{
 			id: "2",
 			title: "Community Impact",
 			description:
 				"Mentored peers and emerging professionals, fostering skill development, collaboration, and career growth.",
-			icon: <Award className="h-5 w-5 text-lime-300" />,
+			icon: <Award className="h-4 w-4 text-lime-300" />,
 		},
 		{
 			id: "3",
-			title: "Research Leadership",
-			description:
-				"Published research on AI applications in healthcare, presenting at international conferences.",
-			icon: <SparklesIcon className="h-5 w-5 text-purple-400" />,
-		},
-		{
-			id: "4",
 			title: "Tech Innovation",
 			description:
 				"Built scalable AI solutions addressing critical healthcare challenges in underserved regions.",
-			icon: <SparklesIcon className="h-5 w-5 text-orange-400" />,
+			icon: <SparklesIcon className="h-4 w-4 text-orange-400" />,
 		},
+	],
+	education: {
+		institution: "African Leadership University (ALU)",
+		degree: "BSc Software Engineering - First Class Honours",
+		specialization: "Machine Learning, AI for Healthcare",
+		duration: "Jan 2022 - June 2025",
+	},
+	certifications: [
+		{ name: "AI For Good", issuer: "DeepLearning.AI", date: "Sept 2025" },
+		{ name: "AI For Medicine", issuer: "DeepLearning.AI", date: "Sept 2025" },
+		{ name: "Generative AI for Data Scientists", issuer: "IBM", date: "May 2025" },
 	],
 };
 
@@ -146,77 +150,153 @@ export function About() {
 
 			{/* Content Sections */}
 			<div className="relative space-y-8 py-2 px-2 lg:px-8">
-				{/* My Mission Section */}
-				<section className="max-w-4xl mx-auto">
-					<motion.div
-						className="space-y-4 text-center"
-						initial={{ opacity: 0 }}
-						whileInView={{ opacity: 1 }}>
-						<h2 className="text-2xl font-bold text-teal-300">
-							My Mission
-						</h2>
+				
+				{/* Row 1: My Mission + Key Achievements */}
+				<div className="grid md:grid-cols-2 gap-8">
+					
+					{/* My Mission - Left Column */}
+					<div>
+						<motion.div
+							className="space-y-4"
+							initial={{ opacity: 0 }}
+							whileInView={{ opacity: 1 }}>
+							<h2 className="text-2xl font-bold text-teal-300 text-center">
+								My Mission
+							</h2>
 
-						<div className="space-y-3 text-gray-200 text-base leading-relaxed">
-							<p className="max-w-2xl mx-auto">
-								Transforming African healthcare through ethical AI innovation
-								and community empowerment.
-							</p>
+							<div className="space-y-3 text-gray-200 text-base leading-relaxed">
+								<ul className="space-y-3">
+									{[
+										"Democratizing medical AI tools",
+										"Building locally-relevant solutions",
+										"Mentoring tech leaders",
+										"Bridging research & impact",
+									].map((item, index) => (
+										<motion.li
+											key={item}
+											className="flex items-center gap-2 p-3 bg-gray-400/20 rounded-lg backdrop-blur-sm"
+											initial={{ opacity: 0, x: -20 }}
+											whileInView={{ opacity: 1, x: 0 }}
+											transition={{ delay: index * 0.1 }}>
+											<SparklesIcon className="h-4 w-4 text-teal-400 flex-shrink-0" />
+											<span className="text-sm">{item}</span>
+										</motion.li>
+									))}
+								</ul>
+							</div>
+						</motion.div>
+					</div>
 
-							<ul className="grid md:grid-cols-2 gap-3 text-left max-w-4xl mx-auto">
-								{[
-									"Democratizing medical AI tools",
-									"Building locally-relevant solutions",
-									"Mentoring tech leaders",
-									"Bridging research & impact",
-								].map((item, index) => (
-									<motion.li
-										key={item}
-										className="flex items-center gap-2 p-3 bg-gray-400/20 rounded-lg backdrop-blur-sm"
-										initial={{ opacity: 0, x: -20 }}
-										whileInView={{ opacity: 1, x: 0 }}
-										transition={{ delay: index * 0.1 }}>
-										<SparklesIcon className="h-4 w-4 text-teal-400 flex-shrink-0" />
-										<span className="text-sm">{item}</span>
-									</motion.li>
-								))}
-							</ul>
-						</div>
-					</motion.div>
-				</section>
+					{/* Key Achievements - Right Column */}
+					<div>
+						<motion.h2
+							className="text-2xl font-bold mb-4 text-teal-300 text-center"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}>
+							Key Achievements
+						</motion.h2>
 
-				{/* Key Achievements */}
-				<section className="max-w-6xl mx-auto">
-					<motion.h2
-						className="text-2xl font-bold text-center mb-4 text-teal-300"
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}>
-						Key Achievements
-					</motion.h2>
-
-					<div className="grid md:grid-cols-2 gap-4">
-						{aboutData.highlights.map((highlight) => (
-							<motion.div
-								key={highlight.id}
-								className="p-4 bg-gray-400/20 rounded-xl backdrop-blur-sm border border-teal-400/20"
-								initial={{ opacity: 0, y: 20 }}
-								whileInView={{ opacity: 1, y: 0 }}
-								whileHover={{ y: -3 }}>
-								<div className="flex items-center gap-4 mb-3">
-									<div className="p-2 bg-teal-400/10 rounded-lg">
+						<div className="grid gap-2">
+							{aboutData.highlights.map((highlight) => (
+								<motion.div
+									key={highlight.id}
+									className="flex items-center gap-2 p-2 bg-gray-400/20 rounded-lg backdrop-blur-sm border border-teal-400/20"
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
+									whileHover={{ x: 3 }}>
+									<div className="p-1 bg-teal-400/10 rounded-lg shrink-0">
 										{highlight.icon}
 									</div>
-									<h3 className="text-lg font-semibold text-teal-200">
-										{highlight.title}
-									</h3>
-								</div>
-								<p className="text-gray-200 text-sm leading-relaxed">
-									{highlight.description}
-								</p>
-							</motion.div>
-						))}
+									<div className="min-w-0">
+										<h3 className="text-sm font-semibold text-teal-200">
+											{highlight.title}
+										</h3>
+										<p className="text-gray-200 text-xs truncate">
+											{highlight.description}
+										</p>
+									</div>
+								</motion.div>
+							))}
+						</div>
 					</div>
-				</section>
+				</div>
+
+				{/* Row 2: Education + Certifications */}
+				<div className="grid md:grid-cols-2 gap-8">
+					
+					{/* Education Card */}
+					<div>
+						<motion.h2
+							className="text-2xl font-bold mb-4 text-teal-300 text-center"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}>
+							Education
+						</motion.h2>
+						
+						<motion.div
+							className="p-4 bg-gray-400/20 rounded-lg backdrop-blur-sm border border-teal-400/20"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}
+							whileHover={{ y: -3 }}>
+							<div className="flex items-center gap-3 mb-3">
+								<div className="p-2 bg-teal-700 rounded-full">
+									<GraduationCap className="h-5 w-5 text-teal-400" />
+								</div>
+								<div>
+									<h3 className="text-base font-bold text-teal-400">
+										{aboutData.education.institution}
+									</h3>
+									<p className="text-white text-sm font-medium">
+										{aboutData.education.degree}
+									</p>
+									<p className="text-white text-xs italic">
+										{aboutData.education.specialization}
+									</p>
+								</div>
+							</div>
+							<div className="flex items-center gap-2 text-teal-300 bg-teal-900/50 rounded-lg p-2">
+								<Calendar className="h-4 w-4" />
+								<span className="text-sm">{aboutData.education.duration}</span>
+							</div>
+						</motion.div>
+					</div>
+
+					{/* Certifications Card */}
+					<div>
+						<motion.h2
+							className="text-2xl font-bold mb-4 text-teal-300 text-center"
+							initial={{ opacity: 0, y: 20 }}
+							whileInView={{ opacity: 1, y: 0 }}>
+							Certifications
+						</motion.h2>
+						
+						<div className="space-y-2">
+							{aboutData.certifications.map((cert, index) => (
+								<motion.div
+									key={index}
+									className="flex items-center gap-3 p-3 bg-gray-400/20 rounded-lg backdrop-blur-sm border border-teal-400/20"
+									initial={{ opacity: 0, x: 20 }}
+									whileInView={{ opacity: 1, x: 0 }}
+									transition={{ delay: index * 0.1 }}
+									whileHover={{ x: 3 }}>
+									<div className="p-1.5 bg-teal-400/10 rounded-lg">
+										<FileBadge className="h-4 w-4 text-teal-400" />
+									</div>
+									<div className="min-w-0 flex-1">
+										<h3 className="text-sm font-semibold text-teal-200 truncate">
+											{cert.name}
+										</h3>
+										<p className="text-gray-400 text-xs">
+											{cert.issuer} • {cert.date}
+										</p>
+									</div>
+								</motion.div>
+							))}
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 	);
 }
+
