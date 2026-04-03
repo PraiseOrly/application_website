@@ -238,8 +238,8 @@ export function SinglePagePortfolio() {
       {/* ── Main Sections ── */}
       <main className="relative z-10">
         <About />
-        <Experience />
         <Education />
+        <Experience />
         <Skills />
 
         <section id="projects" className="w-full">

@@ -162,12 +162,12 @@ export const Education = () => {
   const [showAllCerts, setShowAllCerts] = useState(false);
 
   return (
-    <section id="education" className="py-24 px-6 sm:px-8 relative overflow-hidden"
+    <section id="education" className="py-14 px-6 sm:px-8 relative overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #0a1628, #0f1e38, #0a1628)' }}>
       <div className="absolute top-1/4 right-0 w-80 h-80 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-teal-500" />
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-center mb-16">
+          viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-center mb-10">
           <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold tracking-widest uppercase bg-teal-500/10 border border-teal-500/20 text-teal-300 mb-4">
             Background
           </span>

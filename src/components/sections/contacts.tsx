@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, Mail, Globe, CheckCircle, Send } from 'lucide-react';
+import { Github, Linkedin, Mail, Globe, CheckCircle, Send, Loader2 } from 'lucide-react';
 import resumeData from '../../data/resume.json';
 
 interface FormInputs {
@@ -42,19 +43,38 @@ const labelCls = "block text-xs font-semibold tracking-wide text-gray-500 upperc
 
 const ContactForm: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
   const { register, handleSubmit, watch, reset, formState: { errors } } = useForm<FormInputs>({
     defaultValues: { name: '', email: '', formType: 'message' },
   });
 
   const formType = watch('formType');
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    setTimeout(() => {
-      console.log('Form Data:', data);
+  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    setIsSending(true);
+    setSendError(null);
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          from_name: data.name,
+          from_email: data.email,
+          form_type: formTypeLabels[data.formType],
+          message: JSON.stringify(data, null, 2),
+          to_email: 'praiseorly.a@gmail.com',
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      );
       setIsSubmitted(true);
       reset();
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }, 800);
+      setTimeout(() => setIsSubmitted(false), 6000);
+    } catch {
+      setSendError('Failed to send. Please try again or email praiseorly.a@gmail.com directly.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   const renderFields = () => {
@@ -227,7 +247,7 @@ const ContactForm: React.FC = () => {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center py-20 px-4 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center py-14 px-4 relative overflow-hidden"
       style={{ background: 'linear-gradient(to bottom, #0a1628, #0f1e38, #0a1628)' }}>
 
       {/* Ambient glows */}
@@ -338,13 +358,20 @@ const ContactForm: React.FC = () => {
 
                 <AnimatePresence mode="wait">{renderFields()}</AnimatePresence>
 
+                {sendError && (
+                  <p className="text-red-400 text-xs text-center">{sendError}</p>
+                )}
+
                 <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={{ scale: isSending ? 1 : 1.02 }}
+                  whileTap={{ scale: isSending ? 1 : 0.98 }}
                   type="submit"
-                  className="w-full py-3.5 rounded-full text-sm font-semibold bg-teal-500/15 border border-teal-500/30 text-teal-200 hover:bg-teal-500/25 hover:border-teal-400/40 transition-all duration-300 flex items-center justify-center gap-2">
-                  <Send className="h-4 w-4" />
-                  Send Request
+                  disabled={isSending}
+                  className="w-full py-3.5 rounded-full text-sm font-semibold bg-teal-500/15 border border-teal-500/30 text-teal-200 hover:bg-teal-500/25 hover:border-teal-400/40 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
+                  {isSending
+                    ? <><Loader2 className="h-4 w-4 animate-spin" /> Sending…</>
+                    : <><Send className="h-4 w-4" /> Send Request</>
+                  }
                 </motion.button>
               </motion.form>
             )}
