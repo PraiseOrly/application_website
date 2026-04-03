@@ -163,7 +163,7 @@ export const Education = () => {
 
   return (
     <section id="education" className="py-24 px-6 sm:px-8 relative overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #030712, #060c1a, #030712)' }}>
+      style={{ background: 'linear-gradient(to bottom, #0a1628, #0f1e38, #0a1628)' }}>
       <div className="absolute top-1/4 right-0 w-80 h-80 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-teal-500" />
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}

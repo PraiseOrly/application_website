@@ -77,7 +77,7 @@ export function About() {
     <section
       id="about"
       className="w-full relative overflow-hidden text-gray-100"
-      style={{ background: 'linear-gradient(to bottom, #030712, #0a1628, #030712)' }}>
+      style={{ background: 'linear-gradient(to bottom, #0a1628, #0f1e38, #0a1628)' }}>
 
       {/* Dot grid */}
       <div className="absolute inset-0 opacity-[0.035] pointer-events-none"

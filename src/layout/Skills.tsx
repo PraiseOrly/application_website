@@ -82,7 +82,7 @@ const cardVariants = {
 export const Skills = () => {
   return (
     <section id="skills" className="py-24 px-6 sm:px-8 relative overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #030712, #060c1a, #030712)' }}>
+      style={{ background: 'linear-gradient(to bottom, #0a1628, #0f1e38, #0a1628)' }}>
       <div className="absolute top-0 left-1/4 w-72 h-72 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-teal-400" />
       <div className="absolute bottom-0 right-1/4 w-72 h-72 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-indigo-500" />
       <div className="absolute inset-0 opacity-[0.025] pointer-events-none"

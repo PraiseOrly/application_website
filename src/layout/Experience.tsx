@@ -128,7 +128,7 @@ function FlipCard({ exp }: { exp: ExperienceItem }) {
             backfaceVisibility: "hidden", position: "absolute", inset: 0,
             transform: "rotateY(180deg)",
             border: `1px solid ${exp.accentColor}20`,
-            background: `linear-gradient(140deg, ${exp.accentColor}08, #060d1c 60%)`,
+            background: `linear-gradient(140deg, ${exp.accentColor}08, #0f1f3c 60%)`,
           }}
           className="rounded-2xl overflow-hidden flex flex-col p-5">
           <div className="relative z-10 flex flex-col h-full">
@@ -163,7 +163,7 @@ function FlipCard({ exp }: { exp: ExperienceItem }) {
 export const Experience = () => {
   return (
     <section id="experience" className="py-24 px-6 sm:px-8 relative overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #030712, #060d1c, #030712)' }}>
+      style={{ background: 'linear-gradient(to bottom, #0a1628, #0f1f3c, #0a1628)' }}>
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-teal-400" />
       <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full blur-3xl opacity-[0.04] pointer-events-none bg-indigo-500" />
       <div className="max-w-6xl mx-auto relative z-10">
