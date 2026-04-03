@@ -228,7 +228,7 @@ const ContactForm: React.FC = () => {
   return (
     <div
       className="min-h-screen flex items-center justify-center py-20 px-4 relative overflow-hidden"
-      style={{ background: 'linear-gradient(to bottom, #030712, #060c1a, #030712)' }}>
+      style={{ background: 'linear-gradient(to bottom, #0a1628, #0f1e38, #0a1628)' }}>
 
       {/* Ambient glows */}
       <div className="absolute inset-0 pointer-events-none"

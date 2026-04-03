@@ -70,8 +70,8 @@ export function Header() {
     <header
       className={`sticky top-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-gray-950/95 backdrop-blur-xl shadow-[0_1px_24px_rgba(0,0,0,0.5)]'
-          : 'bg-gray-950'
+          ? 'bg-[#091422]/95 backdrop-blur-xl shadow-[0_1px_24px_rgba(0,0,0,0.5)]'
+          : 'bg-[#091422]'
       } border-b border-white/5`}>
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" ref={navRef}>
         <div className="flex items-center justify-between h-16">

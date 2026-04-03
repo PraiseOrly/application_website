@@ -233,7 +233,7 @@ const Projects = () => {
   const [selectedProject, setSelectedProject] = useState<{ project: Project; category: Category } | null>(null);
 
   return (
-    <div className="w-full text-white" style={{ background: 'linear-gradient(to bottom, #030712, #060c1a, #030712)' }}>
+    <div className="w-full text-white" style={{ background: 'linear-gradient(to bottom, #0a1628, #0f1e38, #0a1628)' }}>
 
       {/* Header */}
       <div className="relative pt-20 pb-12 text-center overflow-hidden">

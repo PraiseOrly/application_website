@@ -109,7 +109,7 @@ function Layout() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-950 flex flex-col relative">
+    <div className="min-h-screen flex flex-col relative" style={{ background: '#0a1628' }}>
       <Header />
       <main className="flex-grow">
         <Routes>

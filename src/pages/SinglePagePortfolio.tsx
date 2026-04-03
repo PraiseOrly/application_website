@@ -108,10 +108,10 @@ export function SinglePagePortfolio() {
   const slide = slideshowData[currentSlide];
 
   return (
-    <div className="w-full min-h-screen overflow-x-hidden text-white" style={{ background: '#030712' }}>
+    <div className="w-full min-h-screen overflow-x-hidden text-white" style={{ background: '#0a1628' }}>
 
       {/* ── Hero Section ── */}
-      <section id="home" className="relative h-[96vh] overflow-hidden" style={{ background: '#030712' }}>
+      <section id="home" className="relative h-[96vh] overflow-hidden" style={{ background: '#0a1628' }}>
 
         {/* Per-slide ambient glow */}
         <motion.div
@@ -258,7 +258,7 @@ export function SinglePagePortfolio() {
       {/* ── CTA ── */}
       <section
         className="py-20 border-t border-white/5 text-center relative overflow-hidden"
-        style={{ background: '#030712' }}>
+        style={{ background: '#0a1628' }}>
         <div className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 55% 50% at 50% 50%, rgba(20,184,166,0.05) 0%, transparent 70%)' }}
         />

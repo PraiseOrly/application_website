@@ -59,7 +59,7 @@
 
 /* Custom scrollbar */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #030712; }
+::-webkit-scrollbar-track { background: #0a1628; }
 ::-webkit-scrollbar-thumb {
   background: rgba(20, 184, 166, 0.25);
   border-radius: 9999px;
