@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  BarChart3, Brain, Database, FlaskConical, Cpu, X, ExternalLink,
+  BarChart3, Brain, Database, FlaskConical, Cpu, X,
   ChevronRight, Activity, Heart, Stethoscope, Globe, AlertTriangle,
-  Zap, Pill, TrendingUp, Dna, Sparkles,
+  Zap, Pill, TrendingUp, Dna, Sparkles, GitBranch,
 } from 'lucide-react';
 
 interface Project {
@@ -50,6 +50,7 @@ const categories: Category[] = [
         techStack: ['Python', 'Pandas', 'Matplotlib', 'Seaborn', 'NLP', 'Statistical Analysis'],
         status: 'Completed',
         icon: <Pill className="h-5 w-5 text-teal-400" />,
+        githubUrl: 'https://github.com/praiseorly/drugs-side-effects-analysis',
       },
       {
         title: 'COVID-19 Clinical Trials Analysis',
@@ -57,6 +58,7 @@ const categories: Category[] = [
         techStack: ['Python', 'Pandas', 'Plotly', 'Seaborn', 'Statistical Analysis'],
         status: 'Completed',
         icon: <FlaskConical className="h-5 w-5 text-teal-400" />,
+        githubUrl: 'https://github.com/praiseorly/covid19-clinical-trials-analysis',
       },
     ],
   },
@@ -79,6 +81,7 @@ const categories: Category[] = [
         techStack: ['Python', 'Pandas', 'Seaborn', 'Scikit-learn', 'Matplotlib', 'EDA'],
         status: 'Completed',
         icon: <Heart className="h-5 w-5 text-cyan-400" />,
+        githubUrl: 'https://github.com/praiseorly/heart-disease-risk-factor-exploration',
       },
       {
         title: 'Cancer Risk Factor Analysis',
@@ -86,6 +89,7 @@ const categories: Category[] = [
         techStack: ['Python', 'Pandas', 'Matplotlib', 'NumPy', 'Statistical Tests'],
         status: 'Completed',
         icon: <Dna className="h-5 w-5 text-cyan-400" />,
+        githubUrl: 'https://github.com/praiseorly/cancer-risk-factor-analysis',
       },
     ],
   },
@@ -108,6 +112,7 @@ const categories: Category[] = [
         techStack: ['Python', 'Scikit-learn', 'XGBoost', 'Pandas', 'Feature Engineering'],
         status: 'Completed',
         icon: <Activity className="h-5 w-5 text-violet-400" />,
+        githubUrl: 'https://github.com/praiseorly/heart-disease-prediction',
       },
       {
         title: 'Stroke Risk Prediction',
@@ -115,6 +120,7 @@ const categories: Category[] = [
         techStack: ['Python', 'Scikit-learn', 'SHAP', 'Flask', 'Pandas', 'XGBoost'],
         status: 'Completed',
         icon: <AlertTriangle className="h-5 w-5 text-violet-400" />,
+        githubUrl: 'https://github.com/praiseorly/stroke-risk-prediction',
       },
       {
         title: 'Personalized Medicine Recommender System',
@@ -122,6 +128,7 @@ const categories: Category[] = [
         techStack: ['Python', 'Scikit-learn', 'Surprise', 'FastAPI', 'PostgreSQL', 'Redis'],
         status: 'Completed',
         icon: <Stethoscope className="h-5 w-5 text-violet-400" />,
+        githubUrl: 'https://github.com/praiseorly/personalized-medicine-recommender',
       },
       {
         title: 'Heart Disease Prediction with Recommendation Model',
@@ -129,6 +136,7 @@ const categories: Category[] = [
         techStack: ['Python', 'XGBoost', 'Scikit-learn', 'Streamlit', 'Pandas'],
         status: 'Completed',
         icon: <TrendingUp className="h-5 w-5 text-violet-400" />,
+        githubUrl: 'https://github.com/praiseorly/heart-disease-prediction-recommender',
       },
     ],
   },
@@ -151,6 +159,7 @@ const categories: Category[] = [
         techStack: ['PyTorch', 'TensorFlow', 'OpenCV', 'Grad-CAM', 'Matplotlib', 'Scikit-learn'],
         status: 'Completed',
         icon: <Zap className="h-5 w-5 text-indigo-400" />,
+        githubUrl: 'https://github.com/praiseorly/ecg-arrhythmia-detection',
       },
       {
         title: 'Disease Outbreak Prediction',
@@ -158,6 +167,7 @@ const categories: Category[] = [
         techStack: ['Python', 'Prophet', 'Scikit-learn', 'GeoPandas', 'Plotly', 'FastAPI'],
         status: 'In Progress',
         icon: <Globe className="h-5 w-5 text-indigo-400" />,
+        githubUrl: 'https://github.com/praiseorly/disease-outbreak-prediction',
       },
     ],
   },
@@ -219,8 +229,8 @@ const ProjectDetailModal: React.FC<{
           </span>
           {project.githubUrl && (
             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors duration-200">
-              <ExternalLink className="h-3.5 w-3.5" /> View on GitHub
+              className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white border border-white/10 hover:border-white/25 px-3 py-1.5 rounded-full transition-all duration-200 hover:bg-white/[0.06]">
+              <GitBranch className="h-3.5 w-3.5" /> View on GitHub
             </a>
           )}
         </div>
@@ -333,8 +343,20 @@ const Projects = () => {
                     )}
                   </div>
 
-                  <div className={`flex items-center gap-1 text-xs font-medium ${cat.textColor} opacity-0 group-hover:opacity-100 transition-all duration-200`}>
-                    View details <ChevronRight className="h-3.5 w-3.5" />
+                  <div className="flex items-center justify-between">
+                    <div className={`flex items-center gap-1 text-xs font-medium ${cat.textColor} opacity-0 group-hover:opacity-100 transition-all duration-200`}>
+                      View details <ChevronRight className="h-3.5 w-3.5" />
+                    </div>
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1.5 text-[11px] text-gray-500 hover:text-white border border-white/8 hover:border-white/20 px-2.5 py-1 rounded-full transition-all duration-200 bg-white/[0.02] hover:bg-white/[0.06]">
+                        <GitBranch className="h-3 w-3" /> GitHub
+                      </a>
+                    )}
                   </div>
                 </motion.div>
               ))}
