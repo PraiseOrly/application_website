@@ -37,7 +37,7 @@ const formTypeLabels: Record<FormInputs['formType'], string> = {
 };
 
 const inputCls = "w-full p-3.5 rounded-xl bg-white/[0.04] border border-white/8 text-white placeholder-gray-600 focus:border-teal-500/40 focus:ring-2 focus:ring-teal-500/10 outline-none transition-all duration-200 text-sm";
-const selectCls = "w-full p-3.5 rounded-xl bg-white/[0.04] border border-white/8 text-white focus:border-teal-500/40 focus:ring-2 focus:ring-teal-500/10 outline-none transition-all duration-200 text-sm";
+const selectCls = "w-full p-3.5 rounded-xl bg-[#0f1e38] border border-white/8 text-white focus:border-teal-500/40 focus:ring-2 focus:ring-teal-500/10 outline-none transition-all duration-200 text-sm";
 const labelCls = "block text-xs font-semibold tracking-wide text-gray-500 uppercase mb-1.5";
 
 const ContactForm: React.FC = () => {

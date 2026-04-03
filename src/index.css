@@ -68,6 +68,12 @@
   background: rgba(20, 184, 166, 0.4);
 }
 
+/* Select dropdown options */
+select option {
+  background-color: #0f1e38;
+  color: #ffffff;
+}
+
 /* PDF viewer */
 .react-pdf__Page__textContent,
 .react-pdf__Page__annotations { display: none; }
