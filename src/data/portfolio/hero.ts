@@ -1,5 +1,4 @@
 import AcademicExcellenceChampion from '../../assets/images/AcademicExcellenceChampion.jpg';
-import AIinMedicine from '../../assets/images/AIinMedicineCropped.jpg';
 import AIInnovation from '../../assets/images/AIInnovation.jpg';
 import SocialImpactCoderina from '../../assets/images/SocialImpactCoderina.jpg';
 
@@ -56,7 +55,7 @@ export const heroSlides: HeroSlide[] = [
     subtitle: 'Innovative AI Solutions',
     description:
       'Pioneering predictive models for stroke (AUC >0.85), diabetes risk stratification, and 12-lead ECG classification — democratizing diagnostic precision for underserved communities across Africa.',
-    image: AIinMedicine,
+    image: '/images/Clinical.jpeg',
     accentColor: '#f59e0b',
     buttonText: 'See Projects',
     buttonLink: '#projects',
