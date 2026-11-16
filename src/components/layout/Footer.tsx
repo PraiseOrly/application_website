@@ -1,9 +1,10 @@
 import { GithubIcon, LinkedinIcon, MailIcon } from 'lucide-react';
+import { scrollToSection } from '../../utils/sectionScroll';
 
 const footerNav = [
   { id: 'about', label: 'About' },
-  { id: 'experience', label: 'Experience' },
   { id: 'education', label: 'Education' },
+  { id: 'experience', label: 'Experience' },
   { id: 'skills', label: 'Skills' },
   { id: 'projects', label: 'Projects' },
   { id: 'research', label: 'Research' },
@@ -17,14 +18,6 @@ const socialLinks = [
 ];
 
 export function Footer() {
-  const scrollToSection = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const offset = el.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: offset, behavior: 'smooth' });
-    }
-  };
-
   return (
     <footer className="bg-[#091422] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
