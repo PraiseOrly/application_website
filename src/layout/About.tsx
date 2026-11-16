@@ -36,8 +36,8 @@ export function About() {
       />
 
       {/* Hero: Photo + Bio */}
-      <div className="relative min-h-screen flex items-center">
-        <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center gap-12 px-6 py-20">
+      <div className="relative flex items-center">
+        <div className="max-w-6xl mx-auto w-full flex flex-col md:flex-row items-center gap-12 px-6 pt-20 pb-10">
 
           {/* Photo */}
           <motion.div

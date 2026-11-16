@@ -1,7 +1,8 @@
 import {
   Activity, BarChart3, BookOpen, BrainCircuit, Building2, Code2, Database,
-  DollarSign, FileText, Globe, GraduationCap, LayoutDashboard, Lightbulb,
-  Microscope, Presentation, School, ShieldCheck, Stethoscope, Trophy, Users,
+  Briefcase, DollarSign, FileText, FlaskConical, Globe, GraduationCap, HandHeart,
+  LayoutDashboard, Lightbulb, Microscope, Presentation, Rocket, School, ShieldCheck,
+  Stethoscope, Trophy, Users,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -135,6 +136,23 @@ export const experienceData: ExperienceItem[] = [
       { text: 'Cut event costs by 30% by renegotiating vendor contracts', icon: DollarSign, iconColor: 'text-green-400' },
     ],
   },
+];
+
+export interface ExperienceGroup {
+  id: string;
+  label: string;
+  description: string;
+  types: ExperienceItem['type'][];
+  accent: string;
+  icon: LucideIcon;
+}
+
+/** Sub-categories shown under Professional Experience, in display order. */
+export const experienceGroups: ExperienceGroup[] = [
+  { id: 'work', label: 'Work', description: 'Health data roles in programmes and organisations.', types: ['Work'], accent: '#38BDF8', icon: Briefcase },
+  { id: 'research', label: 'Research', description: 'Clinical AI and health research.', types: ['Research'], accent: '#14B8A6', icon: FlaskConical },
+  { id: 'leadership', label: 'Leadership', description: 'Founding, leading and mentoring teams and communities.', types: ['Leadership'], accent: '#8B5CF6', icon: Rocket },
+  { id: 'community', label: 'Community & Engagement', description: 'Volunteering, competitions and student engagement.', types: ['Volunteer', 'Competition', 'Engagement'], accent: '#34D399', icon: HandHeart },
 ];
 
 export const experienceTypeColors: Record<ExperienceItem['type'], string> = {

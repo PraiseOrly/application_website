@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { Briefcase, Calendar, MapPin } from "lucide-react";
 import { useState } from "react";
+import { GroupHeader } from "../components/common/GroupHeader";
 import {
   experienceData,
+  experienceGroups,
   experienceTypeColors as typeColors,
   type ExperienceItem,
 } from "../data/portfolio/experience";
@@ -104,17 +106,32 @@ export const Experience = () => {
             Demonstrating technical leadership and social impact through diverse roles — hover any card to reveal details.
           </p>
         </motion.div>
-        <motion.div
-          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
-          variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } }}
-          className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {experienceData.map((exp) => (
-            <motion.div key={`${exp.company}-${exp.title}`}
-              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-              <FlipCard exp={exp} />
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="space-y-12">
+          {experienceGroups.map((group) => {
+            const items = experienceData.filter((exp) => group.types.includes(exp.type));
+            if (items.length === 0) return null;
+            return (
+              <div key={group.id} id={`experience-${group.id}`}>
+                <motion.div initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ duration: 0.5 }}>
+                  <GroupHeader icon={group.icon} label={group.label} count={items.length}
+                    accent={group.accent} description={group.description} />
+                </motion.div>
+                <motion.div
+                  initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }}
+                  variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.1 } } }}
+                  className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                  {items.map((exp) => (
+                    <motion.div key={`${exp.company}-${exp.title}`}
+                      variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                      <FlipCard exp={exp} />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

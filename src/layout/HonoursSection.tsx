@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
-import { ArrowUpRight, Award, Calendar, FileText, Link2, MapPin, Mic2, Presentation, type LucideIcon } from "lucide-react";
+import { ArrowUpRight, Award, Calendar, FileText, Link2, MapPin, Mic2, Presentation } from "lucide-react";
+import { GroupHeader } from "../components/common/GroupHeader";
 import {
   conferences,
   honours,
@@ -19,25 +20,6 @@ const item = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: "easeOut" } },
 };
-
-/** Group header, matching the Project Showcase category header. */
-const GroupHeader = ({ icon: Icon, label, count, accent }: { icon: LucideIcon; label: string; count: number; accent: string }) => (
-  <div className="flex items-center gap-4 mb-6">
-    <div className="p-2.5 rounded-xl border"
-      style={{ background: `${accent}12`, borderColor: `${accent}25`, color: accent }}>
-      <Icon className="h-5 w-5" />
-    </div>
-    <div className="flex items-center gap-3">
-      <h3 className="text-xl font-bold" style={{ color: accent }}>{label}</h3>
-      <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold border"
-        style={{ background: `${accent}12`, borderColor: `${accent}25`, color: accent }}>
-        {count}
-      </span>
-    </div>
-    <div className="hidden sm:block h-px flex-1"
-      style={{ background: `linear-gradient(to right, ${accent}30, transparent)` }} />
-  </div>
-);
 
 /** Shared card shell: accent top line + corner glow, like the Experience cards. */
 const CardShell = ({ accent, className = "", children }: { accent: string; className?: string; children: ReactNode }) => (
