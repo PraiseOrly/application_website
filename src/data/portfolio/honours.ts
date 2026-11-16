@@ -1,32 +1,49 @@
+import {
+  Award, Globe, GraduationCap, HandHeart, Lightbulb, Medal, Star, Trophy,
+  type LucideIcon,
+} from 'lucide-react';
+
 export interface HonourItem {
-  text: string;
+  title: string;
+  detail?: string;
   date?: string;
+  icon: LucideIcon;
+}
+
+export interface ConferenceItem {
+  role: string;
+  event: string;
+  place: string;
+  date: string;
+  note?: string;
+  /** Render as a wider card (e.g. research poster). */
+  wide?: boolean;
 }
 
 export interface ProgrammeCertificate {
   name: string;
   date?: string;
-  /** Optional: fill in to make the item a link. */
+  /** Optional: fill in to make the card a link. */
   url?: string;
 }
 
 export const honours: HonourItem[] = [
-  { text: 'Finalist, Futurize Fuel Africa Innovation Program: CardiacTEK placed in the top 5 of 75 teams and earned an incubator placement', date: 'May 2024' },
-  { text: "One of four ALU students selected for the Swiss-Africa Business Case Challenge, Lucerne School of Business, Switzerland; led a feasibility assessment of Namibia's green hydrogen project and presented it to 15+ investors, agencies and government officials", date: 'Jun – Jul 2024' },
-  { text: 'Research Fellow, African Leadership for Health Research Fellowship: competitively selected', date: '2024' },
-  { text: "Capstone highlighted in ALU's impact report as one of the best capstone projects in my year group", date: '2025' },
-  { text: 'African Impact Challenge, Health Incubator: developed RElid, an AI-powered screening tool for intellectual disabilities' },
-  { text: 'Mastercard Foundation Scholarship, African Leadership University', date: '2022 – 2025' },
-  { text: 'Recognition Award for dedication to supporting persons with intellectual disabilities, New Horizon Special School, Accra', date: '2016' },
-  { text: 'Best Student in Chemistry, Biology and Social Studies, Preset Pacesetters Senior High School, Accra', date: '2015 and 2016' },
+  { title: 'Finalist, Futurize Fuel Africa Innovation Program', detail: 'CardiacTEK placed in the top 5 of 75 teams and earned an incubator placement', date: 'May 2024', icon: Trophy },
+  { title: 'One of four ALU students selected for the Swiss-Africa Business Case Challenge', detail: "Lucerne School of Business, Switzerland; led a feasibility assessment of Namibia's green hydrogen project and presented it to 15+ investors, agencies and government officials", date: 'Jun – Jul 2024', icon: Globe },
+  { title: 'Research Fellow, African Leadership for Health Research Fellowship', detail: 'Competitively selected', date: '2024', icon: GraduationCap },
+  { title: "Capstone highlighted in ALU's impact report", detail: 'One of the best capstone projects in my year group', date: '2025', icon: Star },
+  { title: 'African Impact Challenge, Health Incubator', detail: 'Developed RElid, an AI-powered screening tool for intellectual disabilities', icon: Lightbulb },
+  { title: 'Mastercard Foundation Scholarship', detail: 'African Leadership University', date: '2022 – 2025', icon: Award },
+  { title: 'Recognition Award', detail: 'For dedication to supporting persons with intellectual disabilities, New Horizon Special School, Accra', date: '2016', icon: HandHeart },
+  { title: 'Best Student in Chemistry, Biology and Social Studies', detail: 'Preset Pacesetters Senior High School, Accra', date: '2015 and 2016', icon: Medal },
 ];
 
-export const conferences: HonourItem[] = [
-  { text: 'Delegate (ALU), 18th World Congress on Public Health, Cape Town, South Africa', date: 'Sep 2026' },
-  { text: 'Delegate (ALU), Africa Health Tech Summit, Kigali, Rwanda; presented CardiacTEK at the 2025 summit (Aug 2025)', date: '2026' },
-  { text: 'Delegate (ALU), AI in Practice Summit, Lagos, Nigeria', date: 'Dec 2025' },
-  { text: 'Delegate (Mastercard Foundation), Qatar Africa Business Forum, Johannesburg, South Africa', date: 'Nov 2025' },
-  { text: 'Research poster, "CardiacTEK: An AI-Powered Diagnostic Tool for Low-Resource Clinical Settings", Alliance4AI Research Symposium, ALU', date: '2024' },
+export const conferences: ConferenceItem[] = [
+  { role: 'Delegate (ALU)', event: '18th World Congress on Public Health', place: 'Cape Town, South Africa', date: 'Sep 2026' },
+  { role: 'Delegate (ALU)', event: 'Africa Health Tech Summit', place: 'Kigali, Rwanda', date: '2026', note: 'Presented CardiacTEK at the 2025 summit (Aug 2025)' },
+  { role: 'Delegate (ALU)', event: 'AI in Practice Summit', place: 'Lagos, Nigeria', date: 'Dec 2025' },
+  { role: 'Delegate (Mastercard Foundation)', event: 'Qatar Africa Business Forum', place: 'Johannesburg, South Africa', date: 'Nov 2025' },
+  { role: 'Research poster', event: '"CardiacTEK: An AI-Powered Diagnostic Tool for Low-Resource Clinical Settings"', place: 'Alliance4AI Research Symposium, ALU', date: '2024', wide: true },
 ];
 
 export const programmeCertificates: ProgrammeCertificate[] = [

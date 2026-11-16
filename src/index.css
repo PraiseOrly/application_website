@@ -95,3 +95,44 @@ select option {
 .flip-card-back {
   transform: rotateY(180deg);
 }
+
+/* Section arrival cue after a nav jump (see utils/sectionScroll.ts) */
+.section-arrive {
+  position: relative;
+}
+.section-arrive::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2dd4bf 45%, #22d3ee 55%, transparent);
+  transform-origin: left center;
+  animation: section-sweep 1.1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  pointer-events: none;
+  z-index: 30;
+}
+.section-arrive::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 35% at 50% 0%, rgba(45, 212, 191, 0.12), transparent 70%);
+  animation: section-glow 1.5s ease-out forwards;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes section-sweep {
+  0%   { transform: scaleX(0); opacity: 1; }
+  60%  { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+@keyframes section-glow {
+  0%   { opacity: 0; }
+  30%  { opacity: 1; }
+  100% { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section-arrive::before,
+  .section-arrive::after { animation: none; display: none; }
+}

@@ -73,5 +73,6 @@ export const heroSlides: HeroSlide[] = [
     buttonText: 'Get Involved',
     buttonLink: '#contact',
     tag: 'She Innovate · STEM Education · Rwanda and Nigeria',
+    imageLabel: 'Shenovate',
   },
 ];
