@@ -1,39 +1,16 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Award, Calendar, ExternalLink, FileBadge, GraduationCap, X } from "lucide-react";
 import React, { useState } from "react";
+import {
+  allCertifications,
+  certCategoryColors as categoryColors,
+  certificateDriveUrl,
+  educationEntries,
+  featuredCertifications as featuredCerts,
+  type Certification,
+} from "../data/portfolio/education";
 
-interface Certification {
-  name: string; issuer: string; date: string;
-  status: "completed" | "in progress"; url: string; category: string;
-}
-
-const educationData = {
-  institution: "African Leadership University (ALU)",
-  degree: "BSc Software Engineering — First Class Honours",
-  specialization: "Machine Learning · AI for Healthcare",
-  duration: "Jan 2022 – June 2025",
-  highlights: [
-    "Graduated with First Class Honours (4.56 GPA)",
-    "Specialization in AI-driven healthcare diagnostics",
-    "Led multiple research & innovation projects",
-    "Active member of Alliance4AI ALU Chapter",
-  ],
-};
-
-const allCertifications: Certification[] = [
-  { name: "AI For Good", issuer: "DeepLearning.AI", date: "Sept 2025", status: "completed", url: "/certifications/project-management.pdf", category: "AI & Machine Learning" },
-  { name: "AI For Medicine", issuer: "DeepLearning.AI", date: "Sept 2025", status: "completed", url: "/certifications/project-management.pdf", category: "AI & Machine Learning" },
-  { name: "Generative AI for Data Scientists", issuer: "IBM", date: "May 2025", status: "completed", url: "/certifications/generative_ai.pdf", category: "AI & Machine Learning" },
-  { name: "AI Foundations For Everyone", issuer: "IBM", date: "May 2025", status: "completed", url: "/certifications/AI_Foundations.pdf", category: "AI & Machine Learning" },
-  { name: "IT & Cloud Fundamentals Specialization", issuer: "IBM", date: "Mar 2023", status: "completed", url: "/certifications/cloud-fundamentals.pdf", category: "Cloud & Infrastructure" },
-];
-
-const featuredCerts = allCertifications.slice(0, 4);
-
-const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
-  "AI & Machine Learning": { bg: "bg-teal-500/10", text: "text-teal-300", border: "border-teal-500/20" },
-  "Cloud & Infrastructure": { bg: "bg-indigo-500/10", text: "text-indigo-300", border: "border-indigo-500/20" },
-};
+const issuerLine = (cert: Certification) => (cert.date ? `${cert.issuer} · ${cert.date}` : cert.issuer);
 
 const CertCard: React.FC<{ cert: Certification; onClick: () => void; index: number }> = ({ cert, onClick, index }) => {
   const cat = categoryColors[cert.category] ?? { bg: "bg-gray-500/10", text: "text-gray-300", border: "border-gray-500/20" };
@@ -41,8 +18,8 @@ const CertCard: React.FC<{ cert: Certification; onClick: () => void; index: numb
     <motion.div
       initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }} transition={{ delay: index * 0.08 }}
-      whileHover={{ y: -3 }} onClick={onClick}
-      className="group cursor-pointer bg-white/[0.02] border border-white/8 hover:border-teal-500/25 rounded-xl p-5 transition-all duration-300 relative overflow-hidden">
+      whileHover={{ y: -3 }} onClick={cert.url ? onClick : undefined}
+      className={`group ${cert.url ? "cursor-pointer" : ""} bg-white/[0.02] border border-white/8 hover:border-teal-500/25 rounded-xl p-5 transition-all duration-300 relative overflow-hidden`}>
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-500/35 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       <div className="flex items-start gap-3">
         <div className="p-2 bg-teal-500/10 border border-teal-500/15 rounded-lg shrink-0">
@@ -53,19 +30,21 @@ const CertCard: React.FC<{ cert: Certification; onClick: () => void; index: numb
           <p className="text-gray-500 text-xs">{cert.issuer}</p>
           <div className="flex items-center justify-between mt-2">
             <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium ${cat.bg} ${cat.text} ${cat.border}`}>{cert.category}</span>
-            <span className="text-gray-600 text-[10px]">{cert.date}</span>
+            {cert.date && <span className="text-gray-600 text-[10px]">{cert.date}</span>}
           </div>
         </div>
       </div>
-      <div className="absolute bottom-3 right-3 text-gray-700 group-hover:text-teal-400 transition-colors duration-200">
-        <ExternalLink className="h-3.5 w-3.5" />
-      </div>
+      {cert.url && (
+        <div className="absolute bottom-3 right-3 text-gray-700 group-hover:text-teal-400 transition-colors duration-200">
+          <ExternalLink className="h-3.5 w-3.5" />
+        </div>
+      )}
     </motion.div>
   );
 };
 
 const CertModal: React.FC<{ cert: Certification | null; onClose: () => void }> = ({ cert, onClose }) => {
-  if (!cert) return null;
+  if (!cert || !cert.url) return null;
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       className="fixed inset-0 bg-black/80 backdrop-blur-md flex items-center justify-center z-50 p-4" onClick={onClose}>
@@ -81,7 +60,7 @@ const CertModal: React.FC<{ cert: Certification | null; onClose: () => void }> =
           </div>
           <div>
             <h3 className="text-white font-bold text-lg">{cert.name}</h3>
-            <p className="text-gray-400 text-sm">{cert.issuer} · {cert.date}</p>
+            <p className="text-gray-400 text-sm">{issuerLine(cert)}</p>
           </div>
         </div>
         <div className="bg-gray-900 rounded-xl overflow-hidden border border-white/5">
@@ -128,14 +107,17 @@ const AllCertsModal: React.FC<{ isOpen: boolean; onClose: () => void; onSelect: 
                 <div className="grid sm:grid-cols-2 gap-3">
                   {certs.map((cert, i) => (
                     <motion.button key={i} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-                      onClick={() => { onSelect(cert); onClose(); }}
-                      className="text-left p-4 bg-white/[0.02] border border-white/8 hover:border-teal-500/25 rounded-xl transition-all duration-200 group">
+                      onClick={cert.url ? () => { onSelect(cert); onClose(); } : undefined}
+                      disabled={!cert.url}
+                      className={`text-left p-4 bg-white/[0.02] border border-white/8 hover:border-teal-500/25 rounded-xl transition-all duration-200 group ${cert.url ? "" : "cursor-default"}`}>
                       <div className="flex items-start justify-between gap-2">
                         <div>
                           <p className="text-white text-sm font-medium leading-snug">{cert.name}</p>
-                          <p className="text-gray-500 text-xs mt-1">{cert.issuer} · {cert.date}</p>
+                          <p className="text-gray-500 text-xs mt-1">{issuerLine(cert)}</p>
                         </div>
-                        <ExternalLink className="h-3.5 w-3.5 text-gray-700 group-hover:text-teal-400 shrink-0 transition-colors duration-200 mt-0.5" />
+                        {cert.url && (
+                          <ExternalLink className="h-3.5 w-3.5 text-gray-700 group-hover:text-teal-400 shrink-0 transition-colors duration-200 mt-0.5" />
+                        )}
                       </div>
                     </motion.button>
                   ))}
@@ -145,7 +127,7 @@ const AllCertsModal: React.FC<{ isOpen: boolean; onClose: () => void; onSelect: 
           })}
         </div>
         <div className="mt-6 pt-4 border-t border-white/5 flex justify-center">
-          <a href="https://drive.google.com/drive/folders/1YWkW5CRaslwAh_fMdb1roDbti71WBWO2?usp=sharing"
+          <a href={certificateDriveUrl}
             target="_blank" rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-teal-500/10 border border-teal-500/20 text-teal-300 rounded-full text-sm font-medium hover:bg-teal-500/18 transition-all duration-200">
             <ExternalLink className="h-3.5 w-3.5" />
@@ -188,28 +170,37 @@ export const Education = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
               <p className="text-xs font-semibold tracking-widest text-gray-500 uppercase">Education</p>
             </div>
-            <div className="flex items-start gap-4 mb-6">
-              <div className="p-2.5 bg-teal-500/10 border border-teal-500/15 rounded-xl shrink-0">
-                <GraduationCap className="h-5 w-5 text-teal-400" />
-              </div>
-              <div>
-                <h3 className="text-white font-bold text-base leading-snug">{educationData.institution}</h3>
-                <p className="text-teal-300/80 text-sm mt-0.5">{educationData.degree}</p>
-                <p className="text-gray-600 text-xs italic mt-0.5">{educationData.specialization}</p>
-                <div className="flex items-center gap-1.5 mt-2 text-gray-600 text-xs">
-                  <Calendar className="h-3.5 w-3.5" />{educationData.duration}
+            {educationEntries.map((edu, eduIdx) => (
+              <div key={edu.institution}
+                className={eduIdx > 0 ? "mt-6 pt-6 border-t border-white/5" : ""}>
+                <div className={`flex items-start gap-4 ${edu.highlights?.length ? "mb-6" : ""}`}>
+                  <div className="p-2.5 bg-teal-500/10 border border-teal-500/15 rounded-xl shrink-0">
+                    <GraduationCap className="h-5 w-5 text-teal-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold text-base leading-snug">{edu.institution}</h3>
+                    <p className="text-teal-300/80 text-sm mt-0.5">{edu.degree}</p>
+                    {edu.specialization && (
+                      <p className="text-gray-600 text-xs italic mt-0.5">{edu.specialization}</p>
+                    )}
+                    <div className="flex items-center gap-1.5 mt-2 text-gray-600 text-xs">
+                      <Calendar className="h-3.5 w-3.5" />{edu.duration}
+                    </div>
+                  </div>
                 </div>
+                {edu.highlights && edu.highlights.length > 0 && (
+                  <div className="space-y-2">
+                    {edu.highlights.map((h, i) => (
+                      <motion.div key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                        className="flex items-start gap-2.5 text-xs text-gray-400">
+                        <span className="w-1 h-1 rounded-full bg-teal-400 mt-1.5 shrink-0" />{h}
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
               </div>
-            </div>
-            <div className="space-y-2">
-              {educationData.highlights.map((h, i) => (
-                <motion.div key={i} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                  className="flex items-start gap-2.5 text-xs text-gray-400">
-                  <span className="w-1 h-1 rounded-full bg-teal-400 mt-1.5 shrink-0" />{h}
-                </motion.div>
-              ))}
-            </div>
+            ))}
           </motion.div>
 
           {/* Certifications */}

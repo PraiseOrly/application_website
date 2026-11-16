@@ -1,84 +1,11 @@
 import { motion } from "framer-motion";
+import { Briefcase, Calendar, MapPin } from "lucide-react";
+import { useState } from "react";
 import {
-  BookOpen, BrainCircuit, Briefcase, Calendar, Code2,
-  DollarSign, Globe, HandHeart, MapPin, Microscope, School, Users,
-} from "lucide-react";
-import React, { useState } from "react";
-
-interface Achievement { text: string; icon: React.ReactNode; }
-interface ExperienceItem {
-  title: string; company: string; location: string; duration: string;
-  type: string; accentColor: string; achievements: Achievement[];
-}
-
-const experienceData: ExperienceItem[] = [
-  {
-    title: "AI Research Assistant", company: "Cardiac TEK",
-    location: "Tanzania, Remote", duration: "Feb 2024 – Present",
-    type: "Research", accentColor: "#14B8A6",
-    achievements: [
-      { text: "Built transfer learning ECG model (96% accuracy, 10,000+ PhysioNet samples); cut cardiologist reliance by 70%", icon: <Microscope className="h-4 w-4 text-teal-400" /> },
-      { text: "Developed XGBoost risk stratification model with 90% accuracy for cardiovascular events in underserved populations", icon: <BrainCircuit className="h-4 w-4 text-indigo-300" /> },
-      { text: "Improved diagnostic tool UI for low-resource settings, boosting data accuracy by 30%", icon: <Code2 className="h-4 w-4 text-cyan-300" /> },
-    ],
-  },
-  {
-    title: "Team Lead", company: "She Innovate Initiative",
-    location: "Kigali, Rwanda", duration: "March 2024 – Present",
-    type: "Leadership", accentColor: "#8B5CF6",
-    achievements: [
-      { text: "Led 2-week Summer School training 30 Rwandan girls in tech & design, increasing retention by 40%", icon: <School className="h-4 w-4 text-violet-400" /> },
-      { text: "Managed $2K budget and secured 3 corporate partnerships for hackathon with 6 teams from 4 schools", icon: <DollarSign className="h-4 w-4 text-green-400" /> },
-      { text: "Created inclusive learning materials boosting participant engagement by 40%", icon: <BookOpen className="h-4 w-4 text-blue-300" /> },
-    ],
-  },
-  {
-    title: "Hub Ambassador", company: "African Leadership University",
-    location: "Lagos, Nigeria", duration: "May 2023 – Sept 2023",
-    type: "Engagement", accentColor: "#F59E0B",
-    achievements: [
-      { text: "Organized educational trips and 5+ tech events, increasing student participation by 15%", icon: <Globe className="h-4 w-4 text-amber-300" /> },
-      { text: "Reduced event costs by 30% through strategic vendor negotiations", icon: <DollarSign className="h-4 w-4 text-green-400" /> },
-      { text: "Facilitated ALU student engagement with Nigeria's emerging tech ecosystem", icon: <Users className="h-4 w-4 text-cyan-400" /> },
-    ],
-  },
-  {
-    title: "Vice President", company: "Alliance4AI, ALU Chapter",
-    location: "Kigali, Rwanda", duration: "Sept 2024 – Present",
-    type: "Leadership", accentColor: "#06B6D4",
-    achievements: [
-      { text: "Oversaw 8+ ML workshops using TensorFlow/Scikit-learn; 40% of participants secured AI roles", icon: <BrainCircuit className="h-4 w-4 text-cyan-300" /> },
-      { text: "Managed a team of 10, increasing student engagement by 25%", icon: <Users className="h-4 w-4 text-teal-300" /> },
-      { text: "Mentored 15+ students in project-based AI initiatives with measurable outcomes", icon: <School className="h-4 w-4 text-violet-300" /> },
-    ],
-  },
-  {
-    title: "Participant", company: "Swiss Business Case Challenge",
-    location: "Lucerne, Switzerland", duration: "June 2024",
-    type: "Competition", accentColor: "#A3E635",
-    achievements: [
-      { text: "Researched green hydrogen's potential to meet 25% of Africa's energy needs sustainably", icon: <Globe className="h-4 w-4 text-lime-300" /> },
-      { text: "Led negotiations securing 40% stakeholder support for an SDG-aligned energy project", icon: <HandHeart className="h-4 w-4 text-red-300" /> },
-    ],
-  },
-  {
-    title: "Global Volunteer", company: "AIESEC",
-    location: "Nairobi, Kenya", duration: "Sept 2024 – Oct 2024",
-    type: "Volunteer", accentColor: "#34D399",
-    achievements: [
-      { text: "Improved literacy and numeracy for 70% of 30 students in underserved Nairobi communities", icon: <BookOpen className="h-4 w-4 text-emerald-300" /> },
-      { text: "Increased classroom participation by 30% through engaging, student-centred activities", icon: <Users className="h-4 w-4 text-cyan-400" /> },
-    ],
-  },
-];
-
-const typeColors: Record<string, string> = {
-  Research:    "bg-teal-500/10 text-teal-300 border-teal-500/25",
-  Leadership:  "bg-violet-500/10 text-violet-300 border-violet-500/25",
-  Engagement:  "bg-amber-500/10 text-amber-300 border-amber-500/25",
-  Competition: "bg-lime-500/10 text-lime-300 border-lime-500/25",
-  Volunteer:   "bg-emerald-500/10 text-emerald-300 border-emerald-500/25",
-};
+  experienceData,
+  experienceTypeColors as typeColors,
+  type ExperienceItem,
+} from "../data/portfolio/experience";
 
 function FlipCard({ exp }: { exp: ExperienceItem }) {
   const [flipped, setFlipped] = useState(false);
@@ -141,14 +68,14 @@ function FlipCard({ exp }: { exp: ExperienceItem }) {
                 <p className="text-gray-500 text-[11px]">{exp.company}</p>
               </div>
             </div>
-            <div className="flex-1 space-y-2.5 overflow-hidden">
+            <div className="flex-1 space-y-2.5 overflow-y-auto pr-1">
               {exp.achievements.map((a, i) => (
                 <motion.div key={i}
                   initial={{ opacity: 0, x: -8 }}
                   animate={flipped ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: i * 0.08 + 0.1 }}
                   className="flex items-start gap-2.5">
-                  <span className="shrink-0 mt-0.5">{a.icon}</span>
+                  <span className="shrink-0 mt-0.5"><a.icon className={`h-4 w-4 ${a.iconColor}`} /></span>
                   <p className="text-gray-300 text-[11px] leading-snug">{a.text}</p>
                 </motion.div>
               ))}

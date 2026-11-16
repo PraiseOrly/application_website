@@ -5,76 +5,15 @@ import {
   ChevronRightIcon,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import AcademicExcellenceChampion from '../assets/images/AcademicExcellenceChampion.jpg';
-import AIinMedicine from '../assets/images/AIinMedicine.jpg';
-import AIInnovation from '../assets/images/AIInnovation.jpg';
-import PresidentofAlliance4AI from '../assets/images/PresidentofAlliance4AI.jpg';
-import SocialImpactCoderina from '../assets/images/SocialImpactCoderina.jpg';
 import ContactForm from '../components/sections/contacts';
+import { heroSlides as slideshowData } from '../data/portfolio/hero';
 import { About } from '../layout/About';
 import { Education } from '../layout/Education';
 import { Experience } from '../layout/Experience';
+import { HonoursSection } from '../layout/HonoursSection';
 import { ResearchSection } from '../layout/ResearchSection';
 import { Skills } from '../layout/Skills';
 import Projects from '../pages/projects/projects';
-
-const slideshowData = [
-  {
-    title: 'Revolutionizing Healthcare',
-    subtitle: 'AI-Powered Diagnostics',
-    description:
-      'Built CardiacTEK — an AI ECG analysis tool achieving 96% diagnostic accuracy across 10,000+ PhysioNet records, reducing cardiologist workload by 70% in resource-constrained settings.',
-    image: AIInnovation,
-    accentColor: '#14B8A6',
-    buttonText: 'Explore Work',
-    buttonLink: '#experience',
-    tag: 'CardiacTEK · Deep Learning · ECG Analysis',
-  },
-  {
-    title: 'Empowering Communities',
-    subtitle: 'Tech Leadership',
-    description:
-      "Led 8+ ML workshops with Alliance4AI, with 40% of participants securing AI roles. Directed Rwanda's She Innovate Summer School — training 30 girls in tech with a 40% retention increase.",
-    image: PresidentofAlliance4AI,
-    accentColor: '#8B5CF6',
-    buttonText: 'See Impact',
-    buttonLink: '#skills',
-    tag: 'Alliance4AI · She Innovate · STEM Education',
-  },
-  {
-    title: 'Academic Excellence',
-    subtitle: 'Software Engineering · AI',
-    description:
-      'Top-ranked student at African Leadership University with a 4.56 GPA and First Class Honours. Specializing in AI-driven healthcare diagnostics and machine learning systems.',
-    image: AcademicExcellenceChampion,
-    accentColor: '#4B5EAA',
-    buttonText: 'View Journey',
-    buttonLink: '#education',
-    tag: 'ALU · First Class Honours · 4.56 GPA',
-  },
-  {
-    title: 'Future of Medicine',
-    subtitle: 'Innovative AI Solutions',
-    description:
-      'Pioneering predictive models for stroke (AUC >0.85), diabetes risk stratification, and 12-lead ECG classification — democratizing diagnostic precision for underserved communities across Africa.',
-    image: AIinMedicine,
-    accentColor: '#f59e0b',
-    buttonText: 'See Projects',
-    buttonLink: '#projects',
-    tag: 'Predictive Modeling · Health AI · Impact at Scale',
-  },
-  {
-    title: 'Tech for Good',
-    subtitle: 'Social Impact',
-    description:
-      "Improved literacy and numeracy outcomes for 70% of 30 students in Nairobi's underserved communities. Building inclusive, tech-powered health platforms that reach thousands across Africa.",
-    image: SocialImpactCoderina,
-    accentColor: '#06b6d4',
-    buttonText: 'Get Involved',
-    buttonLink: '#contact',
-    tag: 'AIESEC · Nairobi · Inclusive Education',
-  },
-];
 
 const slideVariants = {
   enter: (dir: number) => ({ opacity: 0, x: dir > 0 ? 80 : -80 }),
@@ -196,7 +135,7 @@ export function SinglePagePortfolio() {
                   style={{ border: `1px solid ${slide.accentColor}25` }}
                 />
                 <div className="absolute bottom-4 left-4 px-3 py-1.5 rounded-full backdrop-blur-md bg-black/50 border border-white/10 text-xs font-medium text-white/70">
-                  Praise Orly Atadja
+                  {slide.imageLabel ?? 'Praise Orly Atadja'}
                 </div>
               </motion.div>
             </div>
@@ -240,6 +179,7 @@ export function SinglePagePortfolio() {
         <About />
         <Education />
         <Experience />
+        <HonoursSection />
         <Skills />
 
         <section id="projects" className="w-full">

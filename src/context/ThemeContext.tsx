@@ -7,7 +7,7 @@ interface ThemeContextProps {
 
 export const ThemeContext = createContext<ThemeContextProps>({
   isDarkMode: false,
-  toggleTheme: () => {},
+  toggleTheme: () => undefined,
 });
 
 interface ThemeProviderProps {

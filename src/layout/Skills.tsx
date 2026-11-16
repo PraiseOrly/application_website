@@ -1,74 +1,5 @@
 import { motion } from "framer-motion";
-import { BrainCircuit, FlaskConical, Rocket, Stethoscope } from "lucide-react";
-
-interface SkillCategory {
-  category: string;
-  icon: React.ReactNode;
-  description: string;
-  skills: string[];
-  accentColor: string;
-  borderColor: string;
-  bgColor: string;
-  textColor: string;
-  tagBg: string;
-  tagText: string;
-  tagBorder: string;
-}
-
-const skillsData: SkillCategory[] = [
-  {
-    category: "AI Development",
-    icon: <BrainCircuit className="h-5 w-5" />,
-    description: "Building intelligent systems that learn, adapt, and deliver clinical-grade diagnostic results.",
-    skills: ["Machine Learning", "Medical Imaging Analysis", "Predictive Modeling", "Natural Language Processing", "Deep Learning (CNN/RNN)", "Model Interpretability"],
-    accentColor: "#14B8A6",
-    borderColor: "border-teal-500/20",
-    bgColor: "bg-teal-500/[0.04]",
-    textColor: "text-teal-300",
-    tagBg: "bg-teal-500/10",
-    tagText: "text-teal-200",
-    tagBorder: "border-teal-500/18",
-  },
-  {
-    category: "Health Tech",
-    icon: <Stethoscope className="h-5 w-5" />,
-    description: "Designing diagnostic and patient-care systems for resource-constrained healthcare environments.",
-    skills: ["Telemedicine Systems", "EHR Integration", "Medical IoT", "Clinical Decision Support", "ECG Analysis", "Healthcare Data Pipelines"],
-    accentColor: "#06B6D4",
-    borderColor: "border-cyan-500/20",
-    bgColor: "bg-cyan-500/[0.04]",
-    textColor: "text-cyan-300",
-    tagBg: "bg-cyan-500/10",
-    tagText: "text-cyan-200",
-    tagBorder: "border-cyan-500/18",
-  },
-  {
-    category: "Technical Leadership",
-    icon: <Rocket className="h-5 w-5" />,
-    description: "Leading teams, driving roadmaps, and delivering measurable impact at organizational scale.",
-    skills: ["Project Management", "Team Mentorship", "Technical Roadmapping", "Stakeholder Engagement", "Agile Methodologies", "Workshop Facilitation"],
-    accentColor: "#8B5CF6",
-    borderColor: "border-violet-500/20",
-    bgColor: "bg-violet-500/[0.04]",
-    textColor: "text-violet-300",
-    tagBg: "bg-violet-500/10",
-    tagText: "text-violet-200",
-    tagBorder: "border-violet-500/18",
-  },
-  {
-    category: "Research & Innovation",
-    icon: <FlaskConical className="h-5 w-5" />,
-    description: "Translating rigorous academic research into practical, deployable AI solutions for real-world impact.",
-    skills: ["Clinical Trial Design", "AI Ethics Frameworks", "Research Publication", "Prototype Development", "Data Analysis", "Scientific Writing"],
-    accentColor: "#4B5EAA",
-    borderColor: "border-indigo-500/20",
-    bgColor: "bg-indigo-500/[0.04]",
-    textColor: "text-indigo-300",
-    tagBg: "bg-indigo-500/10",
-    tagText: "text-indigo-200",
-    tagBorder: "border-indigo-500/18",
-  },
-];
+import { skillsData } from "../data/portfolio/skills";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -113,7 +44,7 @@ export const Skills = () => {
               <div className="flex items-center gap-3 mb-3">
                 <div className="p-2.5 rounded-xl border"
                   style={{ background: `${cat.accentColor}12`, borderColor: `${cat.accentColor}25`, color: cat.accentColor }}>
-                  {cat.icon}
+                  <cat.icon className="h-5 w-5" />
                 </div>
                 <h3 className={`text-lg font-bold ${cat.textColor}`}>{cat.category}</h3>
               </div>

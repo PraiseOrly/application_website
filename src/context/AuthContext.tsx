@@ -10,8 +10,8 @@ interface AuthContextProps {
 
 export const AuthContext = createContext<AuthContextProps>({
   user: null,
-  login: () => {},
-  logout: () => {},
+  login: () => undefined,
+  logout: () => undefined,
 });
 
 interface AuthProviderProps {

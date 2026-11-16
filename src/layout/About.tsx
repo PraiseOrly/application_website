@@ -1,67 +1,15 @@
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowUpRight,
-  Brain,
-  Target,
-  Users,
-  Zap,
-  Sparkles,
-} from "lucide-react";
+import { ArrowUpRight, Sparkles } from "lucide-react";
 import { useEffect, useState } from "react";
-
-const profileImages = [
-  { src: "/images/Praise_Headshot.jpg", caption: "Professional Portrait" },
-  { src: "/images/PraiseAlliance.jpg", caption: "Leading Alliance4AI Chapter · Kigali, 2024" },
-  { src: "/images/Praise_Speech.jpg", caption: "Speaking on AI Innovation in Africa" },
-  { src: "/images/Health2.jpg", caption: "Healthcare Technology Research & Development" },
-  { src: "/images/Swiss.jpg", caption: "Swiss Business Case Challenge · Lucerne, 2024" },
-  { src: "/images/Moyo.jpg", caption: "Community Health Initiative · Nairobi, 2024" },
-  { src: "/images/Health.jpg", caption: "Building CardiacTEK — AI for Cardiac Care" },
-  { src: "/images/AI for Good.jpg", caption: "AI for Good Summit, 2024" },
-  { src: "/images/QABF.jpg", caption: "Qutab Ambiance Business Forum" },
-];
-
-const missionItems = [
-  { icon: <Brain className="h-4 w-4" />, text: "Democratizing medical AI tools for underserved communities" },
-  { icon: <Target className="h-4 w-4" />, text: "Building locally-relevant, Africa-first healthcare solutions" },
-  { icon: <Users className="h-4 w-4" />, text: "Mentoring the next generation of African tech leaders" },
-  { icon: <Zap className="h-4 w-4" />, text: "Bridging cutting-edge research and real-world clinical impact" },
-];
-
-const achievements = [
-  {
-    metric: "96%",
-    label: "Diagnostic Accuracy",
-    description: "ECG model on 10,000+ records; cut cardiologist reliance by 70%.",
-    borderColor: "border-teal-500/25",
-    bgColor: "bg-teal-500/8",
-    textColor: "text-teal-400",
-  },
-  {
-    metric: "40%",
-    label: "Retention Boost",
-    description: "She Innovate STEM Summer School participant retention, Rwanda.",
-    borderColor: "border-violet-500/25",
-    bgColor: "bg-violet-500/8",
-    textColor: "text-violet-400",
-  },
-  {
-    metric: "100+",
-    label: "Students Reached",
-    description: "Trained through Alliance4AI workshops; 40% secured AI roles.",
-    borderColor: "border-cyan-500/25",
-    bgColor: "bg-cyan-500/8",
-    textColor: "text-cyan-400",
-  },
-  {
-    metric: "4.56",
-    label: "GPA · First Class",
-    description: "Top-ranked BSc Software Engineering, ALU, specializing in AI.",
-    borderColor: "border-indigo-500/25",
-    bgColor: "bg-indigo-500/8",
-    textColor: "text-indigo-400",
-  },
-];
+import {
+  aboutBio,
+  aboutName,
+  aboutSubtitle,
+  achievements,
+  missionItems,
+  profileImages,
+  resumeUrl,
+} from "../data/portfolio/about";
 
 export function About() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -152,10 +100,10 @@ export function About() {
                 <Sparkles className="h-3 w-3" /> About Me
               </span>
               <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight">
-                Praise Orly Atadja
+                {aboutName}
               </h1>
               <p className="text-teal-300/80 text-base font-medium mt-1.5">
-                AI & Healthcare Engineer · Machine Learning · Project Manager
+                {aboutSubtitle}
               </p>
             </motion.div>
 
@@ -164,10 +112,7 @@ export function About() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.45 }}>
-              I am a passionate software engineer and researcher dedicated to leveraging AI and
-              machine learning to advance healthcare systems, with a particular focus on Africa. My
-              goal is to develop innovative, accessible, and sustainable healthtech solutions that
-              improve diagnosis, treatment, and health outcomes across diverse communities.
+              {aboutBio}
             </motion.p>
 
             <motion.div
@@ -176,7 +121,7 @@ export function About() {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}>
               <a
-                href="https://docs.google.com/document/d/1hpOO01I7PB5sJytnXY1sThD4xyxU48Co/edit?usp=sharing&ouid=101909117862344144947&rtpof=true&sd=true"
+                href={resumeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-2.5 bg-teal-500/12 border border-teal-500/25 text-teal-300 rounded-full text-sm font-medium hover:bg-teal-500/22 hover:border-teal-400/40 transition-all duration-300">
@@ -217,7 +162,7 @@ export function About() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   className="flex items-start gap-3 p-3.5 rounded-xl bg-white/[0.02] border border-white/5 hover:border-teal-500/20 transition-colors duration-200">
-                  <span className="mt-0.5 text-teal-400 shrink-0">{item.icon}</span>
+                  <span className="mt-0.5 text-teal-400 shrink-0"><item.icon className="h-4 w-4" /></span>
                   <p className="text-gray-300 text-sm leading-relaxed">{item.text}</p>
                 </motion.div>
               ))}
